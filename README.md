@@ -1,9 +1,6 @@
+### Actuator Development
 
-# RoboticsPortfolio
-
-## Actuator Development
-
-# Abstract
+## Abstract
 
 This project is the design of a compact, low-cost quasi-direct drive (QDD) actuator built to be practical to manufacture, assemble, and repair. My goal was to create an actuator that uses readily available components, requires minimal machining, and can be produced without expensive manufacturing processes. The final design combines a frameless brushless motor with a custom cycloidal gearbox inside a package approximately 55 mm in diameter.
 
@@ -61,58 +58,51 @@ Steel outer ring
 
 <img width="886" height="472" alt="Screenshot 2026-07-19 214139" src="https://github.com/user-attachments/assets/03b0ee56-b704-4b2c-b284-b78aaf6d65b6" />
 
+
+# Outer Cycloidal Ring Design
+
+The outer ring is a critical part in the actuator, heavily influencing the lifespan capabilities of the gearbox, so as a result several methods were investigated before arriving at the final design.
+
+**First Concept**
+
+The initial concept incorporated an aluminium housing, a press-fit steel outer race. The steel would reduce wear directly contacting the cycloidal disks while allowing the magority of the gearbox housing to remain aluminium. The outer race would be created using a wire EDM-manufactured profile due to its tall and thin features. This approach would have provided excellent wear resistance but required expensive wire EDM machining.
+
+**Second Concept**
+
+The second design replaced the wire EDM profile with individual dowel pins to reduce machining complexity. Due to tight spaces and machining constrainsts locator slots had to be removed for the dowl pins. The design then pivoted to rely on the outward radial forces generated the cycloidal disks to hold them in place.
+
+
+
+
+However upon testing, it was realised as the cycloidal discs rotated, friction generated radial forces that caused the dowel pins to rotate within their holes. This led to a force moving the pins outside of their designated slot/hole locking the gearbox.
+
+
+**Final Design**
+
+The final design adopted a fully CNC-machined steel outer ring. Although this solution resulted in a slight increase in weight, it provided several significant advantages, including lower manufacturing cost, simpler assembly, improved structural rigidity, elimination of loose components, and reduced overall machining complexity. The integrated design also improves reliability by removing interfaces between separate wear components, resulting in a more robust and manufacturable gearbox.
+
+
 # Manufacturing Constraints
 
 Manufacturability was considered throughout the design process.
 
-The project utilised Barker College's CNC facilities, which introduced one major limitation:
-
-Every component needed to be machined from only one side.
+The project utilised in house CNC facilities, which introduced the following limitations:
+* Limited to 3 axis cnc
+* Single side machined parts are preffered
 
 Although restrictive, this requirement also mirrors commercial machining practices where reducing setups significantly lowers manufacturing cost.
 
 As a result, every aluminium component was designed to:
 
-Avoid undercuts
-Eliminate multi-axis operations
-Minimise tool changes
-Require only standard end mills
+* Eliminate undercuts and multi-axis operations
+* Minimise tool changes
+* Require only standard end mills
 
 This allows the complete actuator housing to be manufactured on a conventional 3-axis CNC machine.
 
 The same design philosophy also reduces manufacturing costs when outsourcing production.
 
+Pic of machined parts
 
-# Outer Cycloidal Ring Design
 
-Several manufacturing methods were investigated before arriving at the final design.
 
-Initial Concept
-
-The original concept used:
-
-Aluminium housing
-Press-fit stainless steel outer race
-Wire EDM manufactured profile
-
-This approach would provide excellent wear resistance but required expensive wire EDM machining and additional assembly operations.
-
-Second Concept
-
-A second design attempted to use individual dowel pins.
-
-This reduced machining complexity but introduced a new problem.
-
-As the cycloidal discs rotated, friction generated radial forces that attempted to rotate the dowel pins themselves. This caused the pins to bind inside their holes, increasing friction and reducing efficiency.
-
-Final Design
-
-The final solution was a fully CNC-machined steel outer ring.
-
-Although slightly heavier, this design offers several advantages:
-
-Lower manufacturing cost
-Simpler assembly
-Improved rigidity
-Elimination of loose components
-Reduced machining complexity
