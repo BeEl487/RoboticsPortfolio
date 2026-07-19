@@ -29,6 +29,12 @@ This was selected because aswell as the base actuation hardware it also includes
 * Integrated Hall sensors for rotor position feedback
 * Built-in temperature sensing
 
+(https://www.cubemars.com/product/ro80-kv105-standard-with-hall-frameless-torque-motor.html)
+
+<img width="1000" height="780" alt="1711590941730751915" src="https://github.com/user-attachments/assets/a9ca42d6-dfdb-4304-b7f3-7f732a45d9b2" />
+
+
+
 # Gearbox
 
 A cycloidal gearbox was selected instead of a planetary gearbox after comparing both mechanisms.
@@ -37,10 +43,10 @@ The target output torque required approximately a 40:1 reduction ratio, while fi
 
 Cycloidal drives provide several advantages:
 
-Higher torque density
-Greater shock resistance
-Longer service life
-Better load distribution
+* Higher torque density
+* Greater shock resistance
+* Longer service life
+* Better load distribution
 
 Unlike planetary gears where only a small portion of each tooth is loaded, cycloidal gearboxes distribute force across many lobes simultaneously. This significantly reduces contact stress and increases lifespan under repeated loading.
 
