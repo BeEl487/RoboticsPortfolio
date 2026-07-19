@@ -1,3 +1,4 @@
+
 # RoboticsPortfolio
 
 ## Actuator Development
@@ -56,3 +57,62 @@ Dual cycloidal discs
 6 mm thick discs for increased strength
 Hardened steel output pins
 Steel outer ring
+
+
+<img width="886" height="472" alt="Screenshot 2026-07-19 214139" src="https://github.com/user-attachments/assets/03b0ee56-b704-4b2c-b284-b78aaf6d65b6" />
+
+# Manufacturing Constraints
+
+Manufacturability was considered throughout the design process.
+
+The project utilised Barker College's CNC facilities, which introduced one major limitation:
+
+Every component needed to be machined from only one side.
+
+Although restrictive, this requirement also mirrors commercial machining practices where reducing setups significantly lowers manufacturing cost.
+
+As a result, every aluminium component was designed to:
+
+Avoid undercuts
+Eliminate multi-axis operations
+Minimise tool changes
+Require only standard end mills
+
+This allows the complete actuator housing to be manufactured on a conventional 3-axis CNC machine.
+
+The same design philosophy also reduces manufacturing costs when outsourcing production.
+
+
+# Outer Cycloidal Ring Design
+
+Several manufacturing methods were investigated before arriving at the final design.
+
+Initial Concept
+
+The original concept used:
+
+Aluminium housing
+Press-fit stainless steel outer race
+Wire EDM manufactured profile
+
+This approach would provide excellent wear resistance but required expensive wire EDM machining and additional assembly operations.
+
+Second Concept
+
+A second design attempted to use individual dowel pins.
+
+This reduced machining complexity but introduced a new problem.
+
+As the cycloidal discs rotated, friction generated radial forces that attempted to rotate the dowel pins themselves. This caused the pins to bind inside their holes, increasing friction and reducing efficiency.
+
+Final Design
+
+The final solution was a fully CNC-machined steel outer ring.
+
+Although slightly heavier, this design offers several advantages:
+
+Lower manufacturing cost
+Simpler assembly
+Improved rigidity
+Elimination of loose components
+Reduced machining complexity
