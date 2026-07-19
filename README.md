@@ -106,3 +106,12 @@ Pic of machined parts
 
 
 
+## Motor Control Hardware
+
+The chosen control device is the open source clone of the ODrive S1, the XDrive Mini motor controller. This controller provides a low-cost alternative to commercial ODrive hardware while supporting field-oriented control of brushless motors. Rotor position feedback is provided by the motor's Hall sensors together with a diametric encoder magnet mounted at the rear of the actuator. 
+
+Incorparating the motor controller directly on the actuator allows for a complete actuation package to be used with minimal setup and integration.
+
+
+
+
