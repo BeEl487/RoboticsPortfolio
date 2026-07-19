@@ -1,4 +1,4 @@
-### Actuator Development
+# Actuator Development
 
 ## Abstract
 
@@ -18,9 +18,9 @@ Output Inertia
 
 
 
-## Mechanical Design:
+# Mechanical Design:
 
-# Actuation Choice
+## Actuation Choice
 Most actuators built for commercial purposes use fully or a largly custom components. In order to reduce costs and complexity a off the self framless motor has been selected to provide the magnet array and stator base. The actuator is built around the CubeMars RO80 KV105 frameless brushless motor.
 
 This was selected because aswell as the base actuation hardware it also includes:
@@ -33,7 +33,7 @@ This was selected because aswell as the base actuation hardware it also includes
 
 
 
-# Gearbox
+## Gearbox
 
 A cycloidal gearbox was selected instead of a planetary gearbox after comparing both mechanisms.
 
@@ -59,7 +59,7 @@ Steel outer ring
 <img width="886" height="472" alt="Screenshot 2026-07-19 214139" src="https://github.com/user-attachments/assets/03b0ee56-b704-4b2c-b284-b78aaf6d65b6" />
 
 
-# Outer Cycloidal Ring Design
+## Outer Cycloidal Ring Design
 
 The outer ring is a critical part in the actuator, heavily influencing the lifespan capabilities of the gearbox, so as a result several methods were investigated before arriving at the final design.
 
@@ -82,7 +82,7 @@ However upon testing, it was realised as the cycloidal discs rotated, friction g
 The final design adopted a fully CNC-machined steel outer ring. Although this solution resulted in a slight increase in weight, it provided several significant advantages, including lower manufacturing cost, simpler assembly, improved structural rigidity, elimination of loose components, and reduced overall machining complexity. The integrated design also improves reliability by removing interfaces between separate wear components, resulting in a more robust and manufacturable gearbox.
 
 
-# Manufacturing Constraints
+## Manufacturing Constraints
 
 Manufacturability was considered throughout the design process.
 
