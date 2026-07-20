@@ -124,6 +124,8 @@ The visualization frontend was built using JavaScript and HTML, and renders a 3D
 - A connection interface for pairing with the ESP32 over its IP address.
 - A pose-estimation menu for distinguishing between different recorded hand signs.
 
+<img width="985" height="666" alt="Web hand" src="https://github.com/user-attachments/assets/a683c184-4002-4952-adde-2f6fd4a1134f" />
+<img width="847" height="513" alt="All web" src="https://github.com/user-attachments/assets/69ae4610-150c-4cbb-8661-fea21fe8b624" />
 ### 6.2 Two-Stage Kinematic Pipeline
 
 Because the ESP32 reports raw joint data from the *mechanical* linkage rather than the human finger itself, that data has to be translated into actual human finger joint angles before it means anything. This is done in two stages:
@@ -137,12 +139,12 @@ An additional, more direct approach was used to keep the virtual model visually 
 
 A **CCD (Cyclic Coordinate Descent) inverse kinematics solver** was then used to iteratively adjust the virtual finger joints until its endpoints matched the red target points from the mechanical data. This approach was chosen deliberately over a hard-coded IK equation, because a human hand has many degrees of freedom, which makes closed-form IK solutions difficult to set up and highly error-prone. CCD instead solves the problem iteratively and generalizes much better across the hand's joint complexity.
 
-<img width="985" height="666" alt="Web hand" src="https://github.com/user-attachments/assets/a683c184-4002-4952-adde-2f6fd4a1134f" />
+
 
 ---
 
 
-<img width="847" height="513" alt="All web" src="https://github.com/user-attachments/assets/69ae4610-150c-4cbb-8661-fea21fe8b624" />
+
 
 
 
