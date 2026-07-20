@@ -169,8 +169,8 @@ As an initial proof of concept, the system was tested on the index finger using 
 
 | Hand Position | Result |
 |---|---|
-| <img width="250" src="https://github.com/user-attachments/assets/b49b398f-b46e-4b60-8837-ddac29059870" /> | <img width="250" src="https://github.com/user-attachments/assets/1a15351e-e506-4919-a1a2-c2419c62ad04" /> |
-| <img width="250" src="https://github.com/user-attachments/assets/50b12f3f-87a1-4465-bc30-1fbc64a447af" /> | <img width="250" src="https://github.com/user-attachments/assets/46597b6f-637c-4688-a050-10c1b94eb670" /> |
+| <img width="250" src="https://github.com/user-attachments/assets/b49b398f-b46e-4b60-8837-ddac29059870" /> | <img width="250" src="https://github.com/user-attachments/assets/46597b6f-637c-4688-a050-10c1b94eb670" /> |
+| <img width="250" src="https://github.com/user-attachments/assets/50b12f3f-87a1-4465-bc30-1fbc64a447af" /> | <img width="250" src="https://github.com/user-attachments/assets/1a15351e-e506-4919-a1a2-c2419c62ad04" /> |
 
 **Result:** The tracker reliably distinguished between the upward and downward finger positions without requiring additional manual tuning.
 
