@@ -4,6 +4,8 @@
 
 *Engineering Research Portfolio*
 
+<img width="563" height="472" alt="Screenshot 2026-07-20 210409" src="https://github.com/user-attachments/assets/6665b4e0-3471-4a97-ae93-dc076aa4909a" />
+
 ## Abstract
 
 ## 1. Introduction and Motivation
