@@ -4,19 +4,16 @@
 
 *Engineering Research Portfolio*
 
----
-
 ## Abstract
-
-Sign language interpretation systems typically rely on camera-based computer vision or IMU-based sensor gloves, both of which suffer from well-known reliability problems: cameras are sensitive to lighting and occlusion, while IMUs drift over time and require frequent recalibration. This project explores a third approach — a mechanical linkage-based tracking "armature" that measures joint rotation directly using potentiometers, avoiding both failure modes. The system captures 15 channels of analog joint-angle data per hand via a custom PCB built around an ESP32 microcontroller and a multiplexer, transmits the data wirelessly to a browser-based 3D visualization, and reconstructs a human hand pose using a two-stage kinematic pipeline: forward kinematics on the mechanical linkage followed by inverse kinematics onto standard human finger proportions. A working prototype successfully distinguished between two test poses (finger up / finger down) using a sample-based pose-matching algorithm, with an estimated joint accuracy of roughly ±3°. This paper documents the research, design decisions, hardware/firmware implementation, and testing that went into the system, along with its current limitations and a roadmap for extending it toward full sign language recognition.
-
----
 
 ## 1. Introduction and Motivation
 
-Sign language is a full, expressive language, but the tools available to translate it automatically into text or speech remain limited and often expensive. The long-term goal of this project is to build a system capable of interpreting sign language gestures from motion capture data and converting them into text or speech output.
 
-Before attempting anything related to sign recognition itself, the first engineering problem to solve is more fundamental: **how do you reliably and cheaply capture the 3D pose of a human hand in the first place?** This project is scoped around answering that question with a physical prototype, treating the recognition and translation stage as a secondary objective to be layered on top once tracking is proven reliable.
+This project presents the design and development of a low-cost, accurate, and reliable mechanical hand-tracking system. Unlike conventional camera-based or IMU-based tracking methods, the system measures finger joint rotation directly using a mechanical exoskeleton with potentiometers, eliminating issues such as occlusion, lighting sensitivity, and sensor drift.
+
+The system captures 15 channels of analogue joint-angle data through a custom ESP32-based PCB with analogue multiplexers, transmits the data wirelessly to a browser, and reconstructs a real-time 3D hand model using a kinematic pipeline. The project demonstrates how reliable hand tracking can be achieved using inexpensive, readily available components.
+
+
 
 ### 1.1 Success Criteria
 
