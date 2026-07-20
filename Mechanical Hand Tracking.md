@@ -89,6 +89,10 @@ Time-permitting, two further features were scoped for the board:
 - An **onboard voltage regulator** to support battery-powered operation.
 - An **onboard IMU** to provide overall hand/wrist rotation data, complementing the finger-level joint data from the potentiometers.
 
+
+<img width="660" height="688" alt="Blue Schem" src="https://github.com/user-attachments/assets/b1507acd-69a4-44ba-98e1-c4f365c8f25f" />
+<img width="657" height="595" alt="White Shcem" src="https://github.com/user-attachments/assets/8395de48-5462-4a53-b573-139d6c59fbe0" />
+
 ### 4.5 Hardware Debugging
 
 Two hardware issues surfaced during PCB assembly and were resolved through direct board rework:
@@ -133,7 +137,16 @@ An additional, more direct approach was used to keep the virtual model visually 
 
 A **CCD (Cyclic Coordinate Descent) inverse kinematics solver** was then used to iteratively adjust the virtual finger joints until its endpoints matched the red target points from the mechanical data. This approach was chosen deliberately over a hard-coded IK equation, because a human hand has many degrees of freedom, which makes closed-form IK solutions difficult to set up and highly error-prone. CCD instead solves the problem iteratively and generalizes much better across the hand's joint complexity.
 
+<img width="985" height="666" alt="Web hand" src="https://github.com/user-attachments/assets/a683c184-4002-4952-adde-2f6fd4a1134f" />
+
 ---
+
+
+<img width="847" height="513" alt="All web" src="https://github.com/user-attachments/assets/69ae4610-150c-4cbb-8661-fea21fe8b624" />
+
+
+
+
 
 ## 7. Calibration
 
@@ -151,6 +164,13 @@ Two calibration procedures were developed to make the raw sensor data usable:
 As an initial proof of concept, the system was tested on the index finger using two distinct poses: pointing upward and pointing downward.
 
 **Method:** During a setup phase, the system records a wide range of data points while the user holds the target pose, rather than a single fixed snapshot. During recognition, the current joint position is compared against the *entire* set of recorded samples for each known pose — not just one reference position — which improves flexibility and robustness. The system computes the total angular error between the current joint positions and each recorded pose's sample set, and classifies the current pose as whichever recorded pose produces the lowest total error.
+
+**Hand Position**
+
+| Hand Position | Result |
+|---|---|
+| <img width="250" src="https://github.com/user-attachments/assets/b49b398f-b46e-4b60-8837-ddac29059870" /> | <img width="250" src="https://github.com/user-attachments/assets/1a15351e-e506-4919-a1a2-c2419c62ad04" /> |
+| <img width="250" src="https://github.com/user-attachments/assets/50b12f3f-87a1-4465-bc30-1fbc64a447af" /> | <img width="250" src="https://github.com/user-attachments/assets/46597b6f-637c-4688-a050-10c1b94eb670" /> |
 
 **Result:** The tracker reliably distinguished between the upward and downward finger positions without requiring additional manual tuning.
 
