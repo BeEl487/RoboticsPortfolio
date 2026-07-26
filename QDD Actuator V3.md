@@ -113,5 +113,3 @@ The chosen control device is the open source clone of the ODrive S1, the XDrive 
 Incorparating the motor controller directly on the actuator allows for a complete actuation package to be used with minimal setup and integration.
 
 
-
-
