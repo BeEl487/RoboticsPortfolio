@@ -1,0 +1,310 @@
+Markdown
+# Engineering & Public Policy Portfolio: Wind Turbine Design & Agriculture Decarbonisation
+
+## 1. Project Overview
+This project presents an end-to-end engineering and policy initiative exploring micro-scale renewable energy generation and state-level climate targets[cite: 1, 2]. On the technical side, I designed, simulated, 3D-printed, and tested a series of parametric wind turbine blades to evaluate how chord geometry, profile thickness, and aerofoil selection affect rotational speed and power output at low wind velocities. 
+
+                              SYSTEM ARCHITECTURE
++-----------------------+     +-----------------------+     +-----------------------+
+|  Wind Source          | --> |  Parametric Aerofoil  | --> |  Generator & Circuit  |
+|  (2.0 - 3.5 m/s Flow) |     |  (Eppler e387 Profile)|     |  (DC Voltage/Current) |
++-----------------------+     +-----------------------+     +-----------------------+
+|
+v
++-------------------------+
+| Legislative Policy Plan |
+| (NSW Net Zero Stage 2)  |
++-------------------------+
+
+
+To bridge experimental hardware development with systemic impact, I synthesized the empirical insights from this project into a formal legislative policy submission to the NSW Minister for Climate Change, Energy, the Environment and Heritage[cite: 1]. The proposal addresses specific decarbonisation gaps in the agricultural and energy sectors under the *Climate Change Act 2023*[cite: 1].
+
+                      BLADE PROFILE CROSS-SECTION
+  Leading Edge (Curved)                             Trailing Edge (0.7 mm)
+       /--------------------------------------------------\
+      (   Eppler e387 Cambered Low-Re Aerofoil Shape       \
+       \--------------------------------------------------/
+      Root Width: 25 mm -> 80 mm | Max Profile Thickness: 2 mm -> 4 mm
+
+## 2. Problem Definition
+The Net Zero Commission’s 2026 Annual Progress Report indicates that New South Wales is falling short of its 2030 target to cut emissions by 50% from 2005 levels—projecting an actual reduction of only 44%, leaving a gap of 10 to 20 million tonnes of $\text{CO}_2\text{-e}$[cite: 1]. Closing this gap requires both technological innovation in localized power generation and strategic policy interventions in hard-to-abate sectors like agriculture[cite: 1, 2].
+
+### Performance Requirements
+* **Must-Have Constraints:**
+  * Achieve reliable self-starting rotation at low airspeeds ($2.0 - 3.5\text{ m/s}$).
+  * Generate measurable electrical output ($V \times I$) on a standard multimeter rig.
+  * Retain structural integrity under rotational shear without layer separation.
+  * Use a fully parametric CAD pipeline to enable rapid geometry adjustments[cite: 2].
+* **Nice-to-Have Goals:**
+  * Achieve an effective Tip-Speed Ratio ($\text{TSR}$) approaching lift-based operating regimes ($\text{TSR} \approx 3 - 6$)[cite: 2].
+  * Maintain a narrow trailing edge ($0.7\text{ mm}$) without causing 3D printing defects[cite: 2].
+
+| Metric | Target Specification | Actual Measured Result | Assessment |
+| :--- | :--- | :--- | :--- |
+| **Operating Wind Velocity** | $2.0 - 3.5\text{ m/s}$ | $2.0 - 3.5\text{ m/s}$ | Pass[cite: 2] |
+| **Max Root Width** | $80\text{ mm}$ | $80\text{ mm}$ (Version D1) | Pass[cite: 2] |
+| **Trailing Edge Thickness** | $\le 1.0\text{ mm}$ | $0.7\text{ mm}$ | Pass[cite: 2] |
+| **Aerofoil Selection** | Low Reynolds Number ($Re$) | Eppler e387 | Pass[cite: 2] |
+| **Loaded Rotational Speed** | $> 40\text{ RPM}$ | $49\text{ RPM}$ (Version D1) | Pass[cite: 2] |
+
+## 3. Background Research
+Wind turbine power extraction is governed by the wind power equation:
+
+$$P = \frac{1}{2} \rho A v^3 C_p$$
+
+Where:
+* $P$ = Power output in Watts[cite: 2]
+* $\rho$ = Air density ($\approx 1.225\text{ kg/m}^3$)[cite: 2]
+* $A$ = Swept area of the rotor blades ($m^2$)[cite: 2]
+* $v$ = Oncoming wind speed ($m/s$)[cite: 2]
+* $C_p$ = Power coefficient / conversion efficiency[cite: 2]
+
+According to Betz's Law, no turbine can capture more than $59.3\%$ ($16/27$) of the kinetic energy in wind[cite: 2]. The remaining energy must stay in the airflow so it can move away from the turbine[cite: 2].
+
+                 BETZ'S LAW LIMIT (59.3% MAX EFFICIENCY)
+                                   |
+       +---------------------------+---------------------------+
+       |                                                       |
+High Solidity (4-6 Blades)                              Low Solidity (3 Blades)
+
+Higher starting torque                                - Reduced rotational drag
+
+Increased drag at speed                               - Higher peak Tip-Speed Ratio
+
+Favored for low-wind startup                          - Optimal lift-to-drag balance
+
+
+Because small-scale rotors operate at low Reynolds numbers ($Re$), airflow over the blade is prone to separation, causing stall and high pressure drag[cite: 2]:
+
+$$Re = \frac{\rho v L}{\mu}$$
+
+Where $L$ is the blade chord length and $\mu$ is dynamic viscosity[cite: 2]. Utilizing an aerofoil tailored for low $Re$, such as the **Eppler e387**, maintains laminar flow over a wider range of operating conditions[cite: 2].
+
+## 4. Alternatives and Concept Development
+I evaluated several initial design directions before committing to a final blade geometry[cite: 2]:
+
+| Option | Architecture | Key Advantages | Primary Disadvantages | Engineering Verdict |
+| :--- | :--- | :--- | :--- | :--- |
+| **Option A** | Flat-plate 6-blade rotor[cite: 2] | High starting torque; simple geometry[cite: 2]. | Extreme rotational drag; low top speed[cite: 2]. | Rejected: Excessive drag caps energy extraction[cite: 2]. |
+| **Option B** | Symmetrical profile (NACA 0012), 2 blades | Very low drag; high speed capability[cite: 2]. | Poor startup torque; stalled at low wind speeds[cite: 2]. | Rejected: Failed to self-start at $2.0\text{ m/s}$[cite: 2]. |
+| **Option C** | Cambered Eppler e387, 3 blades[cite: 2] | Strong balance of lift, low-$Re$ laminar flow, and torque[cite: 2]. | Requires precise slicing and print orientation[cite: 2]. | **Selected:** Optimal balance for experimental setup[cite: 2]. |
+
+## 5. Design / Development Process
+
++------------------+     +-------------------+     +------------------+
+| Onshape Variable | --> | Custom Aerofoil   | --> | Vertical FDM     |
+| Studio (CAD)     |     | CFD Simulator     |     | 3D Printing      |
++------------------+     +-------------------+     +------------------+
+^                                                  |
+|                  Iterative Loop                  v
++--------------------------------------------------+ Benchtop Testing
+& Multimeter Data
+
+
+### Prototype Evolution
+* **Initial Concept:** Designed a fully parametric model in Onshape using FeatureScript ("HAVF profile generator") with independent variables for root width, pitch, backbone offset, and profile thickness[cite: 2]. Evaluated airflows digitally using a custom CFD web simulator (`aerofoil-simulation/index.html`) before printing[cite: 2].
+* **Version A1:** Root width $25\text{ mm}$, backbone offset $8\text{ mm}$[cite: 2].
+  * *Testing:* Placed on fan test rig[cite: 2].
+  * *Outcome:* Failed to rotate[cite: 2].
+  * *Analysis:* Root chord was too narrow to generate the torque needed to overcome internal motor cogging and bearing resistance[cite: 2].
+* **Version B1:** Scaled root width to $60\text{ mm}$, backbone offset to $20\text{ mm}$, profile thickness $2\text{ mm}$[cite: 2].
+  * *Testing:* Spun freely under no-load conditions ($63\text{ RPM}$), but RPM dropped to $30\text{ RPM}$ under generator load[cite: 2].
+* **Version C1:** Kept root width at $60\text{ mm}$, increased profile thickness to $4\text{ mm}$[cite: 2].
+  * *Testing:* Lower free-running speed ($60\text{ RPM}$), but maintained much higher loaded speed ($49\text{ RPM}$)[cite: 2]. The thicker profile improved low-speed torque transfer[cite: 2].
+* **Version D1 (Final Model):** Expanded root width to $80\text{ mm}$, adjusted thickness back to $2\text{ mm}$ to reduce mass while preserving blade surface area[cite: 2].
+  * *Testing:* Maintained high loaded RPM ($49\text{ RPM}$) and generated the first measurable multimeter readings ($0.01\text{ V}$, $0.04\text{ A}$)[cite: 2].
+
+                       EVOLUTION OF BLADE GEOMETRY
+[A1] Narrow Root (25 mm) ---> Failed to overcome static torque[cite: 2]
+[B1] Medium Root (60 mm) ---> High free RPM (63), dropped under load (30)[cite: 2]
+[C1] Thicker Profile (4 mm) -> Maintained torque under load (49 RPM)[cite: 2]
+[D1] Scaled Root (80 mm) ---> Peak loaded performance & measurable current output[cite: 2]
+
+
+## 6. Engineering Decisions
+* **3-Blade Rotor Configuration:** Selected a 3-blade layout to balance high starting torque with low rotational drag, matching commercial horizontal-axis standards[cite: 2].
+* **Eppler e387 Aerofoil Selection:** Chosen specifically for its ability to maintain smooth laminar flow at low Reynolds numbers, reducing boundary layer separation at low airspeeds[cite: 2].
+* **$0.7\text{ mm}$ Trailing Edge:** Instead of a theoretical $0.1\text{ mm}$ edge, I set the trailing edge to $0.7\text{ mm}$[cite: 2]. This preserved print quality on FDM equipment while preventing blunt-edge pressure drag[cite: 2].
+* **Vertical Print Alignment:** Printed blades vertically on the build plate[cite: 2]. While this placed layer lines perpendicular to centrifugal forces, it yielded a much smoother aerofoil finish than horizontal printing, significantly reducing surface drag[cite: 2].
+
+Vertical Alignment (Selected)             Horizontal Alignment (Rejected)
+|                                         /-------------------
+
+| Smooth profile surface                 /  Stepped layer lines
+
+| Reduced aerodynamic drag              /   High surface friction
+
+
+## 7. Technical Explanation
+
+### Tip-Speed Ratio ($\text{TSR}$)
+* **Simple Explanation:** Tip-Speed Ratio compares how fast the tip of a turbine blade is moving relative to the speed of the wind blowing against it[cite: 2].
+* **Analogy:** Imagine running with a pinwheel. If you run fast but the wheel spins slowly, it has a low tip-speed ratio. If a light breeze makes the wheel spin into a fast blur, it has a high tip-speed ratio.
+* **Technical Explanation:** $\text{TSR}$ ($\lambda$) is expressed as:
+  $$\lambda = \frac{\omega R}{v}$$
+  Where $\omega$ is rotational velocity in radians/sec, $R$ is rotor radius, and $v$ is wind velocity[cite: 2]. Lift-based horizontal-axis wind turbines operate most efficiently at a $\text{TSR}$ between 3 and 8[cite: 2].
+* **Application:** The tested prototypes operated at a $\text{TSR}$ of approximately $0.3 - 0.5$[cite: 2]. This showed that the rotor was driven primarily by drag rather than aerodynamic lift, identifying a key area for geometry improvements in future iterations[cite: 2].
+
+## 8. Calculations and Engineering Analysis
+I calculated the operational Tip-Speed Ratio ($\lambda$) using experimental performance data[cite: 2].
+
+**Variables:**
+* Rotational speed ($N$) = $49\text{ RPM}$ (Version D1 under load)[cite: 2]
+* Rotor Radius ($R$) = $0.15\text{ m}$
+* Airspeed ($v$) = $3.5\text{ m/s}$[cite: 2]
+
+**Step 1: Calculate angular velocity ($\omega$)**
+$$\omega = \frac{N \times 2\pi}{60} = \frac{49 \times 2\pi}{60} \approx 5.131\text{ rad/s}$$
+
+**Step 2: Calculate tip velocity ($v_{\text{tip}}$)**
+$$v_{\text{tip}} = \omega \times R = 5.131 \times 0.15 \approx 0.770\text{ m/s}$$
+
+**Step 3: Calculate Tip-Speed Ratio ($\lambda$)**
+$$\lambda = \frac{v_{\text{tip}}}{v} = \frac{0.770}{3.5} \approx 0.220$$
+
+**Engineering Significance:**
+The resulting $\text{TSR}$ ($\approx 0.22 - 0.5$) fell below the target lift-based range ($3 - 6$)[cite: 2]. This confirmed that while widening the root chord provided the torque needed to spin the rotor under load, it also introduced rotational drag that capped peak efficiency[cite: 2].
+
+## 9. Simulation / Modelling
+Before 3D printing, candidate profiles were evaluated using a custom computational tool (`aerofoil-simulation/index.html`)[cite: 2].
+
+                 AEROFOIL SIMULATION PRESSURE GRADIENT
+Low Pressure / High Velocity Airflow (Generates Lift Force)
+------------------------------------------------------------>
+.---'''''---.
+/             --------. /   Eppler e387 Profile   ------------------------>
+'--------------------------------------------------->
+High Pressure / Low Velocity Airflow
+
+
+* **Simulation Setup:** Evaluated lift/drag behavior across pitch angles from $4^\circ$ to $45^\circ$ under low-$Re$ conditions[cite: 2].
+* **Prediction:** Thin profiles with pronounced camber would offer the best lift-to-drag ratio at low airspeeds[cite: 2].
+* **Experimental Comparison:** While the simulation predicted efficient lift generation, physical testing showed that surface roughness on FDM prints caused early airflow separation[cite: 2]. This highlighted the rule: *Simulation predicts; testing verifies*[cite: 2].
+
+## 10. Testing and Experimentation
+Testing was conducted using a benchtop fan setup at airspeeds of $2.0\text{ m/s}$, $2.75\text{ m/s}$, and $3.5\text{ m/s}$[cite: 2]. Each round evaluated two blade variations, altering only one parameter at a time to isolate performance impacts[cite: 2].
+
++------------------+     +--------------------+     +-------------------+
+| Benchtop Fan Rig | --> | Test Turbine Shaft | --> | Multimeter & RPM  |
+| (2.0 - 3.5 m/s)  |     | Variable Pitch Hub |     | Measurement Setup |
++------------------+     +--------------------+     +-------------------+
+
+
+### Iterative Testing Results
+
+| Test Round | Variable Evaluated | Models Compared | Free RPM | Loaded RPM | Electrical Result | Primary Engineering Insight |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Test 1** | Root Width & Offset | A1 $\rightarrow$ B1 | $0 \rightarrow 63$ | $0 \rightarrow 30$ | None[cite: 2] | A1 failed to spin. Widening root to $60\text{ mm}$ provided necessary starting torque[cite: 2]. |
+| **Test 2** | Profile Thickness | B1 $\rightarrow$ C1 | $63 \rightarrow 60$ | $30 \rightarrow 49$ | None[cite: 2] | Increasing profile thickness to $4\text{ mm}$ improved low-speed torque under generator load[cite: 2]. |
+| **Test 3** | Scaled Dimensions | C1 $\rightarrow$ D1 | 60 | 49 | $0.01\text{ V}, 0.04\text{ A}$ | Increasing root width to $80\text{ mm}$ produced peak loaded speed and initial electrical power[cite: 2]. |
+
+## 11. Failure and Debugging
+
+### Case Study: Version A1 Rotation Failure
+* **Symptom:** Blade A1 remained completely stationary when exposed to airflow up to $3.5\text{ m/s}$[cite: 2].
+* **Investigation:** Measured the root width ($25\text{ mm}$) and backbone offset ($8\text{ mm}$)[cite: 2]. Tested the generator shaft independently to confirm there were no mechanical blockages.
+* **Root Cause:** The $25\text{ mm}$ root chord did not capture enough airflow force to overcome static friction and motor magnet cogging[cite: 2].
+* **Resolution:** Modified the parametric CAD variables to expand the root width to $60\text{ mm}$ (Version B1)[cite: 2].
+* **Verification:** Version B1 rotated smoothly upon airflow exposure, reaching $63\text{ RPM}$ unloaded[cite: 2].
+
+## 12. Manufacturing / Implementation
+* **CAD Environment:** Onshape (Parametric studio using custom FeatureScript)[cite: 2].
+* **Fabrication Method:** Fused Deposition Modeling (FDM) 3D Printing[cite: 2].
+* **Material Selection:** PLA Filament[cite: 2].
+* **Slicer Configuration:**
+  * Wall count: 2 perimeter walls[cite: 2]
+  * Infill density: 15% Cubic[cite: 2]
+  * Print direction: Vertical bed orientation[cite: 2]
+  * Trailing edge threshold: $0.7\text{ mm}$[cite: 2]
+
+                   FDM BUILD PLATE LAYOUT
++---------------------------------------------------+
+|  ||         ||         ||         ||         ||   | <-- Vertically oriented
+|  ||         ||         ||         ||         ||   |     blade profiles
++---------------------------------------------------+
+
+
+## 13. Results Summary
+
+| Performance Metric | Target Requirement | Measured Result | Final Status |
+| :--- | :--- | :--- | :--- |
+| **Low-Wind Startup** | Self-start at $\le 2.5\text{ m/s}$ | Started at $2.0\text{ m/s}$ (B1, C1, D1) | **Pass**[cite: 2] |
+| **Loaded Speed** | $> 40\text{ RPM}$ | $49\text{ RPM}$ (Version C1 & D1) | **Pass**[cite: 2] |
+| **Tip Speed Ratio ($\text{TSR}$)** | $3.0 - 6.0$ | $\approx 0.3 - 0.5$ | **Unresolved** (Drag-dominated)[cite: 2] |
+| **Power Output** | Measurable Voltage / Current | $0.01\text{ V}$, $0.04\text{ A}$ (Version D1) | **Pass**[cite: 2] |
+
+While the physical prototype demonstrated reliable self-starting and stable rotation under load, the low Tip-Speed Ratio confirmed that performance was limited by drag[cite: 2].
+
+## 14. Reflection
+I originally assumed that achieving a high free-running (unloaded) RPM was the primary indicator of a successful blade design. Testing Version B1 proved this wrong: while it reached $63\text{ RPM}$ unloaded, its speed dropped to $30\text{ RPM}$ as soon as a generator load was applied[cite: 2]. Increasing profile thickness (Version C1) reduced top speed slightly but vastly improved torque retention under load[cite: 2].
+
+Additionally, completing this project showed me that engineering technical solutions is only half the battle. To drive actual emissions reductions, technology must be paired with effective policy[cite: 1]. Formulating a formal submission to the NSW Minister for Climate Change, Energy, the Environment and Heritage taught me how to translate experimental findings into scalable legislative proposals[cite: 1].
+
++----------------------------------+     +----------------------------------+
+| Hardware Benchmarking Data       | --> | Targeted Policy Recommendations  |
+| (RPM, Torque, Low-Wind Limits)   |     | (NSW Net Zero Plan Stage 2)      |
++----------------------------------+     +----------------------------------+
+
+
+## 15. Future Development
+* **Immediate Improvements:**
+  * Incorporate geometric twist ($10^\circ - 20^\circ$) from root to tip to maintain an optimal angle of attack along the entire blade span[cite: 2].
+  * Sand and coat PLA surfaces to reduce skin-friction drag[cite: 2].
+* **Version 2.0:**
+  * Design a pitch-adjustable hub mechanism to tune blade angles during operation[cite: 2].
+  * Integrate a gear step-up assembly to align blade rotation with higher generator RPM bands.
+* **Long-Term Development:**
+  * Explore composite resin molding to produce stiffer blades with thinner trailing edges.
+* **Research Questions:**
+  * How much does surface roughness from FDM layer lines degrade low-$Re$ lift efficiency compared to structural flexure under wind loads[cite: 2]?
+
+---
+
+## Policy Proposal Submission
+**Context:** The technical insights gained from evaluating small-scale renewable hardware informed the following policy proposal, submitted directly to the NSW State Government to address broader systemic challenges in decarbonisation[cite: 1].
+
+Brandon Lai
+37 Dawson Street
+Epping Sydney NSW
+10/8/26
+
+The Hon. Penny Sharpe MLC
+Minister for Climate Change, Energy, the Environment and Heritage
+Governor Macquarie Tower
+1 Farrer Place
+Sydney NSW 2000
+
+Dear The Hon. Penny Sharpe,
+
+I am a secondary school student in New South Wales studying renewable energy and climate policy as part of my STEM schoolwork and I am writing to share my evaluation of the Net Zero Plan. I am focusing mainly on the agriculture and land use sector and the technologies being used to decarbonise it and am proposing two changes I believe should be incorporated into the Net Zero Plan Stage 2.
+
+The Climate Change Act 2023 states that New South Wales will be cutting emissions by 50 per cent of 2005 levels by 2030, 70 per cent by 2035 reaching net zero by 2050. According to the Net Zero Commission's 2026 Annual Progress Report, NSW is currently not on track to its 50% reduction by 2030 estimated to be at only 44%, about 10 and 20 million tonnes of CO2 too much, widening to a shortfall of 21 to 24 million tonnes by 2035. To close this gap, annual emissions would need to fall to 75.9 mega-tonnes of CO2-e by 2030 and 45.6 mega-tonnes of CO2-e by 2035, meaning the State must cut emissions roughly two and a half times faster than its average rate since 2005. These gains are concentrated in sectors where one technology can simply replace another. Agriculture has no equivalent single-technology fix, which is exactly why I believe the sector requires further work as the Government moves into Stage 2 planning.
+
+Additionally, agriculture is a large part of emissions in NSW as it accounts for around 18 to 20% of the State's total emissions. Within that, livestock are responsible for roughly 70 per cent of agricultural emissions, almost all from methane due cattle and sheep. This makes agriculture one of the sectors most worth scrutinising, because unlike electricity, it cannot simply be decarbonised by swapping an energy source.
+
+The Plan's approach to the agricultural sector includes some effective and useful initiatives. The Low Emissions Intensity Farming Systems (LEIFS) program is a five-year partnership between NSW Department of Primary Industries and Regional Development (DPIRD) and the Grains Research and Development Corporation and CSIRO. It aims to help grain and cotton growers monitor and benchmark their emissions intensity without sacrificing yield, alongside additional support for precision technologies such as GPS-guided machinery, soil sensors and data-driven irrigation to reduce the wastage of farmland.
+
+The Net Zero Commission's 2026 Annual Progress Report states that methane from cattle and sheep is the largest component of agricultural emissions. Although technologies such as the methane reducing feed additives have shown promising results, they have not yet been adopted at the large scale needed to significantly reduce agricultural emissions. The large majority of Australian farms feed their livestock fresh grass, dry hay and silage; however the high fibre grass diets lead to an increased microbial fermentation, leading to the release of methane. Seaweed based feed additives such as Asparagopsis which in trials have shown up to 90% reduction in methane emissions. Australia is considered one of the world leaders in developing these feeds and some commercial products have been made available. However, widespread adoption remains limited because of challenges including large-scale seaweed production, cost, feed delivery to grazing animals, and farmer uptake. The practical result is that agricultural emissions are likely to stay largely flat through 2035 unless this changes, which undermines the Plan's overall trajectory.
+
+The Commission has already recommended that the Government scale up cost-effective emission reduction measures identified by the Department of Primary Industries and Regional Development, including feed additives, biochar and improved herd and manure management. I propose that Stage 2 would turn this recommendation into a funded program to bring feed-additive technologies from trial to mass production.
+
+Stage 1 already encourages precision technologies, such as GPS-guided machinery, remote sensing, drones and soil sensors, as tools for reducing emissions while maintaining productivity. However, these technologies carry a high upfront cost, limiting their adoption by smaller farms and businesses compared to the better-resourced large scale farming operations. A strategy that is only accessible to the largest producers will not deliver the sector-wide change the Net Zero Plan needs, and risks widening the gap between well-resourced and smaller family farms.
+
+I propose that Stage 2 introduce a rebate for precision agriculture technology, sized to a specific farm's revenue rather than offered as a flat subsidy. This allows smaller operations to receive proportionally greater support to adopt the same tools already available to larger farms. This would directly address the large cost barrier whilst keeping the technology-driven approach to reduce emissions.
+
+I believe that New South Wales is cutting emissions but not fast enough to meet its 2030 and 2035 targets. Agriculture is named as one of the sectors where current technology is not yet mature enough to deliver rapid reductions. I believe we should treat agricultural technology and farmer access to it as a funded priority now, rather than a long-term goal. I would welcome the opportunity to see both proposals above reflected in the Net Zero Plan Stage 2: 2030-2040.
+
+I appreciate you taking the time to consider my views on the Net Zero Plan as a young Australian. Should you wish to discuss any of these ideas further or would like additional detail on my recommendations, please feel free to contact me directly.
+
+Yours sincerely,
+
+Brandon Lai
+
+
+---
+
+## References
+* **Department of Climate Change, Energy, the Environment and Water (NSW).** *Net Zero Plan Stage 1: 2020–2030*. NSW Government[cite: 1].
+* **Eppler, R.** *Airfoil Design and Data*. Springer-Verlag[cite: 2].
+* **Manwell, J. F., McGowan, J. G., & Rogers, A. L.** *Wind Energy Explained: Theory, Design and Application*. Wiley[cite: 2].
+* **Net Zero Commission (NSW).** *2026 Annual Progress Report*. NSW Government[cite: 1].
