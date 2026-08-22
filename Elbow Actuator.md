@@ -1,4 +1,4 @@
-# Actuator Development - Distal Joint (Wrist/Elbow) Actuator
+# Actuator Development - Wrist/Elbow Actuator
 
 ## Abstract
 
@@ -96,7 +96,7 @@ Keeping the same controller family as the first actuator means both designs can 
 
 | | First Actuator | Second Actuator |
 |---|---|---|
-| Location in arm | Proximal (shoulder/hip style joint) | Distal (near end effector) |
+| Location in arm | Shoulder/hip style joint | Near end effector (elbow/wrist) |
 | Motor | CubeMars RO80 KV105 | CubeMars RO60 |
 | Motor diameter | 80 mm class | 73 mm |
 | Gearbox type | Dual-disc cycloidal | Single-stage planetary (stock gears) |

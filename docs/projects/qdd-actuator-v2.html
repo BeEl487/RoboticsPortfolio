@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QDD Actuator - Distal Joint - Brandon Lai</title>
+<title>QDD Actuator - Elbow/Wrist Joint - Brandon Lai</title>
 <link rel="stylesheet" href="../style.css" />
 <style></style>
 </head>
@@ -23,8 +23,8 @@
     <main class="detail">
       <a class="back" href="../index.html">&larr; All projects</a>
       <span class="card-tag" style="color:#4d7ac9">Actuator Design</span>
-      <h1>QDD Actuator - Distal Joint</h1>
-      <article class="markdown-body"><h1>Actuator Development - Distal Joint (Wrist/Elbow) Actuator</h1>
+      <h1>QDD Actuator - Elbow/Wrist Joint</h1>
+      <article class="markdown-body"><h1>Actuator Development - Wrist/Elbow Actuator</h1>
 <h2>Abstract</h2>
 <p>This project is the design of a compact, lightweight quasi-direct drive (QDD) actuator intended for use further out along a robotic arm, where low mass and high dynamic response matter more than raw torque. Building on the lessons learned from the first actuator (a 55 mm diameter unit built around a cycloidal gearbox), this second design trades reduction ratio and torque capacity for speed, responsiveness, and a smaller footprint. My goal was to design an actuator that is lighter, faster, and packaged as a vertical stack rather than a flat disc, so that it slots naturally into the tapering profile of an arm segment.</p>
 <p>Because this actuator sits closer to the end effector, it does not need to produce the same continuous torque as a shoulder or hip joint actuator. Instead, the priority shifts to reducing reflected inertia and increasing output speed, while still using a geared transmission to keep the motor operating in an efficient torque/speed range. A two-stage layout was chosen: a frameless brushless motor mounted at the rear, driving a single-stage planetary gearbox at the front, with an output shaft running back down through the centre of the assembly.</p>
@@ -102,8 +102,8 @@ Output Inertia: Lower than first actuator, due to smaller rotor and lighter gear
 </thead>
 <tbody><tr>
 <td>Location in arm</td>
-<td>Proximal (shoulder/hip style joint)</td>
-<td>Distal (near end effector)</td>
+<td>Shoulder/hip style joint</td>
+<td>Near end effector (elbow/wrist)</td>
 </tr>
 <tr>
 <td>Motor</td>

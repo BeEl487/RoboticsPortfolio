@@ -1,5 +1,11 @@
 # Actuator Development
 
+## Build Videos
+
+* [I made a robot actuator](https://www.youtube.com/watch?v=oNFNxutb0vo)
+* [i SPENT 30 days making a robot actuator](https://www.youtube.com/watch?v=NgmLIL-ss8k)
+* [building a custom actuator](https://www.youtube.com/shorts/Irzek_iYFuk)
+
 ## Abstract
 
 This project is the design of a compact, low-cost quasi-direct drive (QDD) actuator built to be practical to manufacture, assemble, and repair. My goal was to create an actuator that uses readily available components, requires minimal machining, and can be produced without expensive manufacturing processes. The final design combines a frameless brushless motor with a custom cycloidal gearbox inside a package approximately 55 mm in diameter.

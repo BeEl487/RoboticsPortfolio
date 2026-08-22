@@ -31,7 +31,7 @@ const projects = [
   {
     slug: "qdd-actuator-v1",
     file: "QDD Actuator V3.md",
-    title: "QDD Actuator - Proximal Joint",
+    title: "QDD Actuator - Shoulder/Hip Joint",
     tag: "Actuator Design",
     deck: "A 55mm quasi-direct drive actuator built around a custom cycloidal gearbox - 50Nm continuous torque for shoulder- and hip-style joints.",
     accent: "#c96a4d",
@@ -40,7 +40,7 @@ const projects = [
   {
     slug: "qdd-actuator-v2",
     file: "Elbow Actuator.md",
-    title: "QDD Actuator - Distal Joint",
+    title: "QDD Actuator - Elbow/Wrist Joint",
     tag: "Actuator Design",
     deck: "The fast, light counterpart to the first actuator - a vertical-stack planetary design tuned for speed and low reflected inertia near the end effector.",
     accent: "#4d7ac9",
@@ -78,6 +78,7 @@ const projects = [
     deck: "DECODE season — Innovate Award 1st Place (Bluey, 11144) and Inspire Award 2nd Place (18306) at the Sydney North Qualifier.",
     accent: "#4d9ec9",
     hero: "ftc/field-action.jpg",
+    competition: true,
   },
   {
     slug: "youtube",
@@ -108,12 +109,13 @@ const timelines = [
     // the shooting video) are embedded inline in the markdown instead.
     images: {
       "Southern Cross Regional": ["frc/greybacks-action.jpg", "frc/greybacks-scoring.jpg"],
-      "FIRST Championship - Houston": ["frc/mechanism-cad-greybacks.jpg", "frc/mechanism-cad-1.jpg"],
-      "FIRST Championship - 4613 Barker Redbacks": ["frc/redbacks-back.jpg", "frc/subsystem-test.jpg"],
+      "FIRST Championship - Houston": ["frc/mechanism-cad-greybacks.jpg", "frc/mechanism-cad-1.jpg", "frc/8613-worlds-win.jpg"],
+      "FIRST Championship - 4613 Barker Redbacks": ["frc/redbacks-back.jpg", "frc/subsystem-test.jpg", "frc/4613-worlds-win.jpg"],
     },
     videos: {
       "Southern Cross Regional": [{ src: "frc/shooting-regionals.mp4", poster: "frc/shooting-regionals-poster.jpg", label: "Shooting mechanism at Southern Cross Regional" }],
     },
+    competition: true,
   },
   {
     slug: "vex",
@@ -130,6 +132,7 @@ const timelines = [
     videos: {
       "V5RC - Middle School": [{ src: "vex-v5/auto-nats.mp4", poster: "vex-v5/auto-nats-poster.jpg", label: "Autonomous run at Nationals" }],
     },
+    competition: true,
   },
   {
     slug: "vex-iq",
@@ -147,6 +150,7 @@ const timelines = [
       ],
       "2024 VEX Robotics World Championship": [{ src: "vex-iq/worlds-match.mp4", poster: "vex-iq/worlds-match-poster.jpg", label: "Competition match at Worlds" }],
     },
+    competition: true,
   },
   {
     slug: "mini-echo",
@@ -198,7 +202,11 @@ ${content}
 
 // ---- Gallery (index) ----------------------------------------------------
 function buildIndex() {
-  const cards = [...projects, ...timelines]
+  const all = [...projects, ...timelines];
+  const group = (p) => (p.competition ? 0 : p.card || p.hero ? 1 : 2);
+  const cards = all
+    .slice()
+    .sort((a, b) => group(a) - group(b))
     .map((p) => {
       const href = timelines.includes(p) ? `timelines/${p.slug}.html` : `projects/${p.slug}.html`;
       const img = p.card || p.hero ? imgPath(p.card || p.hero, "root") : null;
