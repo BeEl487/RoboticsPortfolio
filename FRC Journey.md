@@ -21,24 +21,6 @@ FRC allowed me to apply these skills to a much larger robot and team environment
 
 This season was therefore more than a change in robotics platforms. It was a progression from designing and competing on my own robot to contributing within a larger engineering team.
 
-### My Role
-
-* **Primary Role:** [Insert]
-* **Technical / Subsystem Lead:** [Insert]
-* **Mechanical Design:** [Insert]
-* **Manufacturing:** [Insert]
-* **Programming / Controls:** [Insert]
-* **Strategy / Scouting:** [Insert]
-* **Leadership / Mentoring:** [Insert]
-
-### Key Contributions
-
-* Applied my VEX experience in mechanical design, prototyping, CAD, and competition strategy to FRC.
-* Designed and prototyped [insert mechanism/subsystem].
-* Contributed to manufacturing, assembly, repair, and competition preparation.
-* [Insert a specific engineering problem you helped solve.]
-* [Insert any leadership or mentoring responsibilities.]
-
 ---
 
 # Southern Cross Regional
@@ -56,42 +38,57 @@ My first major FRC competition of the 2025–26 REBUILT season was the **Souther
 * **Assembly, Manufacturing & Repair**
 * **Drive Team Technician**
 
+### Design Notes
+
+CAD design work on the scoring mechanism ahead of the regional:
+
+<img class="img-small" width="900" alt="Scoring mechanism CAD" src="images/frc/mechanism-cad-2.png" />
+
+### Level 3 Climber
+
+Alongside the scoring mechanism, I prototyped the robot's **Level 3 Climber** — the highest and most difficult climb tier available, designed to maximise endgame points by lifting the robot fully off the ground onto the top rung.
+
+<img class="img-small" width="900" alt="Level 3 climber CAD" src="images/frc/climber-cad-1.png" />
+<img class="img-small" width="900" alt="Level 3 climber CAD" src="images/frc/climber-cad-2.jpg" />
+
 ### Competition Results
 
-| Statistic            |                         Result |
+| Statistic | Result |
 | -------------------- | -----------------------------: |
-| Qualification Rank   |                    **#8 / 42** |
-| Qualification Record |                       **12–3** |
-| Alliance             |                         **#1** |
-| Alliance Selection   |                   **1st Pick** |
-| Regional Result      |       🏆 **Regional Champion** |
-| Award                | 🏆 **Industrial Design Award** |
+| Qualification Rank | **#8 / 42** |
+| Qualification Record | **12–3** |
+| Alliance | **#1** |
+| Alliance Selection | **1st Pick** |
+| Regional Result | **Regional Champion** |
+| Award | **Industrial Design Award** |
 
 ### Alliance
 
-1. **5584 ICRobotics** — Alliance Captain
-2. **8613 Barker Greybacks** — 1st Pick
-3. **10552 Mazenod Machinists** — 2nd Pick
+1. **5584 ICRobotics** - Alliance Captain
+2. **8613 Barker Greybacks** - 1st Pick
+3. **10552 Mazenod Machinists** - 2nd Pick
 
 ### Playoff Run
 
-| Match   |   Score | Result |
+| Match | Score | Result |
 | ------- | ------: | ------ |
-| Round 1 |  360–82 | ✅ Win  |
-| Round 2 | 254–204 | ✅ Win  |
-| Round 4 | 285–170 | ✅ Win  |
-| Final 1 | 365–123 | ✅ Win  |
-| Final 2 | 249–199 | ✅ Win  |
+| Round 1 | 360–82 | Win |
+| Round 2 | 254–204 | Win |
+| Round 4 | 285–170 | Win |
+| Final 1 | 365–123 | Win |
+| Final 2 | 249–199 | Win |
 
 ### Outcome
 
 **8613 Barker Greybacks became Southern Cross Regional Champions and received the Industrial Design Award.**
 
+<img class="img-feature" alt="8613 and 4613 with the Southern Cross Regional winner banner" src="images/frc/regionals-winners.png" />
+
 ---
 
-# FIRST Championship — Houston
+# FIRST Championship - Houston
 
-## 8613 Barker Greybacks — Curie Division
+## 8613 Barker Greybacks - Curie Division
 
 At the FIRST Championship in Houston, 8613 competed in the **Curie Division**.
 
@@ -105,30 +102,30 @@ At the FIRST Championship in Houston, 8613 competed in the **Curie Division**.
 
 ### Qualification Results
 
-| Statistic            |                         Result |
+| Statistic | Result |
 | -------------------- | -----------------------------: |
-| Qualification Rank   |                   **#17 / 74** |
-| Qualification Record |                       **10–4** |
-| Alliance             |                         **#2** |
-| Alliance Selection   |                   **2nd Pick** |
-| Division             |                      **Curie** |
-| Result               | 🏆 **Curie Division Champion** |
+| Qualification Rank | **#17 / 74** |
+| Qualification Record | **10–4** |
+| Alliance | **#2** |
+| Alliance Selection | **2nd Pick** |
+| Division | **Curie** |
+| Result | **Curie Division Champion** |
 
 ### Alliance
 
-1. **6800 Valor** — Alliance Captain
-2. **254 Cheesy Poofs** — 1st Pick
-3. **8613 Barker Greybacks** — 2nd Pick
-4. **1714 MORE Robotics** — 3rd Pick
+1. **6800 Valor** - Alliance Captain
+2. **254 Cheesy Poofs** - 1st Pick
+3. **8613 Barker Greybacks** - 2nd Pick
+4. **1714 MORE Robotics** - 3rd Pick
 
 ### Curie Playoffs
 
-| Match       |   Score | Result |
+| Match | Score | Result |
 | ----------- | ------: | ------ |
-| Round 1     | 764–355 | ✅ Win  |
-| Round 2     | 647–349 | ✅ Win  |
-| Round 4     | 689–778 | ❌ Loss |
-| Curie Final | 719–550 | ✅ Win  |
+| Round 1 | 764–355 | Win |
+| Round 2 | 647–349 | Win |
+| Round 4 | 689–778 | Loss |
+| Curie Final | 719–550 | Win |
 
 ### Outcome
 
@@ -136,15 +133,15 @@ At the FIRST Championship in Houston, 8613 competed in the **Curie Division**.
 
 ---
 
-# FIRST Championship — 4613 Barker Redbacks
+# FIRST Championship - 4613 Barker Redbacks
 
 ## Hopper Division
 
 At Worlds, I also helped design and build **4613 Barker Redbacks**.
 
-<img width="600" height="450" alt="4613 Redbacks robot" src="https://github.com/user-attachments/assets/2f4fb941-9f6e-4681-9871-16d991916370" />
+<img width="600" height="450" alt="4613 Redbacks robot" src="images/frc/redbacks-front.jpg" />
 
-<img width="1734" height="1301" alt="4613 Redbacks robot" src="https://github.com/user-attachments/assets/3423525f-0181-4aab-8111-d01ee0b0850a" />
+<img width="1734" height="1301" alt="4613 Redbacks robot" src="images/frc/redbacks-closeup.jpg" />
 
 ### My Role
 
@@ -158,22 +155,22 @@ At Worlds, I also helped design and build **4613 Barker Redbacks**.
 
 ### Qualification Results
 
-| Statistic            |                          Result |
+| Statistic | Result |
 | -------------------- | ------------------------------: |
-| Qualification Rank   |                    **#42 / 74** |
-| Qualification Record |                         **5–5** |
-| Alliance             |                          **#1** |
-| Alliance Selection   |                    **3rd Pick** |
-| Division             |                      **Hopper** |
-| Result               | 🏆 **Hopper Division Champion** |
-| Award                |            🏆 **Quality Award** |
+| Qualification Rank | **#42 / 74** |
+| Qualification Record | **5–5** |
+| Alliance | **#1** |
+| Alliance Selection | **3rd Pick** |
+| Division | **Hopper** |
+| Result | **Hopper Division Champion** |
+| Award | **Quality Award** |
 
 ### Alliance
 
-1. **2056 OP Robotics** — Alliance Captain
-2. **6329** — 1st Pick
-3. **3506** — 2nd Pick
-4. **4613 Barker Redbacks** — 3rd Pick
+1. **2056 OP Robotics** - Alliance Captain
+2. **6329** - 1st Pick
+3. **3506** - 2nd Pick
+4. **4613 Barker Redbacks** - 3rd Pick
 
 ### Outcome
 
@@ -196,12 +193,12 @@ Because **8613 won the Curie Division**, the alliance advanced to the **Einstein
 
 ### Einstein Results
 
-| Match   |       Score | Result |
+| Match | Score | Result |
 | ------- | ----------: | ------ |
-| Match 1 | **717–632** | ✅ Win  |
-| Match 2 | **627–713** | ❌ Loss |
-| Match 3 | **769–638** | ✅ Win  |
-| Match 4 | **699–720** | ❌ Loss |
+| Match 1 | **717–632** | Win |
+| Match 2 | **627–713** | Loss |
+| Match 3 | **769–638** | Win |
+| Match 4 | **699–720** | Loss |
 
 **Einstein Record: 2–2**
 
@@ -241,7 +238,7 @@ Both teams reached the top of the competition, with **4613 winning the event** a
 
 ### Alliance
 
-**Alliance #1 — Captain**
+**Alliance #1 - Captain**
 
 * **4613 Barker Redbacks**
 * **6510**
@@ -249,11 +246,11 @@ Both teams reached the top of the competition, with **4613 winning the event** a
 
 ### Result
 
-# 🏆 Duel Down Under Champions
+# Duel Down Under Champions
 
 The key progression was:
 
-> **17–0 qualification record → #1 seed → Alliance Captain → Event Champion**
+> **17–0 qualification record #1 seed Alliance Captain Event Champion**
 
 ---
 
@@ -277,20 +274,20 @@ The key progression was:
 
 **Alliance #2**
 
-* **9986** — Alliance Captain
-* **8613 Barker Greybacks** — 1st Pick
-* **5876** — 2nd Pick
+* **9986** - Alliance Captain
+* **8613 Barker Greybacks** - 1st Pick
+* **5876** - 2nd Pick
 
 ### Result
 
-# 🥈 Duel Down Under Finalist
+# Duel Down Under Finalist
 
 ### Finals
 
-| Match   |   Score | Result |
+| Match | Score | Result |
 | ------- | ------: | ------ |
-| Final 1 | 309–340 | ❌ Loss |
-| Final 2 | 323–389 | ❌ Loss |
+| Final 1 | 309–340 | Loss |
+| Final 2 | 323–389 | Loss |
 
 ---
 
@@ -302,8 +299,8 @@ The 2025–26 REBUILT season was particularly significant because I competed wit
 
 ### 8613 Barker Greybacks
 
-* 🏆 **Regional Champion**
-* 🏆 **Industrial Design Award**
+* **Regional Champion**
+* **Industrial Design Award**
 * **#8 Seed**
 * **12–3 Qualification Record**
 * **#1 Alliance, 1st Pick**
@@ -314,16 +311,16 @@ The 2025–26 REBUILT season was particularly significant because I competed wit
 
 ### 8613 Barker Greybacks
 
-* 🏆 **Curie Division Champion**
-* 🌎 **Einstein Competitor**
+* **Curie Division Champion**
+* **Einstein Competitor**
 * **2–2 Einstein Record**
 * **#17 Seed**
 * **10–4 Qualification Record**
 
 ### 4613 Barker Redbacks
 
-* 🏆 **Hopper Division Champion**
-* 🏆 **Quality Award**
+* **Hopper Division Champion**
+* **Quality Award**
 * **#42 Seed**
 * **5–5 Qualification Record**
 * **#1 Alliance, 3rd Pick**
@@ -334,14 +331,14 @@ The 2025–26 REBUILT season was particularly significant because I competed wit
 
 ### 4613 Barker Redbacks
 
-* 🏆 **Event Champion**
+* **Event Champion**
 * **#1 Seed**
 * **17–0 Qualification Record**
 * **Alliance #1 Captain**
 
 ### 8613 Barker Greybacks
 
-* 🥈 **Event Finalist**
+* **Event Finalist**
 * **#5 Seed**
 * **11–6 Qualification Record**
 * **Alliance #2, 1st Pick**
@@ -350,18 +347,18 @@ The 2025–26 REBUILT season was particularly significant because I competed wit
 
 # Key Achievements
 
-| Achievement                               | Team     |
+| Achievement | Team |
 | ----------------------------------------- | -------- |
-| 🏆 Southern Cross Regional Champion       | **8613** |
-| 🏆 Southern Cross Industrial Design Award | **8613** |
-| 🏆 Curie Division Champion                | **8613** |
-| 🌎 Einstein Competitor                    | **8613** |
-| 🏆 Hopper Division Champion               | **4613** |
-| 🏆 Quality Award                          | **4613** |
-| 🏆 Duel Down Under Champion               | **4613** |
-| 🥈 Duel Down Under Finalist               | **8613** |
-| **17–0 Qualification Record**             | **4613** |
-| **2–2 Einstein Record**                   | **8613** |
+| Southern Cross Regional Champion | **8613** |
+| Southern Cross Industrial Design Award | **8613** |
+| Curie Division Champion | **8613** |
+| Einstein Competitor | **8613** |
+| Hopper Division Champion | **4613** |
+| Quality Award | **4613** |
+| Duel Down Under Champion | **4613** |
+| Duel Down Under Finalist | **8613** |
+| **17–0 Qualification Record** | **4613** |
+| **2–2 Einstein Record** | **8613** |
 
 ## What This Season Demonstrated
 
@@ -369,6 +366,6 @@ The season gave me experience across **two different FRC teams, multiple competi
 
 I contributed across the full competition cycle:
 
-**Design → Prototype → Manufacture → Assemble → Test → Repair → Compete**
+**Design Prototype Manufacture Assemble Test Repair Compete**
 
 More importantly, I experienced the difference between engineering a robot and engineering **within a high-performing robotics organisation**, where technical decisions have to work under real manufacturing constraints, time pressure, alliance strategy, and competition conditions.

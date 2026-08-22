@@ -1,4 +1,4 @@
-# Actuator Development — Distal Joint (Wrist/Elbow) Actuator
+# Actuator Development - Distal Joint (Wrist/Elbow) Actuator
 
 ## Abstract
 
@@ -20,7 +20,7 @@ Output Inertia: Lower than first actuator, due to smaller rotor and lighter gear
 
 ## Actuation Choice
 
-As with the previous actuator, a frameless brushless motor was chosen over a fully custom wound motor to reduce cost and complexity. This time the CubeMars RO60 was selected instead of the RO80 used previously. The RO60 has a smaller 73 mm outer diameter, which allows the whole actuator to be narrower — a requirement driven by the vertical stack packaging, since the actuator now has to fit inside the taper of the arm rather than sit as a flat disc at a joint.
+As with the previous actuator, a frameless brushless motor was chosen over a fully custom wound motor to reduce cost and complexity. This time the CubeMars RO60 was selected instead of the RO80 used previously. The RO60 has a smaller 73 mm outer diameter, which allows the whole actuator to be narrower - a requirement driven by the vertical stack packaging, since the actuator now has to fit inside the taper of the arm rather than sit as a flat disc at a joint.
 
 The RO60 was chosen for the same reasons as the RO80 in the previous build:
 
@@ -28,7 +28,7 @@ The RO60 was chosen for the same reasons as the RO80 in the previous build:
 * Built-in temperature sensing
 * No need to hand-wind a custom stator
 
-Because this joint doesn't need to produce anywhere near the torque of the first actuator, a smaller-diameter motor is an easy trade to make — it directly shrinks the package and reduces mass, which matters more here since the actuator is carried by everything upstream of it in the arm.
+Because this joint doesn't need to produce anywhere near the torque of the first actuator, a smaller-diameter motor is an easy trade to make - it directly shrinks the package and reduces mass, which matters more here since the actuator is carried by everything upstream of it in the arm.
 
 ## Gearbox
 
@@ -41,7 +41,7 @@ For this actuator, a single-stage planetary gearbox was chosen instead of the cy
 
 The gearbox uses stock off-the-shelf gears rather than custom-cut parts, which significantly reduces cost and lead time compared to the first actuator's fully machined cycloidal ring:
 
-* Sun gear, planet gears, and ring gear — stock parts, part number S5OSU20L-0806 (sun/planet/ring set)
+* Sun gear, planet gears, and ring gear - stock parts, part number S5OSU20L-0806 (sun/planet/ring set)
 * 0.5 module gearset
 * 100 tooth ring gear
 * 40 tooth planet gears
@@ -60,9 +60,9 @@ Ratio = 1 + (100 ÷ 20) = 1 + 5 = **6:1**
 
 This checks out against the required tooth relationship for a planetary set (Ring = Sun + 2 × Planet): 20 + (2 × 40) = 100, confirming the gear combination is geometrically valid.
 
-A 6:1 ratio is a large drop from the ~40:1 used in the first actuator, which is intentional — at this stage of the arm, the priority is output speed and low reflected inertia rather than maximum continuous torque. The gearbox uses needle rollers on the planet gears and is press-fit together rather than bolted, which keeps the stage compact and removes several fasteners compared to a bolted assembly.
+A 6:1 ratio is a large drop from the ~40:1 used in the first actuator, which is intentional - at this stage of the arm, the priority is output speed and low reflected inertia rather than maximum continuous torque. The gearbox uses needle rollers on the planet gears and is press-fit together rather than bolted, which keeps the stage compact and removes several fasteners compared to a bolted assembly.
 
-## Packaging — Vertical Stack Design
+## Packaging - Vertical Stack Design
 
 Unlike the first actuator, which was designed as a flat disc-shaped package to sit directly at a joint, this actuator uses a vertical (in-line) stack:
 
@@ -105,4 +105,4 @@ Keeping the same controller family as the first actuator means both designs can 
 | Package shape | Flat disc | Vertical in-line stack |
 | Gearbox parts | Fully custom CNC | Stock sun/planet/ring set |
 
-This second actuator is intentionally the "fast and light" counterpart to the first "high torque and durable" actuator — together they represent two ends of the same actuator family, built around the same motor controller and design philosophy, but tuned for very different jobs on the same arm.
+This second actuator is intentionally the "fast and light" counterpart to the first "high torque and durable" actuator - together they represent two ends of the same actuator family, built around the same motor controller and design philosophy, but tuned for very different jobs on the same arm.

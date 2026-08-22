@@ -29,7 +29,7 @@ This was selected because aswell as the base actuation hardware it also includes
 
 (https://www.cubemars.com/product/ro80-kv105-standard-with-hall-frameless-torque-motor.html)
 
-<img width="1000" height="780" alt="1711590941730751915" src="https://github.com/user-attachments/assets/a9ca42d6-dfdb-4304-b7f3-7f732a45d9b2" />
+*(CubeMars RO80 motor photo pending upload)*
 
 
 
@@ -56,7 +56,7 @@ Hardened steel output pins
 Steel outer ring
 
 
-<img width="886" height="472" alt="Screenshot 2026-07-19 214139" src="https://github.com/user-attachments/assets/03b0ee56-b704-4b2c-b284-b78aaf6d65b6" />
+*(Cycloidal gearbox photo pending upload)*
 
 
 ## Outer Cycloidal Ring Design

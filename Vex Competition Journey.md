@@ -1,7 +1,7 @@
-# VEX Robotics: Team 4613O (Barker College)
+# VEX Robotics: Team 4613B (Barker College)
 
 **Name:** Brandon Lai  
-**Team:** 4613O — Barker Redbacks  
+**Team:** 4613B - Barker Redbacks  
 **Robot:** Whisper  
 **Season:** VEX HIGH STAKES (2023–2024)
 
@@ -11,9 +11,8 @@ Coming from VEX IQ, I wanted to take the next step into a more demanding robotic
 
 What interested me most was the iterative nature of competitive robotics. A design might work in testing but fail under match conditions, meaning every subsystem had to be designed, tested, measured, and refined. I wanted to understand not just how to build a robot, but how to engineer one that could perform reliably under pressure.
 
-<img width="2000" height="1500" alt="image" src="https://github.com/user-attachments/assets/b4b27449-8c34-44be-b7a8-e1cd7530f0f3" />
-<img width="2000" height="1500" alt="image" src="https://github.com/user-attachments/assets/0f5673c2-93a9-41bf-9d4c-5a4c1b0e2eb3" />
-<img width="2000" height="1500" alt="image" src="https://github.com/user-attachments/assets/4dceab54-2ca6-4776-be52-9bdfcf76d0d7" />
+<img width="2000" height="1500" alt="Whisper robot" src="images/vex/whisper-2.jpg" />
+<img width="2000" height="1500" alt="Whisper robot" src="images/vex/whisper-3.jpg" />
 
 
 
@@ -25,8 +24,10 @@ What interested me most was the iterative nature of competitive robotics. A desi
 
 ## Competition Results
 
-- **Australian Nationals — Winner**
-- **VEX Worlds Alliance Captain — 13th in Division**
+- **Australian Nationals - Winner**
+- **VEX Worlds Alliance Captain - 13th in Division**
+
+<img width="900" alt="Whisper with the VEX V5 High Stakes National Championship 2024 banner" src="images/vex/nationals-win.jpeg" />
 
 ## Engineering Documentation
 
@@ -38,11 +39,45 @@ The engineering notebook provides a more in-depth overview of the robot and the 
 
 [2024 High Stakes Nationals Notebook.pdf](https://github.com/user-attachments/files/31305593/2024.High.Stakes.Nationals.Notebook.pdf)
 
+---
 
+# V5RC - Middle School
 
+## Barker Redbacks MS
 
+As part of the same Barker Redbacks program, 4613B also competed in the **V5RC Middle School** division - moving from VEX IQ’s plastic platform onto full VEX V5 metal hardware.
 
+### Nationals
 
+The team competed at Nationals, running pit setup, qualification matches, and autonomous routines with the V5 robot, and won the event.
+
+---
+
+# V5RC - Middle School Worlds
+
+## Barker Redbacks MS
+
+Following the Nationals win, the team advanced to the World Championship with the V5 robot.
+
+### My Role
+
+* **Team Captain**
+
+### Contributions
+
+* [Insert]
+
+### Event Results
+
+| Statistic | Result |
+| --- | ---: |
+| Qualification Rank | [Insert] |
+| Qualification Record | [Insert] |
+| Alliance | [Insert] |
+| Alliance Selection | [Insert] |
+| Result | [Insert] |
+
+---
 
 # VEX Robotics Personal Portfolio: Team 4613O (Barker College)
 **Name:** Brandon Lai
@@ -54,7 +89,7 @@ The engineering notebook provides a more in-depth overview of the robot and the 
 
 ## Personal Motivation
 
-Joining VEX Robotics Team 4613O was driven by a desire to take on complex mechanical and software challenges under tight, high-stakes constraints. Rather than focusing purely on theoretical engineering, I wanted to build a high-performance system from the ground up—one where every gram of structure, millisecond of cycle time, and line of code directly impacted our competition standing. 
+Joining VEX Robotics Team 4613O was driven by a desire to take on complex mechanical and software challenges under tight, high-stakes constraints. Rather than focusing purely on theoretical engineering, I wanted to build a high-performance system from the ground up - one where every gram of structure, millisecond of cycle time, and line of code directly impacted our competition standing. 
 
 The 2025–2026 VEX OVERRIDE season brought strict power limits and restrictive possession rules, making it the ideal stage to test creative mechanical design, advanced software architectures, and rigorous testing methodologies. Beyond the tech, I wanted to experience true team iteration: pushing past initial design failures, refining solutions, and delivering a reliable machine under pressure.
 
@@ -73,7 +108,7 @@ The 2025–2026 VEX OVERRIDE season brought strict power limits and restrictive 
 
 * **55W Power Optimisation:** Successfully bypassed strict motor limits through passive gravity ratchets, delivering maximum available torque to both the drive and the Double Reverse Four-Bar (DR4B) lift mechanism.
 * **High-Precision Autonomous Trajectories:** Kept autonomous pose deviation under **1.4 inches** across full-field routes using custom particle-filter sensor fusion.
-* **Pneumatic Efficiency:** Achieved **24 full scoring cycles** on a single air tank—exceeding match length demands by 20% while staying safely above the 35 PSI operating threshold.
+* **Pneumatic Efficiency:** Achieved **24 full scoring cycles** on a single air tank - exceeding match length demands by 20% while staying safely above the 35 PSI operating threshold.
 * **Rapid Field Traversal:** Clocked a sub-2.3 second full-field traversal time, maximizing point output during critical scoring windows and driver-control endgames.
 
 ---

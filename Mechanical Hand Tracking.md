@@ -4,7 +4,9 @@
 
 *Engineering Research Portfolio*
 
-<img width="563" height="472" alt="Screenshot 2026-07-20 210409" src="https://github.com/user-attachments/assets/6665b4e0-3471-4a97-ae93-dc076aa4909a" />
+<img width="563" height="472" alt="Hand tracker worn on hand" src="images/hand-tracking/hero.jpg" />
+<img width="985" height="666" alt="Hand tracker side view" src="images/hand-tracking/side-shot.jpg" />
+<img width="847" height="513" alt="Hand tracker worn, alternate angle" src="images/hand-tracking/alt-shot.jpg" />
 
 ## Abstract
 
@@ -45,7 +47,7 @@ Mechanical tracking was chosen because it **directly measures joint angles** rat
 
 ### 2.1 Design Inspiration
 
-The core geometric idea for the tracking arm was borrowed from robotics: an articulated robotic arm can determine a 3D end-effector position using just three rotational measurements — at the waist, shoulder, and elbow. This project applies the same principle at a much smaller scale, using a small tracking arm mounted above each finger to measure the equivalent rotations and derive an XYZ endpoint for the fingertip.
+The core geometric idea for the tracking arm was borrowed from robotics: an articulated robotic arm can determine a 3D end-effector position using just three rotational measurements - at the waist, shoulder, and elbow. This project applies the same principle at a much smaller scale, using a small tracking arm mounted above each finger to measure the equivalent rotations and derive an XYZ endpoint for the fingertip.
 
 ---
 
@@ -53,9 +55,9 @@ The core geometric idea for the tracking arm was borrowed from robotics: an arti
 
 Three rotational sensing technologies were considered for measuring joint angle at each articulation point:
 
-- **Magnetic (diametric) encoders** — accurate, but require dedicated per-axis electronics, which would significantly increase circuit complexity and part count across 16 sensing points.
-- **Incremental encoders** — measure direction and speed of rotation via pulse counting, but the physical sensor packages (typically >10 mm) are too large to fit into a compact finger-mounted design.
-- **Potentiometers** — measure rotation as a change in resistance. Sub-7mm diameter potentiometers exist, making them small enough to embed directly into the finger tracking hardware. Critically, potentiometers are **absolute** encoders: once calibrated, they retain their position reference without needing continuous recalibration, unlike incremental approaches.
+- **Magnetic (diametric) encoders** - accurate, but require dedicated per-axis electronics, which would significantly increase circuit complexity and part count across 16 sensing points.
+- **Incremental encoders** - measure direction and speed of rotation via pulse counting, but the physical sensor packages (typically >10 mm) are too large to fit into a compact finger-mounted design.
+- **Potentiometers** - measure rotation as a change in resistance. Sub-7mm diameter potentiometers exist, making them small enough to embed directly into the finger tracking hardware. Critically, potentiometers are **absolute** encoders: once calibrated, they retain their position reference without needing continuous recalibration, unlike incremental approaches.
 
 Potentiometers were selected as the joint sensor for every articulation point in the final design.
 
@@ -67,9 +69,9 @@ Potentiometers were selected as the joint sensor for every articulation point in
 
 With 16 individual sensors requiring wiring, a custom PCB was designed rather than hand-wiring the circuit. This decision was driven by three factors:
 
-1. **Footprint** — a custom board packages all electronics into a much smaller physical space than a hand-wired equivalent.
-2. **Reliability** — soldered board connections are significantly less failure-prone than loose hand-soldered joints, which matters for a device that will be worn and flexed repeatedly.
-3. **Wiring complexity** — routing 16 independent sensor channels by hand becomes unmanageable quickly; a PCB collapses this into a manageable, repeatable layout.
+1. **Footprint** - a custom board packages all electronics into a much smaller physical space than a hand-wired equivalent.
+2. **Reliability** - soldered board connections are significantly less failure-prone than loose hand-soldered joints, which matters for a device that will be worn and flexed repeatedly.
+3. **Wiring complexity** - routing 16 independent sensor channels by hand becomes unmanageable quickly; a PCB collapses this into a manageable, repeatable layout.
 
 ### 4.2 Microcontroller Choice: ESP32
 
@@ -90,21 +92,20 @@ Time-permitting, two further features were scoped for the board:
 - An **onboard IMU** to provide overall hand/wrist rotation data, complementing the finger-level joint data from the potentiometers.
 
 
-<img width="660" height="688" alt="Blue Schem" src="https://github.com/user-attachments/assets/b1507acd-69a4-44ba-98e1-c4f365c8f25f" />
-<img width="657" height="595" alt="White Shcem" src="https://github.com/user-attachments/assets/8395de48-5462-4a53-b573-139d6c59fbe0" />
+*(PCB schematic figures pending upload)*
 
 ### 4.5 Hardware Debugging
 
 Two hardware issues surfaced during PCB assembly and were resolved through direct board rework:
 
 - One of the ESP32's 3.3V supply pins had been mislabeled as ground on the board layout, which caused significant issues during initial testing. This was fixed by cutting the offending copper trace to disconnect the incorrect ground connection.
-- Several ESP32 pins used for multiplexer communication turned out to be restricted to either input-only or output-only operation, which conflicted with the original wiring plan. This required additional patch wiring — cutting traces and manually rerouting connections — to get the multiplexer and ESP32 communicating correctly.
+- Several ESP32 pins used for multiplexer communication turned out to be restricted to either input-only or output-only operation, which conflicted with the original wiring plan. This required additional patch wiring - cutting traces and manually rerouting connections - to get the multiplexer and ESP32 communicating correctly.
 
 ---
 
 ## 5. Firmware and Data Transmission
 
-The ESP32 firmware was deliberately kept simple: its only job is to **cycle through the multiplexer's addresses, sample each sensor, and transmit the resulting joint data** — it does no kinematic computation itself. This is a conscious architectural choice:
+The ESP32 firmware was deliberately kept simple: its only job is to **cycle through the multiplexer's addresses, sample each sensor, and transmit the resulting joint data** - it does no kinematic computation itself. This is a conscious architectural choice:
 
 - Offloading computation to an external device frees up the ESP32's limited processing power and keeps its role lightweight, which helps with both response speed and power draw.
 - Processing logic is easier to iterate on, inspect, and modify on a full computer than on embedded firmware.
@@ -124,8 +125,6 @@ The visualization frontend was built using JavaScript and HTML, and renders a 3D
 - A connection interface for pairing with the ESP32 over its IP address.
 - A pose-estimation menu for distinguishing between different recorded hand signs.
 
-<img width="985" height="666" alt="Web hand" src="https://github.com/user-attachments/assets/a683c184-4002-4952-adde-2f6fd4a1134f" />
-<img width="847" height="513" alt="All web" src="https://github.com/user-attachments/assets/69ae4610-150c-4cbb-8661-fea21fe8b624" />
 ### 6.2 Two-Stage Kinematic Pipeline
 
 Because the ESP32 reports raw joint data from the *mechanical* linkage rather than the human finger itself, that data has to be translated into actual human finger joint angles before it means anything. This is done in two stages:
@@ -154,8 +153,8 @@ A **CCD (Cyclic Coordinate Descent) inverse kinematics solver** was then used to
 
 Two calibration procedures were developed to make the raw sensor data usable:
 
-1. **Angle conversion calibration** — converts raw potentiometer resistance readings into meaningful angular joint values. Once this calibration routine was built for one joint, it could be reused across all joints in the system.
-2. **Homing sequence** — establishes the mechanical zero position of the linkage, so that all subsequent joint readings are measured relative to a consistent reference point.
+1. **Angle conversion calibration** - converts raw potentiometer resistance readings into meaningful angular joint values. Once this calibration routine was built for one joint, it could be reused across all joints in the system.
+2. **Homing sequence** - establishes the mechanical zero position of the linkage, so that all subsequent joint readings are measured relative to a consistent reference point.
 
 ---
 
@@ -165,18 +164,17 @@ Two calibration procedures were developed to make the raw sensor data usable:
 
 As an initial proof of concept, the system was tested on the index finger using two distinct poses: pointing upward and pointing downward.
 
-**Method:** During a setup phase, the system records a wide range of data points while the user holds the target pose, rather than a single fixed snapshot. During recognition, the current joint position is compared against the *entire* set of recorded samples for each known pose — not just one reference position — which improves flexibility and robustness. The system computes the total angular error between the current joint positions and each recorded pose's sample set, and classifies the current pose as whichever recorded pose produces the lowest total error.
+**Method:** During a setup phase, the system records a wide range of data points while the user holds the target pose, rather than a single fixed snapshot. During recognition, the current joint position is compared against the *entire* set of recorded samples for each known pose - not just one reference position - which improves flexibility and robustness. The system computes the total angular error between the current joint positions and each recorded pose's sample set, and classifies the current pose as whichever recorded pose produces the lowest total error.
 
 **Hand Position**
 
 | Hand Position | Result |
 |---|---|
-| <img width="250" src="https://github.com/user-attachments/assets/b49b398f-b46e-4b60-8837-ddac29059870" /> | <img width="250" src="https://github.com/user-attachments/assets/46597b6f-637c-4688-a050-10c1b94eb670" /> |
-| <img width="250" src="https://github.com/user-attachments/assets/50b12f3f-87a1-4465-bc30-1fbc64a447af" /> | <img width="250" src="https://github.com/user-attachments/assets/1a15351e-e506-4919-a1a2-c2419c62ad04" /> |
+| *(pointing up - figure pending upload)* | *(pointing down - figure pending upload)* |
 
 **Result:** The tracker reliably distinguished between the upward and downward finger positions without requiring additional manual tuning.
 
-**Extensibility:** Because the software recording pipeline is modular, new poses can be added quickly by holding a record button while performing the new gesture — no code changes are required to add a pose.
+**Extensibility:** Because the software recording pipeline is modular, new poses can be added quickly by holding a record button while performing the new gesture - no code changes are required to add a pose.
 
 ### 8.2 Assessment Against Success Criteria
 
@@ -187,7 +185,7 @@ As an initial proof of concept, the system was tested on the index finger using 
 | Detect multiple hand positions | Partially achieved (validated on 2 poses) |
 | Automatic sign-to-text translation | Not yet attempted (future work) |
 
-As of the current build, the mechanical tracking system is considered a viable data-collection device, and its central goal — capturing real-world positional data from a human hand — has been successfully demonstrated.
+As of the current build, the mechanical tracking system is considered a viable data-collection device, and its central goal - capturing real-world positional data from a human hand - has been successfully demonstrated.
 
 ---
 
@@ -201,23 +199,21 @@ As of the current build, the mechanical tracking system is considered a viable d
 
 ## 10. Future Directions
 
-- **Pose recognition scaling:** Move from angular-error-based pose matching toward a small neural network classifier, which would let the system recognize overall movement *patterns* rather than relying on fixed per-joint angular thresholds — improving flexibility and accuracy as the pose library grows.
+- **Pose recognition scaling:** Move from angular-error-based pose matching toward a small neural network classifier, which would let the system recognize overall movement *patterns* rather than relying on fixed per-joint angular thresholds - improving flexibility and accuracy as the pose library grows.
 - **Battery-powered operation:** Leverage the existing onboard regulator to remove the tether entirely.
 - **Adjustable sizing:** Add strap- or clamp-based finger holders to support different hand sizes.
 - **Full sign language translation pipeline:** Extend the current binary pose classifier toward a broader gesture vocabulary sufficient for basic sign language interpretation, and add text/speech output.
-- **Remote manipulation applications:** Beyond sign language, the same low-cost mechanical tracking approach could be applied to teleoperated robotics — for example, remote control of surgical instruments or operation of robots in environments unsafe or inaccessible to humans.
+- **Remote manipulation applications:** Beyond sign language, the same low-cost mechanical tracking approach could be applied to teleoperated robotics - for example, remote control of surgical instruments or operation of robots in environments unsafe or inaccessible to humans.
 
 ---
 
 ## 11. Conclusion
 
-This project set out to answer a narrow but important question: can a low-cost, mechanically-based hand tracking system reliably capture real human hand motion without the drift and calibration problems that plague existing vision- and IMU-based approaches? The prototype built here — a potentiometer-driven mechanical armature, a custom ESP32-based PCB, and a two-stage forward/inverse kinematics pipeline feeding a live 3D visualization — demonstrates that it can. While the current system is validated only on a small set of test poses and still has mechanical and ergonomic limitations to resolve, it establishes a working foundation for the longer-term goal of full sign language interpretation, and more broadly illustrates the potential of low-cost mechanical tracking systems across robotics, medicine, virtual reality, and human-computer interaction.
+This project set out to answer a narrow but important question: can a low-cost, mechanically-based hand tracking system reliably capture real human hand motion without the drift and calibration problems that plague existing vision- and IMU-based approaches? The prototype built here - a potentiometer-driven mechanical armature, a custom ESP32-based PCB, and a two-stage forward/inverse kinematics pipeline feeding a live 3D visualization - demonstrates that it can. While the current system is validated only on a small set of test poses and still has mechanical and ergonomic limitations to resolve, it establishes a working foundation for the longer-term goal of full sign language interpretation, and more broadly illustrates the potential of low-cost mechanical tracking systems across robotics, medicine, virtual reality, and human-computer interaction.
 
 ---
 
-## Appendix: Figures
+## Appendix: Project Poster
 
-- **Figure 1** — Pose/Prediction pair (Test 1: index finger up)
-- **Figure 2** — CCD inverse kinematics solver reconstructing the virtual armature from mechanical endpoint data
-
-*(Insert corresponding image files here when preparing the GitHub repository, e.g. `figures/fig1_pose_prediction.png`, `figures/fig2_ccd_ik.png`)*
+<img width="900" alt="Hand Motion Capture poster, page 1" src="images/hand-tracking/poster-1.png" />
+<img width="900" alt="Hand Motion Capture poster, page 2" src="images/hand-tracking/poster-2.png" />
