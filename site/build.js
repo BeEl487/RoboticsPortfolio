@@ -90,6 +90,54 @@ const projects = [
     hero: "actuator-v1/thumbnail.png",
     card: "youtube/avatar.jpg",
   },
+  {
+    slug: "games",
+    file: "Games.md",
+    title: "Game Design",
+    tag: "beeel.itch.io",
+    deck: "Eight solo game jam entries as a 16-year-old - platformers, an adventure game, and a downhill racer, each built against a fixed jam deadline.",
+    accent: "#c94d9e",
+    hero: "games/wind-tunnel-thumbnail.png",
+    category: "game-design",
+  },
+  {
+    slug: "blender",
+    file: "Blender.md",
+    title: "Blender Animation",
+    tag: "3D Animation",
+    deck: "Two early animation clips from age 12, made in Blender before robotics became the focus.",
+    accent: "#4dc9a8",
+    hero: "blender/rising-box-poster.jpg",
+    category: "blender",
+  },
+  {
+    slug: "python-projects",
+    file: "Python Projects.md",
+    title: "Python Projects",
+    tag: "Algorithms & Simulation",
+    deck: "A path tracer, a NEAT neural network that learns Flappy Bird, an A* visualizer, and more - built from scratch to understand how each algorithm works.",
+    accent: "#6a4dc9",
+    hero: "python-projects/raytracer.png",
+    category: "python-projects",
+  },
+  {
+    slug: "custom-computer",
+    file: "Custom Computer.md",
+    title: "Breadboard Computer",
+    tag: "Digital Logic",
+    deck: "A minimal-instruction-set computer designed in CircuitVerse and hand-built from six perfboard cards - CPU, program counter, memory, and a 555 timer clock.",
+    accent: "#4d9e6a",
+    card: "custom-computer/assembled-powered.jpg",
+  },
+  {
+    slug: "3d-printing",
+    file: "3D Printing.md",
+    title: "3D Design & Printing",
+    tag: "MakerWorld",
+    deck: "Designing 3D printable models published to MakerWorld for Maker Points - plus the printers and infill experiments behind them.",
+    accent: "#9e8a4d",
+    hero: "printing/honeycomb-box-1.jpeg",
+  },
 ];
 
 const timelines = [
@@ -127,6 +175,14 @@ const timelines = [
     hero: "vex/hero.jpg",
     images: {
       "VEX Robotics: Team 4613B (Barker College)": ["vex/whisper-rings.jpg"],
+      "VEX Robotics Personal Portfolio: Team 4613O (Barker College)": [
+        "vex/switch-detail/pto-1.jpeg",
+        "vex/switch-detail/ratchet-1.jpeg",
+        "vex/switch-detail/detail-1.jpg",
+        "vex/switch-detail/detail-2.jpeg",
+        "vex/switch-detail/detail-3.jpeg",
+        "vex/switch-detail/detail-4.jpeg",
+      ],
       "V5RC - Middle School Worlds": ["vex-v5/pit-1.jpg", "vex-v5/pit-2.jpg", "vex-v5/pit-3.jpg", "vex-v5/pit-4.jpg", "vex-v5/nationals-team.jpg"],
     },
     videos: {
@@ -142,13 +198,8 @@ const timelines = [
     deck: "Full Volume season - a Barker League tournament win and a top-6.4% finish at the 2024 VEX Robotics World Championship.",
     accent: "#c98a4d",
     hero: "vex-iq/stacking-demo-poster.jpg",
-    videos: {
-      "4613B - Barker Redbacks": [{ src: "vex-iq/skills-run-2.mp4", poster: "vex-iq/skills-run-2-poster.jpg", label: "Robot Skills run" }],
-      "Barker League VIQC": [
-        { src: "vex-iq/scoring.mp4", poster: "vex-iq/scoring-poster.jpg", label: "Scoring run" },
-        { src: "vex-iq/stacking-demo.mp4", poster: "vex-iq/stacking-demo-poster.jpg", label: "Robot stacking demo" },
-      ],
-      "2024 VEX Robotics World Championship": [{ src: "vex-iq/worlds-match.mp4", poster: "vex-iq/worlds-match-poster.jpg", label: "Competition match at Worlds" }],
+    images: {
+      "Barker League VIQC": ["vex-iq/practice-robot.jpeg"],
     },
     competition: true,
   },
@@ -201,40 +252,58 @@ ${content}
 }
 
 // ---- Gallery (index) ----------------------------------------------------
+function renderCard(p) {
+  const href = timelines.includes(p) ? `timelines/${p.slug}.html` : `projects/${p.slug}.html`;
+  const img = p.card || p.hero ? imgPath(p.card || p.hero, "root") : null;
+  const media = img
+    ? `<img src="${img}" alt="${p.title}" loading="lazy" />`
+    : `<div class="placeholder" style="background:linear-gradient(160deg, ${p.accent}22, ${p.accent}55)">
+         <span style="color:${p.accent}">${p.title}</span>
+       </div>`;
+  return `
+  <a class="card" href="${href}">
+    <div class="card-media">${media}</div>
+    <div class="card-body">
+      <span class="card-tag" style="color:${p.accent}">${p.tag}</span>
+      <h2>${p.title}</h2>
+      <p>${p.deck}</p>
+    </div>
+  </a>`;
+}
+
+function renderSection(heading, items) {
+  if (!items.length) {
+    return `
+  <h2 class="section-heading">${heading}</h2>
+  <p class="section-empty">More coming soon.</p>`;
+  }
+  const cards = items.map(renderCard).join("\n");
+  return `
+  <h2 class="section-heading">${heading}</h2>
+  <main class="gallery">
+    ${cards}
+  </main>`;
+}
+
 function buildIndex() {
   const all = [...projects, ...timelines];
-  const group = (p) => (p.competition ? 0 : p.card || p.hero ? 1 : 2);
-  const cards = all
-    .slice()
-    .sort((a, b) => group(a) - group(b))
-    .map((p) => {
-      const href = timelines.includes(p) ? `timelines/${p.slug}.html` : `projects/${p.slug}.html`;
-      const img = p.card || p.hero ? imgPath(p.card || p.hero, "root") : null;
-      const media = img
-        ? `<img src="${img}" alt="${p.title}" loading="lazy" />`
-        : `<div class="placeholder" style="background:linear-gradient(160deg, ${p.accent}22, ${p.accent}55)">
-             <span style="color:${p.accent}">${p.title}</span>
-           </div>`;
-      return `
-      <a class="card" href="${href}">
-        <div class="card-media">${media}</div>
-        <div class="card-body">
-          <span class="card-tag" style="color:${p.accent}">${p.tag}</span>
-          <h2>${p.title}</h2>
-          <p>${p.deck}</p>
-        </div>
-      </a>`;
-    })
-    .join("\n");
+  const uncategorized = (p) => !p.category;
+  const featured = all.filter((p) => (p.card || p.hero) && uncategorized(p));
+  const gameDesign = all.filter((p) => p.category === "game-design");
+  const blender = all.filter((p) => p.category === "blender");
+  const pythonProjects = all.filter((p) => p.category === "python-projects");
+  const smaller = all.filter((p) => !(p.card || p.hero) && uncategorized(p));
 
   const content = `
   <section class="hero">
     <h1>Robotics &amp; Engineering Portfolio</h1>
     <p>A working record of actuators, manipulation research, competition robotics, and everything in between.</p>
   </section>
-  <main class="gallery">
-    ${cards}
-  </main>`;
+  ${renderSection("Featured Projects", featured)}
+  ${renderSection("Game Design", gameDesign)}
+  ${renderSection("Blender Animation", blender)}
+  ${renderSection("Python Projects", pythonProjects)}
+  ${renderSection("Smaller Projects", smaller)}`;
 
   fs.writeFileSync(path.join(OUT, "index.html"), layout({ title: "Brandon Lai - Portfolio", content, active: "root" }));
 }
@@ -245,7 +314,7 @@ function buildProjectPages() {
   fs.mkdirSync(dir, { recursive: true });
   for (const p of projects) {
     const md = read(p.file);
-    const body = marked.parse(md).replace(/(src|href)="images\//g, '$1="../images/');
+    const body = marked.parse(md).replace(/(src|href|poster)="images\//g, '$1="../images/');
     const heroImg = p.hero ? imgPath(p.hero, "project") : null;
     const hero = heroImg
       ? `<div class="detail-hero"><img src="${heroImg}" alt="${p.title}" /></div>`
@@ -294,7 +363,7 @@ function buildTimelinePage(t) {
   const videoMap = t.videos || {};
   const items = events
     .map((e, i) => {
-      const html = marked.parse(e.body.join("\n")).replace(/(src|href)="images\//g, '$1="../images/');
+      const html = marked.parse(e.body.join("\n")).replace(/(src|href|poster)="images\//g, '$1="../images/');
       const eventImages = imageMap[e.heading] || [];
       const photoGrid = eventImages.length
         ? `<div class="photo-grid">

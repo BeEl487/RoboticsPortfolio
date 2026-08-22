@@ -4,9 +4,13 @@
 
 *Engineering Research Portfolio*
 
-<img width="563" height="472" alt="Hand tracker worn on hand" src="images/hand-tracking/hero.jpg" />
-<img width="985" height="666" alt="Hand tracker side view" src="images/hand-tracking/side-shot.jpg" />
-<img width="847" height="513" alt="Hand tracker worn, alternate angle" src="images/hand-tracking/alt-shot.jpg" />
+<img width="480" height="402" alt="Hand tracker worn on hand" src="images/hand-tracking/hero.jpg" />
+<img width="720" height="436" alt="Hand tracker worn, alternate angle" src="images/hand-tracking/alt-shot.jpg" />
+
+## Appendix: Project Poster
+
+<img width="900" alt="Hand Motion Capture poster, page 1" src="images/hand-tracking/poster-1.png" />
+<img width="900" alt="Hand Motion Capture poster, page 2" src="images/hand-tracking/poster-2.png" />
 
 ## Abstract
 
@@ -212,8 +216,3 @@ As of the current build, the mechanical tracking system is considered a viable d
 This project set out to answer a narrow but important question: can a low-cost, mechanically-based hand tracking system reliably capture real human hand motion without the drift and calibration problems that plague existing vision- and IMU-based approaches? The prototype built here - a potentiometer-driven mechanical armature, a custom ESP32-based PCB, and a two-stage forward/inverse kinematics pipeline feeding a live 3D visualization - demonstrates that it can. While the current system is validated only on a small set of test poses and still has mechanical and ergonomic limitations to resolve, it establishes a working foundation for the longer-term goal of full sign language interpretation, and more broadly illustrates the potential of low-cost mechanical tracking systems across robotics, medicine, virtual reality, and human-computer interaction.
 
 ---
-
-## Appendix: Project Poster
-
-<img width="900" alt="Hand Motion Capture poster, page 1" src="images/hand-tracking/poster-1.png" />
-<img width="900" alt="Hand Motion Capture poster, page 2" src="images/hand-tracking/poster-2.png" />
