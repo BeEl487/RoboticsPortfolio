@@ -2,10 +2,12 @@
 // Reads markdown files from the repo root, renders them to styled HTML pages.
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { marked } = require("marked");
 
 const ROOT = path.join(__dirname, "..");
 const OUT = path.join(__dirname, "..", "docs"); // GitHub Pages friendly output dir
+const CSS_VERSION = crypto.createHash("md5").update(fs.readFileSync(path.join(__dirname, "style.css"))).digest("hex").slice(0, 8);
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -231,7 +233,7 @@ function layout({ title, content, active, css = "" }) {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${title}</title>
-<link rel="stylesheet" href="${base}style.css" />
+<link rel="stylesheet" href="${base}style.css?v=${CSS_VERSION}" />
 <style>${css}</style>
 </head>
 <body>
