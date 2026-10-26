@@ -75,15 +75,6 @@ const projects = [
     hero: "redbacks-code/code-09-mcl-update-sensor-likelihood.png",
   },
   {
-    slug: "engineering-notebook",
-    file: "Engineering Notebook.md",
-    title: "4613R Engineering Notebook",
-    tag: "VEX V5RC Override",
-    deck: "A 190-page design-cycle notebook: weighted decision matrices, six elevator build cycles, and the reasoning behind every design change.",
-    accent: "#e0b43c",
-    hero: "notebook/cover.jpg",
-  },
-  {
     slug: "wind-turbine",
     file: "Wind Turbine.md",
     title: "Parametric Wind Turbine Blades",
@@ -233,6 +224,25 @@ const timelines = [
     competition: true,
   },
   {
+    slug: "override",
+    file: "Override Notebook.md",
+    title: "Override Engineering Notebook",
+    tag: "VEX V5RC Override - Team 4613R",
+    deck: "The 190-page notebook in short form: goals, design selection, six elevator cycles, competition results and the redesign they led to.",
+    accent: "#e0b43c",
+    hero: "override/p001.jpg",
+    images: {
+      "Season Goals": ["override/p001.jpg", "override/p020.jpg"],
+      "Brainstorm and Select": ["override/p028.jpg", "override/p038.jpg", "override/p046.jpg", "override/p052.jpg", "override/p071.jpg", "override/p073.jpg"],
+      "Elevator Build Cycles": ["override/p077.jpg", "override/p083.jpg", "override/p089.jpg"],
+      "Shore Regional": ["override/p093.jpg", "override/p099.jpg"],
+      "Design Cycle 2: Fixing What Shore Showed": ["override/p112.jpg", "override/p143.jpg", "override/p145.jpg", "override/p149.jpg", "override/p152.jpg", "override/p155.jpg", "override/p156.jpg"],
+      "Knox": ["override/p181.jpg"],
+      "Programming": ["override/p184.jpg", "override/p189.jpg"],
+    },
+    competition: true,
+  },
+  {
     slug: "mini-echo",
     file: "Mini Echo Journey.md",
     title: "Mini Echo",
@@ -270,6 +280,7 @@ function layout({ title, content, active, css = "" }) {
     <a href="${base}index.html" class="${active === "root" ? "current" : ""}">Projects</a>
     <a href="${base}timelines/frc.html" class="${active === "frc" ? "current" : ""}">FRC</a>
     <a href="${base}timelines/vex.html" class="${active === "vex" ? "current" : ""}">VEX</a>
+    <a href="${base}timelines/override.html" class="${active === "override" ? "current" : ""}">Override</a>
     <a href="${base}timelines/vex-iq.html" class="${active === "vex-iq" ? "current" : ""}">VEX IQ</a>
     <a href="${base}timelines/mini-echo.html" class="${active === "mini-echo" ? "current" : ""}">Mini Echo</a>
   </nav>
@@ -317,7 +328,9 @@ function renderSection(heading, items) {
 function buildIndex() {
   const all = [...projects, ...timelines];
   const uncategorized = (p) => !p.category;
-  const featured = all.filter((p) => (p.card || p.hero) && uncategorized(p));
+  const featured = all
+    .filter((p) => (p.card || p.hero) && uncategorized(p))
+    .sort((a, b) => (a.slug === "3d-printing") - (b.slug === "3d-printing")); // 3D printing goes last
   const gameDesign = all.filter((p) => p.category === "game-design");
   const blender = all.filter((p) => p.category === "blender");
   const pythonProjects = all.filter((p) => p.category === "python-projects");

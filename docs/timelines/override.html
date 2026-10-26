@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Override Engineering Notebook - Brandon Lai</title>
+<link rel="stylesheet" href="../style.css?v=0dd14829" />
+<style></style>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../index.html">Brandon Lai</a>
+  <nav>
+    <a href="../index.html" class="">Projects</a>
+    <a href="../timelines/frc.html" class="">FRC</a>
+    <a href="../timelines/vex.html" class="">VEX</a>
+    <a href="../timelines/override.html" class="current">Override</a>
+    <a href="../timelines/vex-iq.html" class="">VEX IQ</a>
+    <a href="../timelines/mini-echo.html" class="">Mini Echo</a>
+  </nav>
+</header>
+
+  <main class="timeline-page">
+    <a class="back" href="../index.html">&larr; All projects</a>
+    <span class="card-tag" style="color:#e0b43c">VEX V5RC Override - Team 4613R</span>
+    <h1>Override Engineering Notebook</h1>
+    <p class="deck">The 190-page notebook in short form: goals, design selection, six elevator cycles, competition results and the redesign they led to.</p>
+    <div class="timeline" style="--accent:#e0b43c">
+      
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Season Goals</h2>
+          <div class="markdown-body"><p>Team 4613R (Barker Redbacks) entered V5RC <em>Override</em> with one rule: build a <strong>simple, reliable and effective</strong> robot, then improve it at every competition. The notebook follows the full design cycle, so each decision can be traced back to a problem and forward to a test.</p>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p001.jpg" alt="Season Goals" loading="lazy" />
+<img src="../images/override/p020.jpg" alt="Season Goals" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Brainstorm and Select</h2>
+          <div class="markdown-body"><p>Five robot concepts and four claws were sketched and analysed, alongside 4-wheel tank, 6-wheel tank and X-drive comparisons. <strong>Design 5</strong> won because it combined a wide vertical range, versatility, efficient scoring and reliability.</p>
+<p>The elevator was then chosen with a <strong>weighted decision matrix</strong>: four lift types scored against eight requirements.</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Weighted score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Continuous elevator</td>
+<td>90 / 100</td>
+</tr>
+<tr>
+<td>Cascade elevator</td>
+<td>84 / 100</td>
+</tr>
+<tr>
+<td>Double reverse four-bar</td>
+<td>60 / 100</td>
+</tr>
+<tr>
+<td>Two-bar arm</td>
+<td>58 / 100</td>
+</tr>
+</tbody></table>
+<p>The notebook is clear about what that score means: it chooses a direction for CAD, it is not proof the mechanism works.</p>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p028.jpg" alt="Brainstorm and Select" loading="lazy" />
+<img src="../images/override/p038.jpg" alt="Brainstorm and Select" loading="lazy" />
+<img src="../images/override/p046.jpg" alt="Brainstorm and Select" loading="lazy" />
+<img src="../images/override/p052.jpg" alt="Brainstorm and Select" loading="lazy" />
+<img src="../images/override/p071.jpg" alt="Brainstorm and Select" loading="lazy" />
+<img src="../images/override/p073.jpg" alt="Brainstorm and Select" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Elevator Build Cycles</h2>
+          <div class="markdown-body"><p>Six build cycles, each recorded as <strong>issue, symptom, cause</strong>. Two examples:</p>
+<ul>
+<li><strong>Cycle 1:</strong> the three-stage elevator showed excessive sliding friction. Standoff lengths were slightly off, so the guides were clamped against the C-channel.</li>
+<li><strong>Cycle 3:</strong> the twin pull-down strings failed under load because rope tension also pulled a bearing washer into the sliding path. The fix was one continuous retraction rope, so retraction and guide clearance stopped sharing hardware.</li>
+</ul>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p077.jpg" alt="Elevator Build Cycles" loading="lazy" />
+<img src="../images/override/p083.jpg" alt="Elevator Build Cycles" loading="lazy" />
+<img src="../images/override/p089.jpg" alt="Elevator Build Cycles" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Shore Regional</h2>
+          <div class="markdown-body"><p>The robot finished with a <strong>5th-place ranking</strong> and reached the <strong>semifinals</strong>, and the team won the <strong>Innovate Award</strong>. The review found that field elements being knocked out of position made the toggle unreliable, which is the problem Design Cycle 2 set out to fix.</p>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p093.jpg" alt="Shore Regional" loading="lazy" />
+<img src="../images/override/p099.jpg" alt="Shore Regional" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Design Cycle 2: Fixing What Shore Showed</h2>
+          <div class="markdown-body"><p>Every Shore problem was turned into a requirement before anything was redrawn.</p>
+<ul>
+<li><strong>Claw:</strong> game pieces were being knocked backwards, so the claw has to grip the pin <em>and</em> the cup instead of relying on perfect alignment.</li>
+<li><strong>Elevator:</strong> metal-on-metal guide contact caused friction, so the hypothesis is plastic-on-metal Delrin spacers. The notebook labels this as a hypothesis to test, not a result.</li>
+<li><strong>Chain bar:</strong> integrates the new claw and elevator through their full range of motion.</li>
+</ul>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p112.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+<img src="../images/override/p143.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+<img src="../images/override/p145.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+<img src="../images/override/p149.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+<img src="../images/override/p152.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+<img src="../images/override/p155.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+<img src="../images/override/p156.jpg" alt="Design Cycle 2: Fixing What Shore Showed" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Knox</h2>
+          <div class="markdown-body"><p>Qualification record: <strong>5 wins and 3 losses</strong>, with a highest score of 110, an average of 70.6 points, and more points than the opponents in 5 of 8 matches. The gap between best and worst matches showed that alliance and defence mattered.</p>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p181.jpg" alt="Knox" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-marker" style="background:#e0b43c"></div>
+        <div class="tl-content">
+          <h2>Programming</h2>
+          <div class="markdown-body"><p>One request becomes coordinated movement: the driver or autonomous picks a pin and scoring side, the code looks up a lift height and chain-bar angle from a distance table, and a 10 ms control task applies the movement rules so the lift and chain bar never fight each other. The localization library behind autonomous is on the <a href="../projects/redbacks-localization.html">Redbacks Localization</a> page.</p>
+</div>
+          <div class="photo-grid">
+             <img src="../images/override/p184.jpg" alt="Programming" loading="lazy" />
+<img src="../images/override/p189.jpg" alt="Programming" loading="lazy" />
+           </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+<footer class="site-footer">Robotics &amp; Engineering Portfolio</footer>
+</body>
+</html>
