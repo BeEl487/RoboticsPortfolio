@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redbacks Localization (lillet) - Brandon Lai</title>
+<link rel="stylesheet" href="../style.css?v=0dd14829" />
+<style></style>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../index.html">Brandon Lai</a>
+  <nav>
+    <a href="../index.html" class="">Projects</a>
+    <a href="../timelines/frc.html" class="">FRC</a>
+    <a href="../timelines/vex.html" class="">VEX</a>
+    <a href="../timelines/vex-iq.html" class="">VEX IQ</a>
+    <a href="../timelines/mini-echo.html" class="">Mini Echo</a>
+  </nav>
+</header>
+
+    <div class="detail-hero"><img src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Redbacks Localization (lillet)" /></div>
+    <main class="detail">
+      <a class="back" href="../index.html">&larr; All projects</a>
+      <span class="card-tag" style="color:#c94d4d">VEX Autonomous Software</span>
+      <h1>Redbacks Localization (lillet)</h1>
+      <article class="markdown-body"><p>VEX robots have no GPS. In a 15-second autonomous period you still need to know where you are on a 144&quot; × 144&quot; field. Dead-reckoning from wheel encoders drifts, especially through turns and wheel slip, and one early error ruins every later move.</p>
+<p><strong>lillet</strong> is the custom C++ library I wrote for team 4613B&#39;s Override robot (PROS on the V5 Brain) to fix that. It is a full probabilistic localization stack plus a closed-loop motion controller.</p>
+<h2>The stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Odometry</strong></td>
+<td>Tracking wheel plus IMU for heading. Fast and continuous, but drifts.</td>
+</tr>
+<tr>
+<td><strong>Distance sensors</strong></td>
+<td>Four sensors (front, back, left, right) give absolute readings off the field walls. Noisy, so used as corrections.</td>
+</tr>
+<tr>
+<td><strong>AMCL particle filter</strong></td>
+<td>Keeps 200 pose hypotheses at once and fuses odometry with the sensors, converging on the true position even from an uncertain start.</td>
+</tr>
+<tr>
+<td><strong>Motion controller</strong></td>
+<td>Boomerang-style carrot path following and a locked-sign turn profile, reading the fused pose every 10 ms.</td>
+</tr>
+</tbody></table>
+<h2>Key ideas</h2>
+<ul>
+<li><strong>Honest uncertainty.</strong> A Thrun motion model spreads the particle cloud to match real odometry noise, instead of pretending the wheels are perfect.</li>
+<li><strong>Robust sensing.</strong> A hybrid Gaussian + uniform likelihood, plus an occlusion gate, stops another robot driving past a sensor from destroying the filter.</li>
+<li><strong>Ray casting.</strong> Each particle computes the distance each sensor <em>should</em> read from its pose using a slab-method ray cast against the field model.</li>
+<li><strong>Gated corrections.</strong> Sensor updates only fire after more than 8&quot; of travel or when the effective sample size drops below 30%, which saves CPU for the 40 ms localization loop.</li>
+<li><strong>Drift-free timing.</strong> <code>Task::delay_until</code> keeps a true 40 ms period so odometry integration stays accurate under load.</li>
+</ul>
+<img class="img-feature" src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Sensor likelihood code" /><img class="img-feature" src="../images/redbacks-code/code-10-mcl-resample-and-estimate.png" alt="Resampling and pose estimate code" /><h2>Tooling around it</h2>
+<ul>
+<li><strong>Browser simulator.</strong> Design, tune and validate paths and the filter in a web page before touching the robot.</li>
+<li><strong>Async motion.</strong> Autonomous can run an intake or lift while the chassis is still driving, and starting a new motion safely cancels the old one.</li>
+<li><strong>Autonomous selector.</strong> LEFT/RIGHT on the Brain&#39;s LCD picks the routine, each with its own start pose, so no reflash between matches.</li>
+<li><strong>Live telemetry.</strong> A separate low-priority task streams pose and confidence over the controller&#39;s USB link to a local live view.</li>
+<li><strong>CI.</strong> Every push runs the simulator tests and a full firmware build.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://github.com/BeEl487/Redbacks-optimal-vex-code">github.com/BeEl487/Redbacks-optimal-vex-code</a></p>
+</article>
+      
+    </main>
+<footer class="site-footer">Robotics &amp; Engineering Portfolio</footer>
+</body>
+</html>

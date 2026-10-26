@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vision-Guided Robot Hand - Brandon Lai</title>
+<link rel="stylesheet" href="../style.css?v=0dd14829" />
+<style></style>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../index.html">Brandon Lai</a>
+  <nav>
+    <a href="../index.html" class="">Projects</a>
+    <a href="../timelines/frc.html" class="">FRC</a>
+    <a href="../timelines/vex.html" class="">VEX</a>
+    <a href="../timelines/vex-iq.html" class="">VEX IQ</a>
+    <a href="../timelines/mini-echo.html" class="">Mini Echo</a>
+  </nav>
+</header>
+
+    <div class="detail-hero"><img src="../images/robot-hand/00_overview_real_scenes.jpg" alt="Vision-Guided Robot Hand" /></div>
+    <main class="detail">
+      <a class="back" href="../index.html">&larr; All projects</a>
+      <span class="card-tag" style="color:#4dc98f">Manipulation & Vision</span>
+      <h1>Vision-Guided Robot Hand</h1>
+      <article class="markdown-body"><p>A robot hand that looks at an object, finds its outline, and places each finger against that outline so it grips the shape it is actually looking at. The target hardware is Pollen Robotics&#39; open-source <strong>Amazing Hand</strong> (4 fingers, 8 servos) driven from a single-board computer with a USB webcam.</p>
+<h2>How it works</h2>
+<pre><code>USB webcam  →  vision (find object, trace outline)  →  grasp planner  →  USB serial  →  8 servos
+</code></pre>
+<ol>
+<li><strong>Find the object.</strong> YOLOE, a prompt-free detector with a vocabulary of about 4,500 words, boxes and names the object.</li>
+<li><strong>Trace its outline.</strong> An edge detector runs <em>inside that box only</em> (GrabCut seeded from YOLOE&#39;s own mask, later a direct mask method), so background clutter is ignored. Holes are kept: a donut&#39;s middle, a mug handle&#39;s loop, the finger loops of a pair of scissors.</li>
+<li><strong>Plan the grasp.</strong> The planner picks contact points on the outline where a fingertip fits, scores pairs by force closure, and converts them to finger closures through the hand&#39;s inverse kinematics.</li>
+<li><strong>Drive the fingers.</strong> Positions are smoothed so the grasp stays steady, then sent over the servo bus. Everything runs as a dry run unless the real hand is explicitly connected.</li>
+</ol>
+<img class="img-feature" src="../images/robot-hand/00_overview_real_scenes.jpg" alt="Pipeline output on real desk scenes" /><p><em>The pipeline&#39;s own output on real photos, saved unedited. Green is the object outline, orange is an inside edge (a hole), dots are where a fingertip fits.</em></p>
+<h2>Simulation</h2>
+<p>The hand and a palm camera are simulated in MuJoCo using Pollen&#39;s own model, so the vision and planner can be developed before the hardware is ready. The camera field of view is matched to the real Arducam B0332 (70° horizontal, 1280 × 800).</p>
+<img class="img-feature" src="../images/robot-hand/vision_plane_control.png" alt="Vision pipeline controlling the simulated hand" /><h2>Kinematics</h2>
+<p>Finger size, spread and reach were measured and used to build a workspace map, so the planner only asks the fingers for contacts they can physically reach.</p>
+<img class="img-feature" src="../images/robot-hand/hand_workspace.png" alt="Hand workspace" /><h2>Object permanence</h2>
+<p>When the hand covers an object, the outline disappears. A tracker keeps the last good outline so the grasp stays steady while the fingers close.</p>
+<img class="img-feature" src="../images/robot-hand/scissors_1_strip.png" alt="Scissors tracked as the hand covers them" /><h2>Where it stands</h2>
+<ul>
+<li>The vision pipeline, planner and kinematics are working, with an automated test suite on synthetic shapes.</li>
+<li><strong>No grasp lifts an object in the simulation yet.</strong> The simulation shows the pipeline running end to end, not a successful pick-up.</li>
+<li>Every design decision, measurement and failure is logged in numbered entries in the project&#39;s <code>DECISIONS.md</code>, including the approaches that did not work.</li>
+</ul>
+<p><strong>Source:</strong> <a href="https://github.com/BeEl487/RobotHand">github.com/BeEl487/RobotHand</a></p>
+</article>
+      
+    </main>
+<footer class="site-footer">Robotics &amp; Engineering Portfolio</footer>
+</body>
+</html>
