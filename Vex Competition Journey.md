@@ -115,48 +115,33 @@ The 2025–2026 VEX OVERRIDE season brought strict power limits and restrictive 
 
 If you want an in-depth overview of the robot and why you can look through our engineering notebook
 
-# Override Notebook - Season Goals
+# Override Notebook - The Season in Brief
 
-Team 4613R (Barker Redbacks) entered V5RC *Override* with one rule: build a **simple, reliable and effective** robot, then improve it at every competition. The notebook follows the full design cycle, so each decision can be traced back to a problem and forward to a test.
+Team 4613R (Barker Redbacks) played V5RC *Override* with a simple goal: a reliable robot that scores consistently, then improve it at every event. The full engineering notebook runs to 190 pages following the design cycle; this is the short version.
 
-# Override Notebook - Brainstorm and Select
+The big design call was the lift. Four concepts (continuous elevator, cascade, double reverse four-bar, two-bar arm) were scored against eight weighted requirements, and the **continuous elevator won with 90/100**. The notebook is careful to say that score only chose a direction for CAD; it was not proof the mechanism would work.
 
-Five robot concepts and four claws were sketched and analysed, alongside 4-wheel tank, 6-wheel tank and X-drive comparisons. **Design 5** won because it combined a wide vertical range, versatility, efficient scoring and reliability.
+# Override Notebook - Achievements
 
-The elevator was then chosen with a **weighted decision matrix**: four lift types scored against eight requirements.
+- **Shore Regional:** 5th in qualification, through to the elimination rounds, and the **Innovate Award** for the design and development of the robot.
+- **UNSW:** finished 8th in qualification.
+- **Knox:** qualification record of **5 wins and 3 losses**, an average of 70.6 points per match and a best score of **110**.
+- **Driving:** the driver improved at every event, especially approaching game pieces, which cut down on pieces being knocked away.
+- **Teamwork:** the team covered driving, strategy, scouting and technical support, and adapted between offence and guarding toggles mid-match.
 
-| Concept | Weighted score |
-|---|---|
-| Continuous elevator | 90 / 100 |
-| Cascade elevator | 84 / 100 |
-| Double reverse four-bar | 60 / 100 |
-| Two-bar arm | 58 / 100 |
+# Override Notebook - Problems We Faced
 
-The notebook is clear about what that score means: it chooses a direction for CAD, it is not proof the mechanism works.
+- **Toggle unreliable when the field moved (Shore).** Robots bumping the field shifted it, which misaligned the toggle and the autonomous routines. Skills came out 10th, with a best driver run of 28 and an autonomous run of 8.
+- **Elevator friction.** The first three-stage elevator was clamped against its guides by over-tightened standoffs. Then the twin retraction strings failed under load because rope tension also pulled on the hardware that set the guide clearance. Both led to a simpler two-stage rebuild with one continuous retraction rope.
+- **End effector torque (UNSW).** The gearing could not flip it over the robot. Surgical tubing helped but was not VEX-legal, so rubber bands replaced it and pulled the end effector too far down.
+- **Not enough programming time (UNSW).** Skills finished 17th with no autonomous run, because driver and autonomous code were not finished or tested.
+- **Chain bar and claw (Knox).** The chain bar sometimes lacked the torque to flip pieces, and the claw did not always hold the cup and pin in place. The driver slowed the flips and set pieces carefully first. The planned autonomous broke the day before, so the team chose a reliable parking routine over a risky run.
 
-# Override Notebook - Elevator Build Cycles
+# Override Notebook - What We Changed
 
-Six build cycles, each recorded as **issue, symptom, cause**. Two examples:
+Each Shore problem was turned into a requirement before anything was redrawn.
 
-- **Cycle 1:** the three-stage elevator showed excessive sliding friction. Standoff lengths were slightly off, so the guides were clamped against the C-channel.
-- **Cycle 3:** the twin pull-down strings failed under load because rope tension also pulled a bearing washer into the sliding path. The fix was one continuous retraction rope, so retraction and guide clearance stopped sharing hardware.
-
-# Override Notebook - Shore Regional
-
-The robot finished with a **5th-place ranking** and reached the **semifinals**, and the team won the **Innovate Award**. The review found that field elements being knocked out of position made the toggle unreliable, which is the problem Design Cycle 2 set out to fix.
-
-# Override Notebook - Design Cycle 2: Fixing What Shore Showed
-
-Every Shore problem was turned into a requirement before anything was redrawn.
-
-- **Claw:** game pieces were being knocked backwards, so the claw has to grip the pin *and* the cup instead of relying on perfect alignment.
-- **Elevator:** metal-on-metal guide contact caused friction, so the hypothesis is plastic-on-metal Delrin spacers. The notebook labels this as a hypothesis to test, not a result.
-- **Chain bar:** integrates the new claw and elevator through their full range of motion.
-
-# Override Notebook - Knox
-
-Qualification record: **5 wins and 3 losses**, with a highest score of 110, an average of 70.6 points, and more points than the opponents in 5 of 8 matches. The gap between best and worst matches showed that alliance and defence mattered.
-
-# Override Notebook - Programming
-
-One request becomes coordinated movement: the driver or autonomous picks a pin and scoring side, the code looks up a lift height and chain-bar angle from a distance table, and a 10 ms control task applies the movement rules so the lift and chain bar never fight each other. The localization library behind autonomous is on the [Redbacks Localization](../projects/redbacks-localization.html) page.
+- **Lift:** replace metal-on-metal guide contact with Delrin spacers to cut friction. This is a hypothesis; the notebook says it still needs a loaded comparison test.
+- **Claw:** redesigned to grip over both the pin and the cup instead of relying on perfect alignment.
+- **Back guides:** CAD with a curved 30 mm lead-in so the goal does not need to hit an exact circular opening. Not yet validated on the robot.
+- **Programming:** a lookup table maps scoring distance to lift height and chain-bar angle, applied by a 10 ms control task so the mechanisms never fight each other. The localization code behind autonomous is on the [Redbacks Localization](../projects/redbacks-localization.html) page.
