@@ -260,9 +260,9 @@ function buildIndex() {
   const content = `
   <section class="intro">
     <div class="intro-text">
+      <p class="eyebrow-line">Robotics student &middot; robot builder</p>
       <h1>I build robots.</h1>
-      <p>Robotics student at Barker College, Sydney. I design them, build them, and test them until they stop breaking. Each project here shows the thinking behind the build: the options I
-      weighed, what I tested, what failed, and what I changed because of it.</p>
+      <p>I'm Brandon Lai, a robotics student at Barker College in Sydney. I design them, build them, and test them until they stop breaking.</p>
       <p class="intro-links"><a class="button" href="#work">See the work</a><a href="#profile">About me</a></p>
     </div>
     <figure class="intro-photo">
