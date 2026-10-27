@@ -147,3 +147,5 @@ The robot as built and as described by its code: a tank-drive robot that drives,
 - **Side pistons:** two independent pneumatic pistons on the D-pad.
 - **Sensing:** forward and sideways tracking wheels, an IMU for heading and four distance sensors for field position.
 - **Software:** LemLib handles PID driving and turning, an LCD selector picks the autonomous routine, and a background task keeps the lift and claw running while the robot drives. The Monte Carlo localization library built for it is on the [Redbacks Localization](../projects/redbacks-localization.html) page.
+
+If you want an in-depth overview of the robot and why we built it this way, you can look through our [engineering notebook (PDF)](images/override/4613R-Engineering-Notebook.pdf).
