@@ -260,8 +260,8 @@ function buildIndex() {
   const content = `
   <section class="intro">
     <div class="intro-text">
-      <h1>I design and build robots, then test them until they stop breaking.</h1>
-      <p>Robotics student at Barker College, Sydney. Each project here shows the thinking behind the build: the options I
+      <h1>I build robots.</h1>
+      <p>Robotics student at Barker College, Sydney. I design them, build them, and test them until they stop breaking. Each project here shows the thinking behind the build: the options I
       weighed, what I tested, what failed, and what I changed because of it.</p>
       <p class="intro-links"><a class="button" href="#work">See the work</a><a href="#profile">About me</a></p>
     </div>
