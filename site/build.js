@@ -195,15 +195,11 @@ const timelines = [
     hero: "vex/hero.jpg",
     images: {
       "VEX Robotics: Team 4613B (Barker College)": ["vex/whisper-rings.jpg"],
-      "VEX Robotics Personal Portfolio: Team 4613O (Barker College)": [
-        "vex/switch-detail/pto-1.jpeg",
-        "vex/switch-detail/ratchet-1.jpeg",
-        "vex/switch-detail/detail-1.jpg",
-        "vex/switch-detail/detail-2.jpeg",
-        "vex/switch-detail/detail-3.jpeg",
-        "vex/switch-detail/detail-4.jpeg",
-      ],
       "V5RC - Middle School Worlds": ["vex-v5/pit-1.jpg", "vex-v5/pit-2.jpg", "vex-v5/pit-3.jpg", "vex-v5/pit-4.jpg", "vex-v5/nationals-team.jpg"],
+      "Override - Switch, the Robot": ["override/robot-dr4b.jpg", "override/robot-stack.jpg", "override/robot-field.jpg", "override/ratchet.jpg"],
+      "Override - Achievements": ["override/robot-top.jpg", "override/robot-field-2.jpg"],
+      "Override - Problems We Faced": ["override/end-effector.jpg", "override/lift-bands.jpg", "override/build-day.jpg"],
+      "Override - The Code": ["override/plan.jpg"],
     },
     videos: {
       "V5RC - Middle School": [{ src: "vex-v5/auto-nats.mp4", poster: "vex-v5/auto-nats-poster.jpg", label: "Autonomous run at Nationals" }],
