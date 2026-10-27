@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RobotHand</title>
+<meta name="description" content="A vision-guided grasp planner: from one 2D image it finds an object's outline and plans where each finger of a robotic hand should touch.">
+<style>
+  :root { --bg:#fff; --fg:#14161a; --dim:#5b616b; --line:#d9dce1; --accent:#1f5eff; --card:#f5f6f8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0f1114; --fg:#eceef1; --dim:#9aa1ab; --line:#2a2e35; --accent:#6c93ff; --card:#181b20; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.6 Inter, system-ui, "Segoe UI", sans-serif; }
+  main { max-width:860px; margin:0 auto; padding:0 16px 64px; }
+  header { padding:64px 0 24px; }
+  h1 { font-size:clamp(2.2rem, 7vw, 3.4rem); margin:0 0 12px; letter-spacing:-0.02em; }
+  h2 { font-size:1.35rem; margin:48px 0 12px; padding-top:16px; border-top:1px solid var(--line); }
+  p { margin:0 0 14px; }
+  .lead { font-size:1.2rem; color:var(--dim); max-width:46ch; }
+  .steps { display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); margin:20px 0; }
+  figure { margin:0; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  figure img { display:block; width:100%; height:auto; }
+  figcaption { padding:10px 12px; font-size:.9rem; color:var(--dim); }
+  figcaption b { color:var(--fg); }
+  ul { padding-left:1.2em; margin:0 0 14px; }
+  li { margin-bottom:6px; }
+  .note { background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px; padding:12px 14px; }
+  a { color:var(--accent); }
+  .flow { list-style:none; padding:0; margin:20px 0; display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); counter-reset:s; }
+  .flow li { counter-increment:s; position:relative; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 12px; margin:0; font-size:.92rem; line-height:1.4; }
+  .flow li::before { content:counter(s); display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; font-size:.85rem; margin-bottom:8px; }
+  .flow b { display:block; font-size:1rem; margin-bottom:2px; }
+  .flow span { color:var(--dim); }
+  .stats { display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); margin:20px 0; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px; text-align:center; }
+  .stat big { display:block; font-size:1.6rem; font-weight:700; color:var(--accent); line-height:1.2; }
+  .stat small { color:var(--dim); font-size:.82rem; }
+  .status { display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); margin:16px 0; }
+  .status div { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; font-size:.92rem; }
+  .tag { display:inline-block; font-size:.75rem; font-weight:700; padding:2px 8px; border-radius:99px; margin-bottom:6px; }
+  .ok { background:#1a7f4b; color:#fff; } .part { background:#b7791f; color:#fff; } .no { background:#b42318; color:#fff; }
+  footer { color:var(--dim); font-size:.9rem; padding-top:32px; border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>RobotHand</h1>
+    <p class="lead">A robot hand that looks at an object, finds its outline, and works out where each finger should touch it.</p>
+  </header>
+
+  <h2>What it does</h2>
+  <p>One 2D image in, finger servo angles out, for the open-source
+  <a href="https://huggingface.co/blog/pollen-robotics/amazing-hand">Amazing Hand</a> by Pollen Robotics.</p>
+  <div class="stats">
+    <div class="stat"><big>1</big><small>camera image, no depth</small></div>
+    <div class="stat"><big>8 px</big><small>grip search step</small></div>
+    <div class="stat"><big>0.5</big><small>friction coefficient</small></div>
+    <div class="stat"><big>2</big><small>servo angles per finger</small></div>
+  </div>
+
+  <div class="steps">
+    <figure><img src="img/cup_raw.png" alt="A cup photographed from above" loading="lazy"><figcaption><b>1. Picture.</b> One camera image, no depth.</figcaption></figure>
+    <figure><img src="img/cup_outline.png" alt="The cup's outline drawn on the picture" loading="lazy"><figcaption><b>2. Outline.</b> The object's edge, found inside the detector's box.</figcaption></figure>
+    <figure><img src="img/cup_plan.png" alt="Planned finger contacts on the cup's outline" loading="lazy"><figcaption><b>3. Plan.</b> Where the thumb and fingers should touch.</figcaption></figure>
+  </div>
+
+  <h2>How it works</h2>
+  <ol class="flow">
+    <li><b>Detect</b><span>YOLOE finds the object's box; labels ignored</span></li>
+    <li><b>Outline</b><span>GrabCut or edges inside the box, holes kept</span></li>
+    <li><b>Score</b><span>Grips tried along the outline, ranked by force balance</span></li>
+    <li><b>Solve</b><span>Inverse kinematics gives each finger's servo angles</span></li>
+    <li><b>Grasp</b><span>Space saves it, holds 1 s, then closes the fingers</span></li>
+  </ol>
+
+  <h2>Status</h2>
+  <div class="status">
+    <div><span class="tag ok">TESTED</span><br>Vision and planning, on photos</div>
+    <div><span class="tag ok">TESTED</span><br>Grasps in a MuJoCo simulation</div>
+    <div><span class="tag no">NOT RUN</span><br>Real hand: hands are on order, driver never run on hardware</div>
+    <div><span class="tag part">UNFINISHED</span><br>Finger CAD and PCB; project moved to code</div>
+  </div>
+  <div class="note">
+    Simulation uses Pollen's hand model only, so finger geometry is not measured on a real hand. Results come from small samples.
+    Full numbers and failures are in the decision logs in the repository.
+  </div>
+
+  <footer>
+    Built with Python, OpenCV, YOLOE and MuJoCo. Hand design by Pollen Robotics (code Apache 2.0, mechanical design CC BY 4.0).
+  </footer>
+</main>
+</body>
+</html>

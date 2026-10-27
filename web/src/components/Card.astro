@@ -1,0 +1,47 @@
+---
+// One project on the home page, after Jack Wilson's work grid: photo with the rank number on it, category and date,
+// title, short description, tags, link. The photo carries a view-transition name so it grows into the project page.
+import { Image } from "astro:assets";
+import { photo } from "../lib/content.mjs";
+
+interface Props {
+  page: { slug: string; title: string; category: string; date?: string; deck: string; tags?: string[]; hero: string };
+  rank?: number;
+  size: "feature" | "wide" | "third" | "mini" | "small";
+}
+const { page, rank, size } = Astro.props;
+const meta = await photo(page.hero);
+const sizes = {
+  feature: "(max-width: 760px) 100vw, 740px",
+  wide: "(max-width: 760px) 100vw, 640px",
+  third: "(max-width: 760px) 100vw, 360px",
+  mini: "(max-width: 760px) 100vw, 220px",
+  small: "(max-width: 760px) 100vw, 240px",
+}[size];
+---
+<a class:list={["card", `card-${size}`]} href={`/projects/${page.slug}/`}>
+  <span class="card-media">
+    {meta && (
+      <Image
+        src={meta}
+        alt=""
+        widths={[400, 720, 1100, 1500].filter((w) => w <= meta.width)}
+        sizes={sizes}
+        transition:name={`cover-${page.slug}`}
+      />
+    )}
+    {rank && <span class="card-rank" aria-label={`Number ${rank}`}>{String(rank).padStart(2, "0")}</span>}
+  </span>
+  <span class="card-text">
+    <span class="card-meta">
+      <span>{page.category}</span>
+      {page.date && <span>{page.date}</span>}
+    </span>
+    <span class="card-title">{page.title}</span>
+    <span class="card-deck">{page.deck}</span>
+    {page.tags && size !== "mini" && size !== "small" && (
+      <span class="card-tags">{page.tags.map((t) => <span>{t}</span>)}</span>
+    )}
+    {size !== "mini" && size !== "small" && <span class="card-link">View case study</span>}
+  </span>
+</a>

@@ -1,0 +1,79 @@
+---
+// A project page: title, cover photo (the same photo as the home page card, so it grows into place), then the write-up
+// as numbered design steps.
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { NAME, ORDERED, PAIRED, bySlug, pairedTo } from "../../data/pages.mjs";
+import { loadPage, photo } from "../../lib/content.mjs";
+
+export function getStaticPaths() {
+  return ORDERED.map((p, i) => ({ params: { slug: p.slug }, props: { page: p, next: ORDERED[(i + 1) % ORDERED.length] } }));
+}
+
+const { page, next } = Astro.props;
+const { introHtml, steps } = await loadPage(page);
+const hero = await photo(page.hero);
+const lead = PAIRED[page.slug] ? page.slug : pairedTo(page.slug);
+const related = lead ? [lead, ...PAIRED[lead]].filter((s) => s !== page.slug).map((s) => bySlug[s]) : [];
+const pad = (n: number) => String(n).padStart(2, "0");
+---
+<Layout title={`${page.title} - ${NAME}`} description={page.deck}>
+  <article class="case">
+    <header class="case-head">
+      <a class="back" href="/#work">Back to all work</a>
+      <p class="case-tag">{page.category}{page.date && ` · ${page.date}`}</p>
+      <h1>{page.title}</h1>
+      <p class="case-deck">{page.deck}</p>
+      {related.length > 0 && (
+        <nav class="related" aria-label="Paired pages">
+          <span>Goes with</span>
+          {related.map((q) => <a href={`/projects/${q.slug}/`}>{q.title}</a>)}
+        </nav>
+      )}
+    </header>
+
+    {hero && (
+      <figure class="case-hero">
+        <Image src={hero} alt={page.title} widths={[640, 1100, 1600, 2200].filter((w) => w <= hero.width)} sizes="(max-width: 1160px) 100vw, 1120px" loading="eager" transition:name={`cover-${page.slug}`} />
+      </figure>
+    )}
+
+    {introHtml && <div class="case-intro prose" set:html={introHtml} />}
+
+    {steps.length > 2 && (
+      <nav class="steps-nav" aria-label="On this page">
+        <ol>{steps.map((s, n) => <li><a href={`#step-${n + 1}`}>{s.heading}</a></li>)}</ol>
+      </nav>
+    )}
+
+    <div class="steps">
+      {steps.map((s, n) => (
+        <section class="step" id={`step-${n + 1}`}>
+          <div class="step-num" aria-hidden="true">{pad(n + 1)}</div>
+          <div class="step-body">
+            <h2>{s.heading}</h2>
+            <div class="prose" set:html={s.html} />
+            {s.photos.length > 0 && (
+              <div class="photo-grid">{s.photos.map((src) => <img src={src} alt={s.heading} loading="lazy" />)}</div>
+            )}
+            {s.videos.length > 0 && (
+              <div class="video-grid">
+                {s.videos.map((v) => (
+                  <figure class:list={[{ portrait: v.portrait }]}>
+                    <video controls preload="none" poster={v.poster}><source src={v.src} type="video/mp4" /></video>
+                    <figcaption>{v.label}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <nav class="case-foot" aria-label="More work">
+      <a href="/#work">Back to all work</a>
+      <a class="next" href={`/projects/${next.slug}/`}>Next: {next.title}</a>
+    </nav>
+  </article>
+</Layout>

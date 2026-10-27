@@ -2,36 +2,49 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Redbacks Localization (lillet) - Brandon Lai</title>
-<link rel="stylesheet" href="../style.css?v=3e771942" />
-<style></style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Redbacks localization - Brandon Lai</title>
+<meta name="description" content="A C++ library for team 4613B: odometry fused with distance sensors by a 200-particle Monte Carlo filter, plus a closed-loop motion controller." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
+<link rel="stylesheet" href="../style.css?v=5b1327b6" />
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="brand" href="../index.html">Brandon Lai</a>
-  <nav>
-    <a href="../index.html" class="">Projects</a>
-    <a href="../timelines/frc.html" class="">FRC</a>
-    <a href="../timelines/vex.html" class="">VEX</a>
-    <a href="../timelines/vex-iq.html" class="">VEX IQ</a>
-    <a href="../timelines/mini-echo.html" class="">Mini Echo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#profile">Profile</a>
+    <a href="../index.html#contact">Contact</a>
   </nav>
 </header>
+<main id="main">
 
-    <div class="detail-hero"><img src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Redbacks Localization (lillet)" /></div>
-    <main class="detail">
-      <a class="back" href="../index.html">&larr; All projects</a>
-      <span class="card-tag" style="color:#c94d4d">VEX Autonomous Software</span>
-      <h1>Redbacks Localization (lillet)</h1>
-      <article class="markdown-body"><p>VEX robots have no GPS. In a 15-second autonomous period you still need to know where you are on a 144&quot; × 144&quot; field. Dead-reckoning from wheel encoders drifts, especially through turns and wheel slip, and one early error ruins every later move.</p>
+  <article class="case">
+    <header class="case-head">
+      <a class="back" href="../index.html#work">Back to all work</a>
+      <p class="case-tag">VEX autonomous software</p>
+      <h1>Redbacks localization</h1>
+      <p class="case-deck">A C++ library for team 4613B: odometry fused with distance sensors by a 200-particle Monte Carlo filter, plus a closed-loop motion controller.</p>
+      <nav class="related" aria-label="Paired pages"><span>Goes with</span><a href="vex.html">VEX V5</a><a href="vex-iq.html">VEX IQ</a></nav>
+    </header>
+    <figure class="case-hero"><img src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Redbacks localization" /></figure>
+    <div class="case-intro prose"><p>VEX robots have no GPS. In a 15-second autonomous period you still need to know where you are on a 144&quot; × 144&quot; field. Dead-reckoning from wheel encoders drifts, especially through turns and wheel slip, and one early error ruins every later move.</p>
 <p><strong>lillet</strong> is the custom C++ library I wrote for team 4613B&#39;s Override robot (PROS on the V5 Brain) to fix that. It is a full probabilistic localization stack plus a closed-loop motion controller.</p>
 <ul>
 <li><a href="https://beel487.github.io/lillet/docs.html">lillet library docs</a>: the localizer, motion controller, tuning guide and API.</li>
 <li><a href="https://beel487.github.io/lillet/Sim.html">AMCL localisation simulator</a>: drive the robot in the browser, watch the particle filter track it, plan autonomous paths and export them as LemLib code.</li>
 </ul>
-<h2>The stack</h2>
-<table>
+</div>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">The stack</a></li><li><a href="#step-2">Key ideas</a></li><li><a href="#step-3">Tooling around it</a></li></ol></nav>
+    <div class="steps">
+      <section class="step" id="step-1">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-body">
+          <h2>The stack</h2>
+          <div class="prose"><table>
 <thead>
 <tr>
 <th>Layer</th>
@@ -55,16 +68,31 @@
 <td>Boomerang-style carrot path following and a locked-sign turn profile, reading the fused pose every 10 ms.</td>
 </tr>
 </tbody></table>
-<h2>Key ideas</h2>
-<ul>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-2">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-body">
+          <h2>Key ideas</h2>
+          <div class="prose"><ul>
 <li><strong>Honest uncertainty.</strong> A Thrun motion model spreads the particle cloud to match real odometry noise, instead of pretending the wheels are perfect.</li>
 <li><strong>Robust sensing.</strong> A hybrid Gaussian + uniform likelihood, plus an occlusion gate, stops another robot driving past a sensor from destroying the filter.</li>
 <li><strong>Ray casting.</strong> Each particle computes the distance each sensor <em>should</em> read from its pose using a slab-method ray cast against the field model.</li>
 <li><strong>Gated corrections.</strong> Sensor updates only fire after more than 8&quot; of travel or when the effective sample size drops below 30%, which saves CPU for the 40 ms localization loop.</li>
 <li><strong>Drift-free timing.</strong> <code>Task::delay_until</code> keeps a true 40 ms period so odometry integration stays accurate under load.</li>
 </ul>
-<img class="img-feature" src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Sensor likelihood code" /><img class="img-feature" src="../images/redbacks-code/code-10-mcl-resample-and-estimate.png" alt="Resampling and pose estimate code" /><h2>Tooling around it</h2>
-<ul>
+<img class="img-feature" src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Sensor likelihood code" /><img class="img-feature" src="../images/redbacks-code/code-10-mcl-resample-and-estimate.png" alt="Resampling and pose estimate code" />
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-3">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-body">
+          <h2>Tooling around it</h2>
+          <div class="prose"><ul>
 <li><strong>Browser simulator.</strong> Design, tune and validate paths and the filter in a web page before touching the robot.</li>
 <li><strong>Async motion.</strong> Autonomous can run an intake or lift while the chassis is still driving, and starting a new motion safely cancels the old one.</li>
 <li><strong>Autonomous selector.</strong> LEFT/RIGHT on the Brain&#39;s LCD picks the routine, each with its own start pose, so no reflash between matches.</li>
@@ -72,9 +100,21 @@
 <li><strong>CI.</strong> Every push runs the simulator tests and a full firmware build.</li>
 </ul>
 <p><strong>Source:</strong> <a href="https://github.com/BeEl487/Redbacks-optimal-vex-code">github.com/BeEl487/Redbacks-optimal-vex-code</a></p>
-</article>
-      
-    </main>
-<footer class="site-footer">Robotics &amp; Engineering Portfolio</footer>
+</div>
+          
+        </div>
+      </section>
+    </div>
+    <nav class="case-foot" aria-label="More work">
+      <a href="../index.html#work">Back to all work</a>
+      <a class="next" href="mini-echo.html">Next: Mini Echo robot dog</a>
+    </nav>
+  </article>
+</main>
+<footer class="site-footer">
+  <span>Brandon Lai · Sydney</span>
+  <a href="https://github.com/BeEl487">GitHub</a>
+  <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
+</footer>
 </body>
 </html>

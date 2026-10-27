@@ -1,0 +1,19 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "assets": "node scripts/collect-assets.mjs",
+    "dev": "node scripts/collect-assets.mjs && astro dev",
+    "build": "node scripts/collect-assets.mjs && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.4.2",
+    "marked": "^18.1.2"
+  }
+}

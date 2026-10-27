@@ -2,32 +2,44 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Breadboard Computer - Brandon Lai</title>
-<link rel="stylesheet" href="../style.css?v=3e771942" />
-<style></style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Breadboard computer - Brandon Lai</title>
+<meta name="description" content="A minimal-instruction-set computer designed in CircuitVerse and hand-built from six perfboard cards - CPU, program counter, memory, and a 555 timer clock." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
+<link rel="stylesheet" href="../style.css?v=5b1327b6" />
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <a class="brand" href="../index.html">Brandon Lai</a>
-  <nav>
-    <a href="../index.html" class="">Projects</a>
-    <a href="../timelines/frc.html" class="">FRC</a>
-    <a href="../timelines/vex.html" class="">VEX</a>
-    <a href="../timelines/vex-iq.html" class="">VEX IQ</a>
-    <a href="../timelines/mini-echo.html" class="">Mini Echo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#profile">Profile</a>
+    <a href="../index.html#contact">Contact</a>
   </nav>
 </header>
+<main id="main">
 
-    <div class="detail-hero placeholder" style="background:linear-gradient(160deg, #4d9e6a22, #4d9e6a55)"></div>
-    <main class="detail">
-      <a class="back" href="../index.html">&larr; All projects</a>
-      <span class="card-tag" style="color:#4d9e6a">Digital Logic</span>
-      <h1>Breadboard Computer</h1>
-      <article class="markdown-body"><h1>Breadboard Computer</h1>
-<img src="../images/custom-computer/3d-sage-inspiration.jpg" alt="3D Sage YouTube videos that inspired this project" class="img-small" /><p>Inspired by 3D Sage&#39;s breadboard computer videos, I designed and built my own minimal-instruction-set computer from scratch, rather than following an existing build guide.</p>
-<h2>Circuit Design (CircuitVerse)</h2>
-<p>Before touching any real hardware, I designed and simulated the whole computer logic-gate by logic-gate in CircuitVerse. The design is split into four main chips:</p>
+  <article class="case">
+    <header class="case-head">
+      <a class="back" href="../index.html#work">Back to all work</a>
+      <p class="case-tag">Digital logic</p>
+      <h1>Breadboard computer</h1>
+      <p class="case-deck">A minimal-instruction-set computer designed in CircuitVerse and hand-built from six perfboard cards - CPU, program counter, memory, and a 555 timer clock.</p>
+      
+    </header>
+    <figure class="case-hero"><img src="../images/custom-computer/assembled-powered.jpg" alt="Breadboard computer" /></figure>
+    <div class="case-intro prose"><img src="../images/custom-computer/3d-sage-inspiration.jpg" alt="3D Sage YouTube videos that inspired this project" class="img-small" /><p>Inspired by 3D Sage&#39;s breadboard computer videos, I designed and built my own minimal-instruction-set computer from scratch, rather than following an existing build guide.</p>
+</div>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Circuit Design (CircuitVerse)</a></li><li><a href="#step-2">Physical Build</a></li><li><a href="#step-3">Custom PCB (V1)</a></li></ol></nav>
+    <div class="steps">
+      <section class="step" id="step-1">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-body">
+          <h2>Circuit Design (CircuitVerse)</h2>
+          <div class="prose"><p>Before touching any real hardware, I designed and simulated the whole computer logic-gate by logic-gate in CircuitVerse. The design is split into four main chips:</p>
 <ul>
 <li><strong>CPU</strong> - decodes op-codes and routes data between inputs, outputs, and the program counter.</li>
 <li><strong>Counter</strong> - the program counter, tracking which instruction is currently executing.</li>
@@ -42,8 +54,15 @@
 <li><strong>Set Counter</strong> - jump to a given instruction address.</li>
 <li><strong>Halt</strong> - stop the clock.</li>
 </ol>
-<h2>Physical Build</h2>
-<img src="../images/custom-computer/hand-soldered-cards.jpg" alt="Six hand-soldered perfboard cards for the computer" /><p>Once the CircuitVerse design was working, I moved to real hardware: six hand-soldered perfboard cards (one per chip, plus supporting logic), designed to slot together rather than being wired as one big tangle.</p>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-2">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-body">
+          <h2>Physical Build</h2>
+          <div class="prose"><img src="../images/custom-computer/hand-soldered-cards.jpg" alt="Six hand-soldered perfboard cards for the computer" /><p>Once the CircuitVerse design was working, I moved to real hardware: six hand-soldered perfboard cards (one per chip, plus supporting logic), designed to slot together rather than being wired as one big tangle.</p>
 <video controls preload="none" poster="../images/custom-computer/clock-test-poster.jpg">
   <source src="../images/custom-computer/clock-test.mp4" type="video/mp4" />
 </video><p>Testing the clock circuit: a 555 timer in astable mode generates the square wave that drives the whole computer&#39;s clock signal.</p>
@@ -55,13 +74,32 @@
 <video controls preload="none" poster="../images/custom-computer/instruction-demo-poster.jpg">
   <source src="../images/custom-computer/instruction-demo.mp4" type="video/mp4" />
 </video><p>The finished computer executing a program: stepping through instructions and outputting values, driven entirely by hand-built logic gates rather than a microcontroller.</p>
-<h2>Custom PCB (V1)</h2>
-<p>Having proven the design on breadboards, I moved the whole computer onto a custom PCB - Mini Computer V1 - to improve reliability over the hand-soldered perfboard-and-breadboard build.</p>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-3">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-body">
+          <h2>Custom PCB (V1)</h2>
+          <div class="prose"><p>Having proven the design on breadboards, I moved the whole computer onto a custom PCB - Mini Computer V1 - to improve reliability over the hand-soldered perfboard-and-breadboard build.</p>
 <img src="../images/custom-computer/pcb-front.jpg" alt="Mini Computer V1 PCB, front" />
 <img src="../images/custom-computer/pcb-back.jpg" alt="Mini Computer V1 PCB, back" /><p>The board keeps the same logical structure as the breadboard version - memory, program counter, clock, inverter, and override switches for manual debugging - now laid out as a single populated board instead of six separate cards.</p>
-</article>
-      
-    </main>
-<footer class="site-footer">Robotics &amp; Engineering Portfolio</footer>
+</div>
+          
+        </div>
+      </section>
+    </div>
+    <nav class="case-foot" aria-label="More work">
+      <a href="../index.html#work">Back to all work</a>
+      <a class="next" href="python-projects.html">Next: Python projects</a>
+    </nav>
+  </article>
+</main>
+<footer class="site-footer">
+  <span>Brandon Lai · Sydney</span>
+  <a href="https://github.com/BeEl487">GitHub</a>
+  <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
+</footer>
 </body>
 </html>

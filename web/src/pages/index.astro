@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { NAME, GITHUB, YOUTUBE, RANK, PAIRED, OTHER, bySlug } from "../data/pages.mjs";
+import { photo } from "../lib/content.mjs";
+
+// card size by rank position, after Jack Wilson's work grid: a wide feature, a two-up row, three across, a feature
+const SIZES = ["feature", "wide", "third", "third", "third", "feature"];
+const own = await photo("portrait.jpg");
+const portrait = own ?? (await photo("frc/hero.jpg"));
+---
+<Layout title={`${NAME} - Robotics portfolio`} description="Robots I have designed and built, and the design process behind each one." current="work">
+  <section class="intro">
+    <div class="intro-text">
+      <h1>I design and build robots, and write down why.</h1>
+      <p>
+        Robotics student at Barker College, Sydney. Each project here shows the thinking behind the build: the options I
+        weighed, what I tested, what failed, and what I changed because of it.
+      </p>
+      <p class="intro-links"><a class="button" href="#work">See the work</a><a href="#profile">About me</a></p>
+    </div>
+    {portrait && (
+      <figure class="intro-photo">
+        <Image src={portrait} alt={own ? NAME : "The FRC robot"} widths={[400, 700, 1000].filter((w) => w <= portrait.width)} sizes="(max-width: 760px) 100vw, 360px" loading="eager" />
+        <figcaption>{own ? `${NAME}, Sydney` : "FRC robot, 2025–26 season"}</figcaption>
+      </figure>
+    )}
+  </section>
+
+  <section id="work" class="work" aria-labelledby="work-h">
+    <header class="work-head">
+      <h2 id="work-h">Work</h2>
+      <p>Most important first. Each page walks through the design: the problem, the options, what failed, and what changed.</p>
+    </header>
+    <div class="cards">
+      {RANK.map((slug, i) =>
+        PAIRED[slug] ? (
+          <div class="pair-block">
+            <Card page={bySlug[slug]} rank={i + 1} size="wide" />
+            <div class="pair-side" role="group" aria-label={`Goes with ${bySlug[slug].title}`}>
+              <p class="pair-label">Goes with {bySlug[slug].title}</p>
+              {PAIRED[slug].map((s) => <Card page={bySlug[s]} size="mini" />)}
+            </div>
+          </div>
+        ) : (
+          <Card page={bySlug[slug]} rank={i + 1} size={SIZES[i] ?? "third"} />
+        ),
+      )}
+    </div>
+
+    <section class="other" aria-labelledby="other-h">
+      <h3 id="other-h">Other projects</h3>
+      <div class="other-cards">{OTHER.map((s) => <Card page={bySlug[s]} size="small" />)}</div>
+    </section>
+  </section>
+
+  <section id="profile" class="profile">
+    <h2>Profile</h2>
+    <div class="profile-body">
+      <p>
+        I started in VEX IQ with team 4613B, finishing in the top 6.4% at the 2024 VEX Robotics World Championship, then moved
+        to VEX V5 and FRC with Barker's teams, competing at regionals, Worlds and Einstein.
+      </p>
+      <p>
+        Outside competition I build my own robots: a vision-guided robot hand, a walking quadruped, a motion-capture glove and
+        a computer made from logic chips. I document builds on my YouTube channel, which has been featured on Hackaday and
+        Hackster.io.
+      </p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>The code and design logs for most of these projects are public.</p>
+    <p class="contact-links"><a href={GITHUB}>GitHub</a><a href={YOUTUBE}>YouTube</a></p>
+  </section>
+</Layout>
