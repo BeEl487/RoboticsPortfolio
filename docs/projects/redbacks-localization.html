@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Redbacks Localization (lillet) - Brandon Lai</title>
-<link rel="stylesheet" href="../style.css?v=0dd14829" />
+<link rel="stylesheet" href="../style.css?v=3e771942" />
 <style></style>
 </head>
 <body>
@@ -26,6 +26,10 @@
       <h1>Redbacks Localization (lillet)</h1>
       <article class="markdown-body"><p>VEX robots have no GPS. In a 15-second autonomous period you still need to know where you are on a 144&quot; × 144&quot; field. Dead-reckoning from wheel encoders drifts, especially through turns and wheel slip, and one early error ruins every later move.</p>
 <p><strong>lillet</strong> is the custom C++ library I wrote for team 4613B&#39;s Override robot (PROS on the V5 Brain) to fix that. It is a full probabilistic localization stack plus a closed-loop motion controller.</p>
+<ul>
+<li><a href="https://beel487.github.io/lillet/docs.html">lillet library docs</a>: the localizer, motion controller, tuning guide and API.</li>
+<li><a href="https://beel487.github.io/lillet/Sim.html">AMCL localisation simulator</a>: drive the robot in the browser, watch the particle filter track it, plan autonomous paths and export them as LemLib code.</li>
+</ul>
 <h2>The stack</h2>
 <table>
 <thead>

@@ -2,6 +2,9 @@ VEX robots have no GPS. In a 15-second autonomous period you still need to know 
 
 **lillet** is the custom C++ library I wrote for team 4613B's Override robot (PROS on the V5 Brain) to fix that. It is a full probabilistic localization stack plus a closed-loop motion controller.
 
+- [lillet library docs](https://beel487.github.io/lillet/docs.html): the localizer, motion controller, tuning guide and API.
+- [AMCL localisation simulator](https://beel487.github.io/lillet/Sim.html): drive the robot in the browser, watch the particle filter track it, plan autonomous paths and export them as LemLib code.
+
 ## The stack
 
 | Layer | What it does |
