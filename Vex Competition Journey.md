@@ -137,11 +137,13 @@ The big design call was the lift. Four concepts (continuous elevator, cascade, d
 - **Not enough programming time (UNSW).** Skills finished 17th with no autonomous run, because driver and autonomous code were not finished or tested.
 - **Chain bar and claw (Knox).** The chain bar sometimes lacked the torque to flip pieces, and the claw did not always hold the cup and pin in place. The driver slowed the flips and set pieces carefully first. The planned autonomous broke the day before, so the team chose a reliable parking routine over a risky run.
 
-# Override Notebook - What We Changed
+# Override Notebook - The Robot
 
-Each Shore problem was turned into a requirement before anything was redrawn.
+The robot as built and as described by its code: a tank-drive robot that drives, lifts and scores under driver control, runs a selectable autonomous, and has its own localization library.
 
-- **Lift:** replace metal-on-metal guide contact with Delrin spacers to cut friction. This is a hypothesis; the notebook says it still needs a loaded comparison test.
-- **Claw:** redesigned to grip over both the pin and the cup instead of relying on perfect alignment.
-- **Back guides:** CAD with a curved 30 mm lead-in so the goal does not need to hit an exact circular opening. Not yet validated on the robot.
-- **Programming:** a lookup table maps scoring distance to lift height and chain-bar angle, applied by a 10 ms control task so the mechanisms never fight each other. The localization code behind autonomous is on the [Redbacks Localization](../projects/redbacks-localization.html) page.
+- **Drivetrain:** six motors (three per side) on a 12 in track width with 2.75 in wheels, geared to 450 rpm for about 65 in/s.
+- **Lift:** a double reverse four-bar (DR4B) raised by the **intake motors through a one-way ratchet**. That means the arm can only be driven up and falls by letting the motors spin forward. A normal PID loop would drop the arm, so the controller uses a smooth, slew-limited ramp with a hold state and four preset heights on the controller buttons.
+- **Claw:** a pneumatic clamp with two rollers. R1 intakes and stops by itself when a piece jams, L1 scores and L2 matchloads. The piston is only written when it changes, so it does not waste air.
+- **Side pistons:** two independent pneumatic pistons on the D-pad.
+- **Sensing:** forward and sideways tracking wheels, an IMU for heading and four distance sensors for field position.
+- **Software:** LemLib handles PID driving and turning, an LCD selector picks the autonomous routine, and a background task keeps the lift and claw running while the robot drives. The Monte Carlo localization library built for it is on the [Redbacks Localization](../projects/redbacks-localization.html) page.

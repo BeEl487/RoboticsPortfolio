@@ -188,9 +188,7 @@
 </div>
           <div class="photo-grid">
              <img src="../images/override/build-1.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
-<img src="../images/override/robot-side.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
-<img src="../images/override/robot-top.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
-<img src="../images/override/robot-lift.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
+<img src="../images/override/robot-assembled.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
            </div>
           
         </div>
@@ -209,9 +207,7 @@
 </ul>
 </div>
           <div class="photo-grid">
-             <img src="../images/override/robot-assembled.jpg" alt="Override Notebook - Achievements" loading="lazy" />
-<img src="../images/override/claw-hold.jpg" alt="Override Notebook - Achievements" loading="lazy" />
-<img src="../images/override/pin.jpg" alt="Override Notebook - Achievements" loading="lazy" />
+             <img src="../images/override/pin.jpg" alt="Override Notebook - Achievements" loading="lazy" />
            </div>
           
         </div>
@@ -243,21 +239,22 @@
       <div class="tl-item">
         <div class="tl-marker" style="background:#4dabc9"></div>
         <div class="tl-content">
-          <h2>Override Notebook - What We Changed</h2>
-          <div class="markdown-body"><p>Each Shore problem was turned into a requirement before anything was redrawn.</p>
+          <h2>Override Notebook - The Robot</h2>
+          <div class="markdown-body"><p>The robot as built and as described by its code: a tank-drive robot that drives, lifts and scores under driver control, runs a selectable autonomous, and has its own localization library.</p>
 <ul>
-<li><strong>Lift:</strong> replace metal-on-metal guide contact with Delrin spacers to cut friction. This is a hypothesis; the notebook says it still needs a loaded comparison test.</li>
-<li><strong>Claw:</strong> redesigned to grip over both the pin and the cup instead of relying on perfect alignment.</li>
-<li><strong>Back guides:</strong> CAD with a curved 30 mm lead-in so the goal does not need to hit an exact circular opening. Not yet validated on the robot.</li>
-<li><strong>Programming:</strong> a lookup table maps scoring distance to lift height and chain-bar angle, applied by a 10 ms control task so the mechanisms never fight each other. The localization code behind autonomous is on the <a href="../projects/redbacks-localization.html">Redbacks Localization</a> page.</li>
+<li><strong>Drivetrain:</strong> six motors (three per side) on a 12 in track width with 2.75 in wheels, geared to 450 rpm for about 65 in/s.</li>
+<li><strong>Lift:</strong> a double reverse four-bar (DR4B) raised by the <strong>intake motors through a one-way ratchet</strong>. That means the arm can only be driven up and falls by letting the motors spin forward. A normal PID loop would drop the arm, so the controller uses a smooth, slew-limited ramp with a hold state and four preset heights on the controller buttons.</li>
+<li><strong>Claw:</strong> a pneumatic clamp with two rollers. R1 intakes and stops by itself when a piece jams, L1 scores and L2 matchloads. The piston is only written when it changes, so it does not waste air.</li>
+<li><strong>Side pistons:</strong> two independent pneumatic pistons on the D-pad.</li>
+<li><strong>Sensing:</strong> forward and sideways tracking wheels, an IMU for heading and four distance sensors for field position.</li>
+<li><strong>Software:</strong> LemLib handles PID driving and turning, an LCD selector picks the autonomous routine, and a background task keeps the lift and claw running while the robot drives. The Monte Carlo localization library built for it is on the <a href="../projects/redbacks-localization.html">Redbacks Localization</a> page.</li>
 </ul>
 </div>
           <div class="photo-grid">
-             <img src="../images/override/cad-elevator.jpg" alt="Override Notebook - What We Changed" loading="lazy" />
-<img src="../images/override/cad-guide-photo.jpg" alt="Override Notebook - What We Changed" loading="lazy" />
-<img src="../images/override/cad-claw.jpg" alt="Override Notebook - What We Changed" loading="lazy" />
-<img src="../images/override/cad-chainbar.jpg" alt="Override Notebook - What We Changed" loading="lazy" />
-<img src="../images/override/cad-backguide.jpg" alt="Override Notebook - What We Changed" loading="lazy" />
+             <img src="../images/override/robot-side.jpg" alt="Override Notebook - The Robot" loading="lazy" />
+<img src="../images/override/robot-top.jpg" alt="Override Notebook - The Robot" loading="lazy" />
+<img src="../images/override/robot-lift.jpg" alt="Override Notebook - The Robot" loading="lazy" />
+<img src="../images/override/claw-hold.jpg" alt="Override Notebook - The Robot" loading="lazy" />
            </div>
           
         </div>
