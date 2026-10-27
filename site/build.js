@@ -186,7 +186,6 @@ function layout({ title, description, content, depth, current }) {
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
-  ${depth ? `<a class="back-top" href="${base}index.html#work">All work</a>` : ""}
   <a class="brand" href="${base}index.html">${NAME}</a>
   <nav aria-label="Main">
     <a href="${base}index.html#work"${current === "work" ? ' aria-current="page"' : ""}>Work</a>
@@ -362,7 +361,7 @@ function buildPage(p, i) {
   const content = `
   <article class="case">
     <header class="case-head">
-      <a class="back" href="../index.html#work">Back to all work</a>
+      <nav class="crumb" aria-label="Breadcrumb"><a href="../index.html#work">Work</a><span aria-hidden="true">/</span><span>${esc(p.title)}</span></nav>
       <p class="case-tag">${esc(p.tag)}</p>
       <h1>${esc(p.title)}</h1>
       <p class="case-deck">${esc(p.deck)}</p>
@@ -374,7 +373,7 @@ function buildPage(p, i) {
     <div class="steps">${steps}
     </div>
     <nav class="case-foot" aria-label="More work">
-      <a href="../index.html#work">Back to all work</a>
+      <a href="../index.html#work">All work</a>
       <a class="next" href="${next.slug}.html">Next: ${esc(next.title)}</a>
     </nav>
   </article>`;
