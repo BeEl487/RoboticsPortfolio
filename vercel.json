@@ -1,13 +1,6 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "astro",
-  "installCommand": "npm ci --prefix web",
-  "buildCommand": "npm run build --prefix web",
-  "outputDirectory": "web/dist",
-  "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/(projects|timelines)/:slug.html", "destination": "/projects/:slug/", "permanent": true },
-    { "source": "/projects/(3d-printing|games|blender|bin-picking-rl|wind-turbine|qdd-actuator-v1|qdd-actuator-v2|engineering-notebook)/", "destination": "/", "permanent": true },
-    { "source": "/projects/youtube/", "destination": "https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA", "permanent": false }
-  ]
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "docs",
+  "cleanUrls": false
 }

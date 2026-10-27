@@ -33,9 +33,22 @@ When the hand covers an object, the outline disappears. A tracker keeps the last
 
 <img class="img-feature" src="images/robot-hand/scissors_1_strip.png" alt="Scissors tracked as the hand covers them" />
 
+## From one picture to a grasp plan
+
+One trial on a cup: the camera picture, the outline found inside the detector's box, and the planned contact points for the thumb and fingers.
+
+<img class="img-feature" src="images/robot-hand/cup_raw.png" alt="A cup photographed from above" />
+<img class="img-feature" src="images/robot-hand/cup_outline.png" alt="The cup's outline drawn on the picture" />
+<img class="img-feature" src="images/robot-hand/cup_plan.png" alt="Planned finger contacts on the cup's outline" />
+
+## Grasping from the app
+
+The plan is worked out on every picture, but the fingers never move on their own. Pressing Space saves the grasp worked out at that moment and moves the fingers to it. After 1 second of holding, the servos close at a set rate to finish the grasp. While Space is held the detector takes no new pictures, so the hand keeps to the one saved grasp. Letting go goes back to live pictures. This has only been run against the simulated hand, in a dry run.
+
 ## Where it stands
 
 - The vision pipeline, planner and kinematics are working, with an automated test suite on synthetic shapes.
+- **Nothing has been tried on a real hand.** The hands are on order and the driver for them has never been run on hardware.
 - **No grasp lifts an object in the simulation yet.** The simulation shows the pipeline running end to end, not a successful pick-up.
 - Every design decision, measurement and failure is logged in numbered entries in the project's `DECISIONS.md`, including the approaches that did not work.
 
