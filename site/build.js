@@ -204,6 +204,13 @@ const timelines = [
         "vex/switch-detail/detail-4.jpeg",
       ],
       "V5RC - Middle School Worlds": ["vex-v5/pit-1.jpg", "vex-v5/pit-2.jpg", "vex-v5/pit-3.jpg", "vex-v5/pit-4.jpg", "vex-v5/nationals-team.jpg"],
+      "Override Notebook - Season Goals": ["override/p001.jpg", "override/p020.jpg"],
+      "Override Notebook - Brainstorm and Select": ["override/p028.jpg", "override/p038.jpg", "override/p046.jpg", "override/p052.jpg", "override/p071.jpg", "override/p073.jpg"],
+      "Override Notebook - Elevator Build Cycles": ["override/p077.jpg", "override/p083.jpg", "override/p089.jpg"],
+      "Override Notebook - Shore Regional": ["override/p093.jpg", "override/p099.jpg"],
+      "Override Notebook - Design Cycle 2: Fixing What Shore Showed": ["override/p112.jpg", "override/p143.jpg", "override/p145.jpg", "override/p149.jpg", "override/p152.jpg", "override/p155.jpg", "override/p156.jpg"],
+      "Override Notebook - Knox": ["override/p181.jpg"],
+      "Override Notebook - Programming": ["override/p184.jpg", "override/p189.jpg"],
     },
     videos: {
       "V5RC - Middle School": [{ src: "vex-v5/auto-nats.mp4", poster: "vex-v5/auto-nats-poster.jpg", label: "Autonomous run at Nationals" }],
@@ -220,25 +227,6 @@ const timelines = [
     hero: "vex-iq/stacking-demo-poster.jpg",
     images: {
       "Barker League VIQC": ["vex-iq/practice-robot.jpeg"],
-    },
-    competition: true,
-  },
-  {
-    slug: "override",
-    file: "Override Notebook.md",
-    title: "Override Engineering Notebook",
-    tag: "VEX V5RC Override - Team 4613R",
-    deck: "The 190-page notebook in short form: goals, design selection, six elevator cycles, competition results and the redesign they led to.",
-    accent: "#e0b43c",
-    hero: "override/p001.jpg",
-    images: {
-      "Season Goals": ["override/p001.jpg", "override/p020.jpg"],
-      "Brainstorm and Select": ["override/p028.jpg", "override/p038.jpg", "override/p046.jpg", "override/p052.jpg", "override/p071.jpg", "override/p073.jpg"],
-      "Elevator Build Cycles": ["override/p077.jpg", "override/p083.jpg", "override/p089.jpg"],
-      "Shore Regional": ["override/p093.jpg", "override/p099.jpg"],
-      "Design Cycle 2: Fixing What Shore Showed": ["override/p112.jpg", "override/p143.jpg", "override/p145.jpg", "override/p149.jpg", "override/p152.jpg", "override/p155.jpg", "override/p156.jpg"],
-      "Knox": ["override/p181.jpg"],
-      "Programming": ["override/p184.jpg", "override/p189.jpg"],
     },
     competition: true,
   },
@@ -280,7 +268,6 @@ function layout({ title, content, active, css = "" }) {
     <a href="${base}index.html" class="${active === "root" ? "current" : ""}">Projects</a>
     <a href="${base}timelines/frc.html" class="${active === "frc" ? "current" : ""}">FRC</a>
     <a href="${base}timelines/vex.html" class="${active === "vex" ? "current" : ""}">VEX</a>
-    <a href="${base}timelines/override.html" class="${active === "override" ? "current" : ""}">Override</a>
     <a href="${base}timelines/vex-iq.html" class="${active === "vex-iq" ? "current" : ""}">VEX IQ</a>
     <a href="${base}timelines/mini-echo.html" class="${active === "mini-echo" ? "current" : ""}">Mini Echo</a>
   </nav>
