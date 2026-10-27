@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
-<link rel="stylesheet" href="../style.css?v=5b1327b6" />
+<link rel="stylesheet" href="../style.css?v=7f1cc5db" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  <a class="back-top" href="../index.html#work">All work</a>
   <a class="brand" href="../index.html">Brandon Lai</a>
   <nav aria-label="Main">
     <a href="../index.html#work">Work</a>
@@ -31,17 +32,17 @@
       
     </header>
     <figure class="case-hero"><img src="../images/python-projects/raytracer.png" alt="Python projects" /></figure>
-    <div class="case-intro prose"><p>A collection of smaller Python projects I built outside of robotics, mostly focused on algorithms and simulations. I wrote them from scratch to understand how they actually work instead of relying on existing libraries.</p>
-<p>These were built before I started using AI tools, so I had to figure things out myself through documentation, searching online, and a lot of debugging.</p>
-<p>All of the projects below were run directly from the source in this repository to produce the screenshots shown.</p>
+    <div class="case-intro prose"><p>Small programs I wrote from scratch to understand how algorithms really work. I wrote them before using AI tools.</p>
+<ul class="glance"><li><b>6</b><span>projects</span></li><li><b>0</b><span>ML frameworks used</span></li><li><b>3</b><span>videos</span></li></ul>
 </div>
-    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Path Tracer</a></li><li><a href="#step-2">Flappy Bird - NEAT Neural Network</a></li><li><a href="#step-3">A* Pathfinding Visualizer</a></li><li><a href="#step-4">Neural Network From Scratch</a></li><li><a href="#step-5">Tic-Tac-Toe Minimax AI</a></li><li><a href="#step-6">Tic-Tac-Toe Neural Network</a></li><li><a href="#step-7">Wave Function Collapse (prototype)</a></li><li><a href="#step-8">VEX IQ Score Calculator</a></li><li><a href="#step-9">MazeRush - Raycasted Maze Racer (Small Basic)</a></li></ol></nav>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Path tracer</a></li><li><a href="#step-2">Flappy Bird learns to fly</a></li><li><a href="#step-3">A* pathfinder</a></li><li><a href="#step-4">Neural network from scratch</a></li><li><a href="#step-5">MazeRush</a></li><li><a href="#step-6">Also built</a></li></ol></nav>
     <div class="steps">
       <section class="step" id="step-1">
         <div class="step-num" aria-hidden="true">01</div>
         <div class="step-body">
-          <h2>Path Tracer</h2>
-          <div class="prose"><img src="../images/python-projects/raytracer.png" alt="Path tracer render of three spheres and a light source" width="500" /><p>A CPU path tracer built from first principles: ray-sphere intersection, diffuse reflection via random hemisphere sampling, and light accumulation over multiple bounces (8 bounces, 150 samples per pixel). No rendering libraries - just vector math, a <code>PIL</code> image buffer, and Monte Carlo sampling. The visible noise is characteristic of path tracing at a finite sample count; more samples would converge to a cleaner image at the cost of render time (this 500x300 render took about a minute on CPU).</p>
+          <h2>Path tracer</h2>
+          <div class="prose"><p>A CPU path tracer written from first principles: ray-sphere hits, diffuse bounces, 8 bounces and 150 samples per pixel.</p>
+<figure class="fig"><img src="../images/python-projects/raytracer.png" alt="Three spheres and a light, rendered by my own tracer." loading="lazy" /><figcaption>Three spheres and a light, rendered by my own tracer.</figcaption></figure>
 </div>
           
         </div>
@@ -49,11 +50,9 @@
       <section class="step" id="step-2">
         <div class="step-num" aria-hidden="true">02</div>
         <div class="step-body">
-          <h2>Flappy Bird - NEAT Neural Network</h2>
-          <div class="prose"><img src="../images/python-projects/flappy-bird-neuralnet.png" alt="Screenshot of the Flappy Bird NEAT AI mid-flight" width="500" /><p>A NEAT-style (NeuroEvolution of Augmenting Topologies) neural network learns to play Flappy Bird from scratch. A generation of birds, each controlled by its own small neural network, plays simultaneously in a <code>pygame</code> window; birds that die are removed, and the survivors&#39; networks are bred and mutated to produce the next generation. Over successive generations, average fitness (distance survived) increases as the population learns to time its jumps against incoming pipes.</p>
-<video width="500" controls preload="none" poster="../images/python-projects/flappy-bird-best-poster.jpg">
-  <source src="../images/python-projects/flappy-bird-best.mp4" type="video/mp4" />
-</video><p>Recording of the best-performing bird from a later generation, navigating several pipes in a row.</p>
+          <h2>Flappy Bird learns to fly</h2>
+          <div class="prose"><p>A NEAT-style network evolves over generations. Each bird has its own small brain, and the best survive.</p>
+<div class="fig-grid "><figure><img src="../images/python-projects/flappy-bird-neuralnet.png" alt="Mid-flight, a whole generation at once" loading="lazy" /><figcaption>Mid-flight, a whole generation at once</figcaption></figure></div><div class="fig-grid "><figure><video controls preload="none" poster="../images/python-projects/flappy-bird-best-poster.jpg"><source src="../images/python-projects/flappy-bird-best.mp4" type="video/mp4" /></video><figcaption>The best bird from a later generation</figcaption></figure></div>
 </div>
           
         </div>
@@ -61,8 +60,9 @@
       <section class="step" id="step-3">
         <div class="step-num" aria-hidden="true">03</div>
         <div class="step-body">
-          <h2>A* Pathfinding Visualizer</h2>
-          <div class="prose"><img src="../images/python-projects/pathfinder.png" alt="A* pathfinding grid showing explored nodes and the final path" width="500" /><p>An interactive <code>pygame</code> grid where the user places a start point, end point, and barriers with the mouse, then watches A* search the grid live. Red cells are nodes the algorithm has visited and closed off, and the purple line is the reconstructed shortest path once the end node is reached. The heuristic is Manhattan distance, appropriate since movement is restricted to four directions (no diagonals).</p>
+          <h2>A* pathfinder</h2>
+          <div class="prose"><p>Place a start, an end and walls with the mouse, then watch A* search the grid. Red cells are visited. The path is the result.</p>
+<figure class="fig"><img src="../images/python-projects/pathfinder.png" alt="A* search with explored cells and the final path." loading="lazy" /><figcaption>A* search with explored cells and the final path.</figcaption></figure>
 </div>
           
         </div>
@@ -70,8 +70,9 @@
       <section class="step" id="step-4">
         <div class="step-num" aria-hidden="true">04</div>
         <div class="step-body">
-          <h2>Neural Network From Scratch</h2>
-          <div class="prose"><img src="../images/python-projects/nnet-training.png" alt="From-scratch neural network fitting a sine curve" width="500" /><p>A small neural network library built without any machine learning framework - just <code>numpy</code> for the matrix math. Weights are trained using numerical (finite-difference) gradient descent rather than backpropagation: each weight is nudged slightly, the change in cost is measured, and the resulting slope is used to update it. It&#39;s a much slower way to train a network than analytic backprop, but a useful way to confirm the cost function and forward pass are correct before implementing anything more complex. The chart above shows the network&#39;s output curve after training against a target <code>sin(2x)</code> curve.</p>
+          <h2>Neural network from scratch</h2>
+          <div class="prose"><p>Only <code>numpy</code>, no framework. It learns a sine curve using finite-difference gradient descent.</p>
+<figure class="fig"><img src="../images/python-projects/nnet-training.png" alt="The network&#x27;s curve closing in on a sine wave." loading="lazy" /><figcaption>The network's curve closing in on a sine wave.</figcaption></figure>
 </div>
           
         </div>
@@ -79,13 +80,9 @@
       <section class="step" id="step-5">
         <div class="step-num" aria-hidden="true">05</div>
         <div class="step-body">
-          <h2>Tic-Tac-Toe Minimax AI</h2>
-          <div class="prose"><p>Two versions of a Tic-Tac-Toe AI, both built around exhaustively searching the game tree rather than any learned heuristic:</p>
-<ul>
-<li>An early version that searches move sequences by breadth (expanding all boards one ply at a time) and scores completed games as wins, losses, or draws for the computer.</li>
-<li>A cleaner rewrite using classic recursive minimax, alternating between maximizing and minimizing players at each depth of the tree.</li>
-</ul>
-<p>Both play from the console. Testing surfaced real bugs in each version&#39;s edge-case handling (an unhandled empty-results case in the first, and a recursive call missing an argument when re-prompting for an invalid move in the second) - left as-is here as an honest record of where the logic still needs hardening, rather than quietly patched for the screenshot.</p>
+          <h2>MazeRush</h2>
+          <div class="prose"><p>A two-player first-person maze race in Small Basic, for a Year 9 assignment. Mazes come from a depth-first backtracker. Walls are drawn by ray marching, 70 rays across 90 degrees.</p>
+<div class="fig-grid "><figure><video controls preload="none" poster="../images/python-projects/maze-generation-poster.jpg"><source src="../images/python-projects/maze-generation.mp4" type="video/mp4" /></video><figcaption>Maze generation</figcaption></figure><figure><video controls preload="none" poster="../images/python-projects/maze-rush-gameplay-poster.jpg"><source src="../images/python-projects/maze-rush-gameplay.mp4" type="video/mp4" /></video><figcaption>Gameplay</figcaption></figure></div>
 </div>
           
         </div>
@@ -93,43 +90,12 @@
       <section class="step" id="step-6">
         <div class="step-num" aria-hidden="true">06</div>
         <div class="step-body">
-          <h2>Tic-Tac-Toe Neural Network</h2>
-          <div class="prose"><p>A from-scratch neural network (reusing the same <code>Layer</code>/<code>Network</code> structure as the sine-fitting project above) applied to Tic-Tac-Toe instead of minimax search, exploring what it takes to get a network to evaluate board positions directly rather than searching them.</p>
-</div>
-          
-        </div>
-      </section>
-      <section class="step" id="step-7">
-        <div class="step-num" aria-hidden="true">07</div>
-        <div class="step-body">
-          <h2>Wave Function Collapse (prototype)</h2>
-          <div class="prose"><p>An early-stage prototype of the wave function collapse procedural generation algorithm. Currently it only builds the initial grid of &quot;all possibilities&quot; per cell (each cell starts able to be either of two tile types); the actual entropy-based collapse and constraint propagation steps aren&#39;t implemented yet. Included here as a work-in-progress rather than a finished algorithm.</p>
-</div>
-          
-        </div>
-      </section>
-      <section class="step" id="step-8">
-        <div class="step-num" aria-hidden="true">08</div>
-        <div class="step-body">
-          <h2>VEX IQ Score Calculator</h2>
-          <div class="prose"><p>A small command-line utility that tallies a VEX IQ match score from raw match stats (cubes scored, red cubes knocked over, uniform bonus, lowest level reached, robots partially parked) - built to quickly check scores during my own VEX IQ season without doing the arithmetic by hand.</p>
-</div>
-          
-        </div>
-      </section>
-      <section class="step" id="step-9">
-        <div class="step-num" aria-hidden="true">09</div>
-        <div class="step-body">
-          <h2>MazeRush - Raycasted Maze Racer (Small Basic)</h2>
-          <div class="prose"><p>The one project on this page not written in Python - a two-player, first-person maze racing game called <strong>MazeRush</strong>, built in Microsoft Small Basic for a Year 9 Computer Science game dev assignment. The whole first-person 3D view is rendered by a raycasting engine I wrote myself in Small Basic, a language with no built-in 3D graphics at all.</p>
-<video width="500" controls preload="none" poster="../images/python-projects/maze-generation-poster.jpg">
-  <source src="../images/python-projects/maze-generation.mp4" type="video/mp4" />
-</video><p><strong>Maze generation</strong> uses a randomised depth-first-search &quot;backtracker&quot; algorithm: a cursor walks the grid carving a path into unvisited cells, pushing each new position onto a stack, and popping back off the stack to backtrack whenever it paints itself into a corner. A neighbour-count check (skip a cell if it already has more than one carved neighbour) stops the walk from carving loops back into itself, so the result is a single connected path with no cycles - a proper perfect maze, not just noise. Once the maze is carved, a key tile is spawned next to the walked path, which the player has to find and touch to unlock the exit door before the clock runs out.</p>
-<p><strong>Rendering</strong> is a simple ray-marching approach rather than true DDA: for each of 70 rays across a 90-degree field of view, the ray steps forward in small fixed increments along its angle until it lands on a non-empty map tile, and the distance travelled becomes that ray&#39;s wall-slice height on screen (closer walls -&gt; taller slices). Each of the 70 rays draws one vertical strip, and the strips together produce the corridor-and-wall first-person view - the same core idea behind Wolfenstein 3D&#39;s renderer, just written from scratch in a language built for teaching, not games.</p>
-<video width="500" controls preload="none" poster="../images/python-projects/maze-rush-gameplay-poster.jpg">
-  <source src="../images/python-projects/maze-rush-gameplay.mp4" type="video/mp4" />
-</video><p>The final version pivoted away from the original plan (placing pickup &quot;charges&quot; that would boost speed or visibility) after the projection math for object placement didn&#39;t come together in the assignment&#39;s time limit - it became a straight time-based two-player race through the maze instead, with a key-and-door unlock mechanic and a persistent leaderboard written to a local scores file.</p>
-<p><em>Music by Zack Lam.</em></p>
+          <h2>Also built</h2>
+          <div class="prose"><ul>
+<li>Tic-tac-toe AIs: two minimax versions and a neural network.</li>
+<li>A wave function collapse prototype.</li>
+<li>A VEX IQ score calculator.</li>
+</ul>
 </div>
           
         </div>
@@ -143,8 +109,24 @@
 </main>
 <footer class="site-footer">
   <span>Brandon Lai · Sydney</span>
+  <a href="mailto:brandon.lai053@gmail.com">Email</a>
   <a href="https://github.com/BeEl487">GitHub</a>
   <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
 </footer>
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  var h = document.querySelector(".site-header");
+  function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
+  s(); window.addEventListener("scroll", s, { passive: true });
+  var p = document.querySelector(".intro-photo");
+  if (p && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", function () { p.style.transform = "translateY(" + Math.min(window.scrollY * 0.08, 40) + "px)"; }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>

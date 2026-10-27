@@ -14,6 +14,7 @@ const CSS_VERSION = crypto.createHash("md5").update(fs.readFileSync(path.join(__
 marked.setOptions({ gfm: true, breaks: false });
 
 const NAME = "Brandon Lai";
+const EMAIL = "brandon.lai053@gmail.com";
 const GITHUB = "https://github.com/BeEl487";
 const YOUTUBE = "https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA";
 
@@ -79,11 +80,6 @@ const pages = [
     title: "FRC", tag: "2025–26 REBUILT season",
     deck: "From VEX to FRC - competing with two Barker teams across regionals, Worlds, and Einstein.",
     hero: "frc/hero.jpg",
-    images: {
-      "Southern Cross Regional": ["frc/greybacks-action.jpg", "frc/greybacks-scoring.jpg"],
-      "FIRST Championship - Houston": ["frc/mechanism-cad-greybacks.jpg", "frc/mechanism-cad-1.jpg", "frc/8613-worlds-win.jpg"],
-      "FIRST Championship - 4613 Barker Redbacks": ["frc/redbacks-back.jpg", "frc/subsystem-test.jpg", "frc/4613-worlds-win.jpg"],
-    },
     videos: {
       "Southern Cross Regional": [{ src: "frc/shooting-regionals.mp4", poster: "frc/shooting-regionals-poster.jpg", label: "Shooting mechanism at Southern Cross Regional" }],
     },
@@ -93,14 +89,6 @@ const pages = [
     title: "VEX V5", tag: "Team 4613B / 4613O",
     deck: "Two seasons of VEX Robotics - from Nationals-winning Whisper to the powertrain-optimised Switch, plus a V5RC Middle School Nationals win.",
     hero: "vex/hero.jpg",
-    images: {
-      "VEX Robotics: Team 4613B (Barker College)": ["vex/whisper-rings.jpg"],
-      "V5RC - Middle School Worlds": ["vex-v5/pit-1.jpg", "vex-v5/pit-2.jpg", "vex-v5/pit-3.jpg", "vex-v5/pit-4.jpg", "vex-v5/nationals-team.jpg"],
-      "Override - Switch, the Robot": ["override/robot-dr4b.jpg", "override/robot-stack.jpg", "override/robot-field.jpg", "override/ratchet.jpg"],
-      "Override - Achievements": ["override/robot-top.jpg", "override/robot-field-2.jpg"],
-      "Override - Problems We Faced": ["override/end-effector.jpg", "override/lift-bands.jpg", "override/build-day.jpg"],
-      "Override - The Code": ["override/plan.jpg"],
-    },
     videos: {
       "V5RC - Middle School": [{ src: "vex-v5/auto-nats.mp4", poster: "vex-v5/auto-nats-poster.jpg", label: "Autonomous run at Nationals" }],
     },
@@ -110,7 +98,6 @@ const pages = [
     title: "VEX IQ", tag: "Team 4613B",
     deck: "Full Volume season - a Barker League tournament win and a top-6.4% finish at the 2024 VEX Robotics World Championship.",
     hero: "vex-iq/stacking-demo-poster.jpg",
-    images: { "Barker League VIQC": ["vex-iq/practice-robot.jpeg"] },
   },
   {
     slug: "ftc", file: "FTC Journey.md",
@@ -199,6 +186,7 @@ function layout({ title, description, content, depth, current }) {
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  ${depth ? `<a class="back-top" href="${base}index.html#work">All work</a>` : ""}
   <a class="brand" href="${base}index.html">${NAME}</a>
   <nav aria-label="Main">
     <a href="${base}index.html#work"${current === "work" ? ' aria-current="page"' : ""}>Work</a>
@@ -211,9 +199,25 @@ ${content}
 </main>
 <footer class="site-footer">
   <span>${NAME} · Sydney</span>
+  <a href="mailto:${EMAIL}">Email</a>
   <a href="${GITHUB}">GitHub</a>
   <a href="${YOUTUBE}">YouTube</a>
 </footer>
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  var h = document.querySelector(".site-header");
+  function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
+  s(); window.addEventListener("scroll", s, { passive: true });
+  var p = document.querySelector(".intro-photo");
+  if (p && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", function () { p.style.transform = "translateY(" + Math.min(window.scrollY * 0.08, 40) + "px)"; }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>`;
 }
@@ -256,7 +260,7 @@ function buildIndex() {
   const content = `
   <section class="intro">
     <div class="intro-text">
-      <h1>I design and build robots, and write down why.</h1>
+      <h1>I design and build robots, then test them until they stop breaking.</h1>
       <p>Robotics student at Barker College, Sydney. Each project here shows the thinking behind the build: the options I
       weighed, what I tested, what failed, and what I changed because of it.</p>
       <p class="intro-links"><a class="button" href="#work">See the work</a><a href="#profile">About me</a></p>
@@ -267,25 +271,48 @@ function buildIndex() {
     </figure>
   </section>
 
-  <section id="work" class="work" aria-label="Work">
+  <section id="work" class="work reveal" aria-label="Work">
     ${groups}
   </section>
 
-  <section id="profile" class="profile">
-    <h2>Profile</h2>
+  <section id="profile" class="profile reveal">
+    <h2>How I work</h2>
     <div class="profile-body">
-      <p>I started in VEX IQ with team 4613B, finishing in the top 6.4% at the 2024 VEX Robotics World Championship, then moved
-      to VEX V5 and FRC with Barker's teams, competing at regionals, Worlds and Einstein.</p>
-      <p>Outside competition I build my own robots: a vision-guided robot hand, a walking quadruped, a motion-capture glove
-      and a computer made from logic chips. I document builds on my YouTube channel, which has been featured on Hackaday and
-      Hackster.io.</p>
+      <ol class="how">
+        <li><strong>Identify.</strong> Turn the problem into numbers: what it must do, how fast, how heavy.</li>
+        <li><strong>Design.</strong> Sketch options, score them in a decision matrix, then model the winner in CAD.</li>
+        <li><strong>Build and test.</strong> Make it, measure it, and write down what failed and why.</li>
+        <li><strong>Iterate.</strong> Each failure becomes the next requirement, until the numbers are met.</li>
+      </ol>
     </div>
   </section>
 
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>The code and design logs for most of these projects are public.</p>
-    <p class="contact-links"><a href="${GITHUB}">GitHub</a><a href="${YOUTUBE}">YouTube</a></p>
+  <section id="achievements" class="profile reveal">
+    <h2>Achievements</h2>
+    <div class="profile-body">
+      <ul class="how">
+        <li><strong>VEX Australian Nationals winner</strong> with Whisper, as team captain and lead designer (2024).</li>
+        <li><strong>FRC Curie Division champion</strong> and Einstein, with 8613. Also Hopper Division champion with 4613.</li>
+        <li><strong>Southern Cross Regional champion</strong> and Industrial Design Award, FRC 8613.</li>
+        <li><strong>VEX IQ:</strong> Barker League champion, then 27th of 420 at the 2024 World Championship.</li>
+        <li><strong>YouTube:</strong> 69,000 views, featured on Hackaday and Hackster.io.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <div class="contact-inner">
+      <div class="contact-head">
+        <p class="eyebrow">Contact</p>
+        <h2>Get in touch</h2>
+        <p>I'm always up for talking robotics, code and student projects. Email is the best way to reach me.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:${EMAIL}"><span>${EMAIL}</span><span aria-hidden="true">&#8599;</span></a>
+        <a href="${GITHUB}"><span>GitHub</span><span aria-hidden="true">&#8599;</span></a>
+        <a href="${YOUTUBE}"><span>YouTube</span><span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </div>
   </section>`;
 
   fs.writeFileSync(

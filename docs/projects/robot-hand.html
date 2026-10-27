@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
-<link rel="stylesheet" href="../style.css?v=5b1327b6" />
+<link rel="stylesheet" href="../style.css?v=7f1cc5db" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  <a class="back-top" href="../index.html#work">All work</a>
   <a class="brand" href="../index.html">Brandon Lai</a>
   <nav aria-label="Main">
     <a href="../index.html#work">Work</a>
@@ -31,23 +32,29 @@
       
     </header>
     <figure class="case-hero"><img src="../images/robot-hand/00_overview_real_scenes.jpg" alt="Vision-guided robot hand" /></figure>
-    <div class="case-intro prose"><p>A robot hand that looks at an object, finds its outline, and places each finger against that outline so it grips the shape it is actually looking at. The target hardware is Pollen Robotics&#39; open-source <strong>Amazing Hand</strong> (4 fingers, 8 servos) driven from a single-board computer with a USB webcam.</p>
+    <div class="case-intro prose"><p>A hand that looks at an object, traces its outline, and places each finger against it. It grips the shape it actually sees.</p>
+<p><strong>My role</strong></p>
+<ul>
+<li>Designed the whole pipeline: detection, outline, grasp planner, finger kinematics.</li>
+<li>Built the MuJoCo simulation and the desktop app.</li>
+<li>Wrote the tests and the decision log.</li>
+</ul>
+<ul class="glance"><li><b>4</b><span>fingers, 8 servos</span></li><li><b>~4,500</b><span>object names YOLOE knows</span></li><li><b>2</b><span>grasp planners</span></li><li><b>Dry run</b><span>no real hand yet</span></li></ul>
 </div>
-    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">How it works</a></li><li><a href="#step-2">Simulation</a></li><li><a href="#step-3">Kinematics</a></li><li><a href="#step-4">Object permanence</a></li><li><a href="#step-5">Where it stands</a></li></ol></nav>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">How it works</a></li><li><a href="#step-2">From one picture to a plan</a></li><li><a href="#step-3">Holes and awkward shapes</a></li><li><a href="#step-4">Keeping hold when the hand covers the object</a></li><li><a href="#step-5">Simulation</a></li><li><a href="#step-6">Using it</a></li><li><a href="#step-7">Where it stands</a></li></ol></nav>
     <div class="steps">
       <section class="step" id="step-1">
         <div class="step-num" aria-hidden="true">01</div>
         <div class="step-body">
           <h2>How it works</h2>
-          <div class="prose"><pre><code>USB webcam  →  vision (find object, trace outline)  →  grasp planner  →  USB serial  →  8 servos
-</code></pre>
+          <div class="prose"><p>Four short steps from camera to fingers.</p>
 <ol>
-<li><strong>Find the object.</strong> YOLOE, a prompt-free detector with a vocabulary of about 4,500 words, boxes and names the object.</li>
-<li><strong>Trace its outline.</strong> An edge detector runs <em>inside that box only</em> (GrabCut seeded from YOLOE&#39;s own mask, later a direct mask method), so background clutter is ignored. Holes are kept: a donut&#39;s middle, a mug handle&#39;s loop, the finger loops of a pair of scissors.</li>
-<li><strong>Plan the grasp.</strong> The planner picks contact points on the outline where a fingertip fits, scores pairs by force closure, and converts them to finger closures through the hand&#39;s inverse kinematics.</li>
-<li><strong>Drive the fingers.</strong> Positions are smoothed so the grasp stays steady, then sent over the servo bus. Everything runs as a dry run unless the real hand is explicitly connected.</li>
+<li><strong>Find the object.</strong> YOLOE draws a box around it and names it.</li>
+<li><strong>Trace the outline.</strong> An edge detector runs inside that box only, so the background is ignored.</li>
+<li><strong>Plan the grasp.</strong> Contact points are scored for force closure, then turned into finger angles.</li>
+<li><strong>Move the fingers.</strong> Positions are smoothed so the grasp stays steady.</li>
 </ol>
-<img class="img-feature" src="../images/robot-hand/00_overview_real_scenes.jpg" alt="Pipeline output on real desk scenes" /><p><em>The pipeline&#39;s own output on real photos, saved unedited. Green is the object outline, orange is an inside edge (a hole), dots are where a fingertip fits.</em></p>
+<figure class="fig"><img src="../images/robot-hand/overview-crop.jpg" alt="The pipeline run on real photos (three of 22 shown). Green is the outline, orange is a hole, dots are fingertip contacts." loading="lazy" /><figcaption>The pipeline run on real photos (three of 22 shown). Green is the outline, orange is a hole, dots are fingertip contacts.</figcaption></figure>
 </div>
           
         </div>
@@ -55,9 +62,9 @@
       <section class="step" id="step-2">
         <div class="step-num" aria-hidden="true">02</div>
         <div class="step-body">
-          <h2>Simulation</h2>
-          <div class="prose"><p>The hand and a palm camera are simulated in MuJoCo using Pollen&#39;s own model, so the vision and planner can be developed before the hardware is ready. The camera field of view is matched to the real Arducam B0332 (70° horizontal, 1280 × 800).</p>
-<img class="img-feature" src="../images/robot-hand/vision_plane_control.png" alt="Vision pipeline controlling the simulated hand" />
+          <h2>From one picture to a plan</h2>
+          <div class="prose"><p>One test on a cup. The camera picture goes in, a grasp plan comes out.</p>
+<div class="fig-grid "><figure><img src="../images/robot-hand/cup_raw.png" alt="1. The camera picture" loading="lazy" /><figcaption>1. The camera picture</figcaption></figure><figure><img src="../images/robot-hand/cup_outline.png" alt="2. The outline found inside the box" loading="lazy" /><figcaption>2. The outline found inside the box</figcaption></figure><figure><img src="../images/robot-hand/cup_plan.png" alt="3. Planned thumb and finger contacts" loading="lazy" /><figcaption>3. Planned thumb and finger contacts</figcaption></figure></div>
 </div>
           
         </div>
@@ -65,9 +72,9 @@
       <section class="step" id="step-3">
         <div class="step-num" aria-hidden="true">03</div>
         <div class="step-body">
-          <h2>Kinematics</h2>
-          <div class="prose"><p>Finger size, spread and reach were measured and used to build a workspace map, so the planner only asks the fingers for contacts they can physically reach.</p>
-<img class="img-feature" src="../images/robot-hand/hand_workspace.png" alt="Hand workspace" />
+          <h2>Holes and awkward shapes</h2>
+          <div class="prose"><p>Holes are kept. A donut&#39;s middle, a mug handle and scissors&#39; finger loops all count as edges the fingers can use.</p>
+<div class="fig-grid tall"><figure><img src="../images/robot-hand/doughnut-edges.jpg" alt="Edge methods compared on a doughnut" loading="lazy" /><figcaption>Edge methods compared on a doughnut</figcaption></figure><figure><img src="../images/robot-hand/scissors-boxes.jpg" alt="Scissors: every box the detector finds" loading="lazy" /><figcaption>Scissors: every box the detector finds</figcaption></figure><figure><img src="../images/robot-hand/scissors-plan.jpg" alt="Scissors: the finger plan" loading="lazy" /><figcaption>Scissors: the finger plan</figcaption></figure></div>
 </div>
           
         </div>
@@ -75,9 +82,9 @@
       <section class="step" id="step-4">
         <div class="step-num" aria-hidden="true">04</div>
         <div class="step-body">
-          <h2>Object permanence</h2>
-          <div class="prose"><p>When the hand covers an object, the outline disappears. A tracker keeps the last good outline so the grasp stays steady while the fingers close.</p>
-<img class="img-feature" src="../images/robot-hand/scissors_1_strip.png" alt="Scissors tracked as the hand covers them" />
+          <h2>Keeping hold when the hand covers the object</h2>
+          <div class="prose"><p>When the hand covers the object, the outline disappears. A tracker keeps the last good outline so the grasp stays steady.</p>
+<figure class="fig"><img src="../images/robot-hand/scissors_1_strip.png" alt="Scissors tracked as the hand covers them, left to right." loading="lazy" /><figcaption>Scissors tracked as the hand covers them, left to right.</figcaption></figure>
 </div>
           
         </div>
@@ -85,11 +92,31 @@
       <section class="step" id="step-5">
         <div class="step-num" aria-hidden="true">05</div>
         <div class="step-body">
+          <h2>Simulation</h2>
+          <div class="prose"><p>The hand and a palm camera run in MuJoCo using Pollen Robotics&#39; model. The camera matches the real Arducam (70 degrees, 1280 x 800).</p>
+<div class="fig-grid "><figure><img src="../images/robot-hand/vision_plane_control.png" alt="The vision plan drives the simulated fingers" loading="lazy" /><figcaption>The vision plan drives the simulated fingers</figcaption></figure><figure><img src="../images/robot-hand/hand_workspace.png" alt="Where the fingers can reach" loading="lazy" /><figcaption>Where the fingers can reach</figcaption></figure></div>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-6">
+        <div class="step-num" aria-hidden="true">06</div>
+        <div class="step-body">
+          <h2>Using it</h2>
+          <div class="prose"><p>The plan is worked out on every picture, but the fingers never move by themselves. Press <strong>Space</strong> to save the grasp and move the fingers to it. After one second the servos close to finish the grasp. Let go and it returns to live pictures. This has only been run on the simulated hand, as a dry run.</p>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-7">
+        <div class="step-num" aria-hidden="true">07</div>
+        <div class="step-body">
           <h2>Where it stands</h2>
           <div class="prose"><ul>
-<li>The vision pipeline, planner and kinematics are working, with an automated test suite on synthetic shapes.</li>
-<li><strong>No grasp lifts an object in the simulation yet.</strong> The simulation shows the pipeline running end to end, not a successful pick-up.</li>
-<li>Every design decision, measurement and failure is logged in numbered entries in the project&#39;s <code>DECISIONS.md</code>, including the approaches that did not work.</li>
+<li>The pipeline, planner and kinematics work, with an automated test suite.</li>
+<li><strong>Not tried on a real hand yet.</strong> The hands are on order.</li>
+<li><strong>No grasp lifts an object in simulation yet.</strong> The simulation proves the pipeline end to end, nothing more.</li>
+<li>Every decision, number and failure is logged in <code>DECISIONS.md</code>.</li>
 </ul>
 <p><strong>Source:</strong> <a href="https://github.com/BeEl487/RobotHand">github.com/BeEl487/RobotHand</a></p>
 </div>
@@ -105,8 +132,24 @@
 </main>
 <footer class="site-footer">
   <span>Brandon Lai · Sydney</span>
+  <a href="mailto:brandon.lai053@gmail.com">Email</a>
   <a href="https://github.com/BeEl487">GitHub</a>
   <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
 </footer>
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  var h = document.querySelector(".site-header");
+  function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
+  s(); window.addEventListener("scroll", s, { passive: true });
+  var p = document.querySelector(".intro-photo");
+  if (p && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", function () { p.style.transform = "translateY(" + Math.min(window.scrollY * 0.08, 40) + "px)"; }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>

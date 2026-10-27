@@ -1,55 +1,59 @@
-A robot hand that looks at an object, finds its outline, and places each finger against that outline so it grips the shape it is actually looking at. The target hardware is Pollen Robotics' open-source **Amazing Hand** (4 fingers, 8 servos) driven from a single-board computer with a USB webcam.
+# Vision-guided robot hand
+
+A hand that looks at an object, traces its outline, and places each finger against it. It grips the shape it actually sees.
+
+**My role**
+
+* Designed the whole pipeline: detection, outline, grasp planner, finger kinematics.
+* Built the MuJoCo simulation and the desktop app.
+* Wrote the tests and the decision log.
+
+<ul class="glance"><li><b>4</b><span>fingers, 8 servos</span></li><li><b>~4,500</b><span>object names YOLOE knows</span></li><li><b>2</b><span>grasp planners</span></li><li><b>Dry run</b><span>no real hand yet</span></li></ul>
 
 ## How it works
 
-```
-USB webcam  →  vision (find object, trace outline)  →  grasp planner  →  USB serial  →  8 servos
-```
+Four short steps from camera to fingers.
 
-1. **Find the object.** YOLOE, a prompt-free detector with a vocabulary of about 4,500 words, boxes and names the object.
-2. **Trace its outline.** An edge detector runs *inside that box only* (GrabCut seeded from YOLOE's own mask, later a direct mask method), so background clutter is ignored. Holes are kept: a donut's middle, a mug handle's loop, the finger loops of a pair of scissors.
-3. **Plan the grasp.** The planner picks contact points on the outline where a fingertip fits, scores pairs by force closure, and converts them to finger closures through the hand's inverse kinematics.
-4. **Drive the fingers.** Positions are smoothed so the grasp stays steady, then sent over the servo bus. Everything runs as a dry run unless the real hand is explicitly connected.
+1. **Find the object.** YOLOE draws a box around it and names it.
+2. **Trace the outline.** An edge detector runs inside that box only, so the background is ignored.
+3. **Plan the grasp.** Contact points are scored for force closure, then turned into finger angles.
+4. **Move the fingers.** Positions are smoothed so the grasp stays steady.
 
-<img class="img-feature" src="images/robot-hand/00_overview_real_scenes.jpg" alt="Pipeline output on real desk scenes" />
+<figure class="fig"><img src="images/robot-hand/overview-crop.jpg" alt="The pipeline run on real photos (three of 22 shown). Green is the outline, orange is a hole, dots are fingertip contacts." loading="lazy" /><figcaption>The pipeline run on real photos (three of 22 shown). Green is the outline, orange is a hole, dots are fingertip contacts.</figcaption></figure>
 
-*The pipeline's own output on real photos, saved unedited. Green is the object outline, orange is an inside edge (a hole), dots are where a fingertip fits.*
+## From one picture to a plan
+
+One test on a cup. The camera picture goes in, a grasp plan comes out.
+
+<div class="fig-grid "><figure><img src="images/robot-hand/cup_raw.png" alt="1. The camera picture" loading="lazy" /><figcaption>1. The camera picture</figcaption></figure><figure><img src="images/robot-hand/cup_outline.png" alt="2. The outline found inside the box" loading="lazy" /><figcaption>2. The outline found inside the box</figcaption></figure><figure><img src="images/robot-hand/cup_plan.png" alt="3. Planned thumb and finger contacts" loading="lazy" /><figcaption>3. Planned thumb and finger contacts</figcaption></figure></div>
+
+## Holes and awkward shapes
+
+Holes are kept. A donut's middle, a mug handle and scissors' finger loops all count as edges the fingers can use.
+
+<div class="fig-grid tall"><figure><img src="images/robot-hand/doughnut-edges.jpg" alt="Edge methods compared on a doughnut" loading="lazy" /><figcaption>Edge methods compared on a doughnut</figcaption></figure><figure><img src="images/robot-hand/scissors-boxes.jpg" alt="Scissors: every box the detector finds" loading="lazy" /><figcaption>Scissors: every box the detector finds</figcaption></figure><figure><img src="images/robot-hand/scissors-plan.jpg" alt="Scissors: the finger plan" loading="lazy" /><figcaption>Scissors: the finger plan</figcaption></figure></div>
+
+## Keeping hold when the hand covers the object
+
+When the hand covers the object, the outline disappears. A tracker keeps the last good outline so the grasp stays steady.
+
+<figure class="fig"><img src="images/robot-hand/scissors_1_strip.png" alt="Scissors tracked as the hand covers them, left to right." loading="lazy" /><figcaption>Scissors tracked as the hand covers them, left to right.</figcaption></figure>
 
 ## Simulation
 
-The hand and a palm camera are simulated in MuJoCo using Pollen's own model, so the vision and planner can be developed before the hardware is ready. The camera field of view is matched to the real Arducam B0332 (70° horizontal, 1280 × 800).
+The hand and a palm camera run in MuJoCo using Pollen Robotics' model. The camera matches the real Arducam (70 degrees, 1280 x 800).
 
-<img class="img-feature" src="images/robot-hand/vision_plane_control.png" alt="Vision pipeline controlling the simulated hand" />
+<div class="fig-grid "><figure><img src="images/robot-hand/vision_plane_control.png" alt="The vision plan drives the simulated fingers" loading="lazy" /><figcaption>The vision plan drives the simulated fingers</figcaption></figure><figure><img src="images/robot-hand/hand_workspace.png" alt="Where the fingers can reach" loading="lazy" /><figcaption>Where the fingers can reach</figcaption></figure></div>
 
-## Kinematics
+## Using it
 
-Finger size, spread and reach were measured and used to build a workspace map, so the planner only asks the fingers for contacts they can physically reach.
-
-<img class="img-feature" src="images/robot-hand/hand_workspace.png" alt="Hand workspace" />
-
-## Object permanence
-
-When the hand covers an object, the outline disappears. A tracker keeps the last good outline so the grasp stays steady while the fingers close.
-
-<img class="img-feature" src="images/robot-hand/scissors_1_strip.png" alt="Scissors tracked as the hand covers them" />
-
-## From one picture to a grasp plan
-
-One trial on a cup: the camera picture, the outline found inside the detector's box, and the planned contact points for the thumb and fingers.
-
-<img class="img-feature" src="images/robot-hand/cup_raw.png" alt="A cup photographed from above" />
-<img class="img-feature" src="images/robot-hand/cup_outline.png" alt="The cup's outline drawn on the picture" />
-<img class="img-feature" src="images/robot-hand/cup_plan.png" alt="Planned finger contacts on the cup's outline" />
-
-## Grasping from the app
-
-The plan is worked out on every picture, but the fingers never move on their own. Pressing Space saves the grasp worked out at that moment and moves the fingers to it. After 1 second of holding, the servos close at a set rate to finish the grasp. While Space is held the detector takes no new pictures, so the hand keeps to the one saved grasp. Letting go goes back to live pictures. This has only been run against the simulated hand, in a dry run.
+The plan is worked out on every picture, but the fingers never move by themselves. Press **Space** to save the grasp and move the fingers to it. After one second the servos close to finish the grasp. Let go and it returns to live pictures. This has only been run on the simulated hand, as a dry run.
 
 ## Where it stands
 
-- The vision pipeline, planner and kinematics are working, with an automated test suite on synthetic shapes.
-- **Nothing has been tried on a real hand.** The hands are on order and the driver for them has never been run on hardware.
-- **No grasp lifts an object in the simulation yet.** The simulation shows the pipeline running end to end, not a successful pick-up.
-- Every design decision, measurement and failure is logged in numbered entries in the project's `DECISIONS.md`, including the approaches that did not work.
+* The pipeline, planner and kinematics work, with an automated test suite.
+* **Not tried on a real hand yet.** The hands are on order.
+* **No grasp lifts an object in simulation yet.** The simulation proves the pipeline end to end, nothing more.
+* Every decision, number and failure is logged in `DECISIONS.md`.
 
 **Source:** [github.com/BeEl487/RobotHand](https://github.com/BeEl487/RobotHand)

@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
-<link rel="stylesheet" href="../style.css?v=5b1327b6" />
+<link rel="stylesheet" href="../style.css?v=7f1cc5db" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  <a class="back-top" href="../index.html#work">All work</a>
   <a class="brand" href="../index.html">Brandon Lai</a>
   <nav aria-label="Main">
     <a href="../index.html#work">Work</a>
@@ -31,102 +32,76 @@
       
     </header>
     <figure class="case-hero"><img src="../images/mini-echo/mini-echo-hero.jpeg" alt="Mini Echo robot dog" /></figure>
-    
-    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Mini Echo: Iterative Quadruped Robot Development</a></li><li><a href="#step-2">Version 1 — Prototyping the Concept</a></li><li><a href="#step-3">Version 2 — Servos, Inverse Kinematics and Walking</a></li><li><a href="#step-4">Version 3 — Mechanical Optimisation</a></li><li><a href="#step-5">Mini Echo — Integrated System</a></li><li><a href="#step-6">What I Learned</a></li></ol></nav>
+    <div class="case-intro prose"><p>A small quadruped robot that walks around my house. It had to be compact, light and cheap. I built three prototypes, and each failure became the next version&#39;s requirements.</p>
+<p><strong>My role</strong></p>
+<ul>
+<li>Designed all of it: CAD, electronics and code.</li>
+<li>Taught myself inverse kinematics to make it walk.</li>
+</ul>
+<ul class="glance"><li><b>3</b><span>prototypes</span></li><li><b>3D printed</b><span>every version</span></li><li><b>Li-ion</b><span>final power</span></li><li><b>IK</b><span>walking gait</span></li></ul><figure class="fig"><img src="../images/mini-echo/mini-echo-hero.jpeg" alt="Mini Echo, the final integrated version." loading="lazy" /><figcaption>Mini Echo, the final integrated version.</figcaption></figure>
+</div>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Version 1 — Prototyping the Concept</a></li><li><a href="#step-2">Version 2 — Servos, Inverse Kinematics and Walking</a></li><li><a href="#step-3">Version 3 — Mechanical Optimisation</a></li><li><a href="#step-4">Mini Echo: the integrated robot</a></li><li><a href="#step-5">What I learned</a></li></ol></nav>
     <div class="steps">
       <section class="step" id="step-1">
         <div class="step-num" aria-hidden="true">01</div>
         <div class="step-body">
-          <h2>Mini Echo: Iterative Quadruped Robot Development</h2>
-          <div class="prose"><h2>Overview</h2>
-<p>I wanted to build a small quadruped robot that could move around my house at a useful walking speed while remaining compact, lightweight, and inexpensive to build. Rather than designing the final robot immediately, I treated the project as an iterative engineering process. Each version was used to identify limitations in the previous design and inform the next.</p>
-<p>The project progressed through three major prototypes, taking me from basic servo control and electronics to inverse kinematics, gait generation, mechanical optimisation, and integrated robot control.</p>
-<hr>
+          <h2>Version 1 — Prototyping the Concept</h2>
+          <div class="prose"><p>Micro servos and an AA battery pack. The goal was to find out if it could walk at all.</p>
+<ul>
+<li>The servos were too weak.</li>
+<li>The batteries could not supply enough current.</li>
+<li><strong>Lesson:</strong> a robot is only as good as its weakest part.</li>
+</ul>
+<figure class="fig"><img src="../images/mini-echo/v1-hero.jpeg" alt="Version 1 with micro servos and the AA pack." loading="lazy" /><figcaption>Version 1 with micro servos and the AA pack.</figcaption></figure>
 </div>
-          
+          <div class="video-grid"><figure><video controls preload="none" poster="../images/mini-echo/v1-demo-poster.jpg"><source src="../images/mini-echo/v1-demo.mp4" type="video/mp4" /></video><figcaption>V1 prototype demo</figcaption></figure></div>
         </div>
       </section>
       <section class="step" id="step-2">
         <div class="step-num" aria-hidden="true">02</div>
         <div class="step-body">
-          <h2>Version 1 — Prototyping the Concept</h2>
-          <div class="prose"><p>My first quadruped used inexpensive micro servos and AA batteries. The goal was not to build a high-performance robot immediately, but to establish whether I could create a functional walking mechanism.</p>
-<img width="900" alt="V1 prototype — micro servos and AA battery pack" src="../images/mini-echo/v1-hero.jpeg" /><p>The first prototype quickly exposed several problems.</p>
-<p>The micro servos were lightweight and inexpensive, but they had limited torque. The AA battery pack also could not deliver enough power to operate the servos effectively, particularly when multiple joints were moving simultaneously. I also found that the mechanical design was relatively inefficient, with unnecessary mass and poor mechanical advantage.</p>
-<p>This version taught me an important lesson: <strong>the performance of a robot is not determined by any single component. The motors, power system, mechanical structure, and control system all have to be designed as one system.</strong></p>
-<p>The failures of the first prototype gave me the requirements for the next version.</p>
-<hr>
+          <h2>Version 2 — Servos, Inverse Kinematics and Walking</h2>
+          <div class="prose"><p>Stronger bus servos, daisy-chained to simplify the wiring.</p>
+<ul>
+<li>I taught myself the trigonometry of <strong>inverse kinematics</strong>: choose where a foot goes, and the maths finds the joint angles.</li>
+<li>I used that to build walking gaits.</li>
+<li>It worked, but the legs were too heavy.</li>
+</ul>
 </div>
-          <div class="video-grid"><figure><video controls preload="none" poster="../images/mini-echo/v1-demo-poster.jpg"><source src="../images/mini-echo/v1-demo.mp4" type="video/mp4" /></video><figcaption>V1 prototype demo</figcaption></figure></div>
+          <div class="video-grid"><figure><video controls preload="none" poster="../images/mini-echo/v2-walk-poster.jpg"><source src="../images/mini-echo/v2-walk.mp4" type="video/mp4" /></video><figcaption>V2 inverse-kinematics walking gait</figcaption></figure></div>
         </div>
       </section>
       <section class="step" id="step-3">
         <div class="step-num" aria-hidden="true">03</div>
         <div class="step-body">
-          <h2>Version 2 — Servos, Inverse Kinematics and Walking</h2>
-          <div class="prose"><p>For the second prototype, I moved to more powerful <strong>bus servos</strong>. Unlike the previous servos, these could be connected through a daisy-chain communication system, significantly simplifying the electronics and allowing me to control a larger number of joints.</p>
-<p>I redesigned the body and legs around the new actuators and built another fully 3D-printed quadruped.</p>
-<p>This was also where the software side of the project became substantially more challenging.</p>
-<p>To make the robot walk rather than simply move individual servos, I taught myself <strong>inverse kinematics</strong> and the trigonometry required to calculate joint angles from the desired position of each foot.</p>
-<p>Instead of directly commanding each joint, I could specify where I wanted a foot to be and mathematically determine the corresponding joint configuration.</p>
-<p>I then used these calculations to develop walking gaits, coordinating the movement of multiple legs to produce stable forward motion.</p>
-<p>This prototype was a major step forward because I was no longer just assembling a robot. I was beginning to design the mathematical and control systems that allowed the robot to behave as a coordinated machine.</p>
-<p>However, the mechanical design still had significant limitations. The robot worked, but it carried too much unnecessary weight in the legs and did not make efficient use of the available actuator torque.</p>
-<hr>
+          <h2>Version 3 — Mechanical Optimisation</h2>
+          <div class="prose"><p>I moved the actuators up into the body and used linkages to drive the legs. Light legs mean faster, more efficient movement. A lithium-ion battery replaced the AAs.</p>
+<figure class="fig"><img src="../images/mini-echo/v3-bare-frame.jpeg" alt="The bare Version 3 frame, with servos high in the body and linkages to the legs." loading="lazy" /><figcaption>The bare Version 3 frame, with servos high in the body and linkages to the legs.</figcaption></figure>
 </div>
-          <div class="video-grid"><figure><video controls preload="none" poster="../images/mini-echo/v2-walk-poster.jpg"><source src="../images/mini-echo/v2-walk.mp4" type="video/mp4" /></video><figcaption>V2 inverse-kinematics walking gait</figcaption></figure></div>
+          <div class="video-grid"><figure><video controls preload="none" poster="../images/mini-echo/v3-manual-move-poster.jpg"><source src="../images/mini-echo/v3-manual-move.mp4" type="video/mp4" /></video><figcaption>V3 legs moved manually</figcaption></figure><figure class="portrait"><video controls preload="none" poster="../images/mini-echo/v3-walking-poster.jpg"><source src="../images/mini-echo/v3-walking.mp4" type="video/mp4" /></video><figcaption>V3 walking</figcaption></figure></div>
         </div>
       </section>
       <section class="step" id="step-4">
         <div class="step-num" aria-hidden="true">04</div>
         <div class="step-body">
-          <h2>Version 3 — Mechanical Optimisation</h2>
-          <div class="prose"><p>The third version focused heavily on <strong>mechanical efficiency</strong>.</p>
-<p>I redesigned the robot around a proper lithium-ion battery, reducing the limitations of the previous AA battery system while improving the overall power-to-weight ratio.</p>
-<p>One of the largest mechanical changes was moving the actuators higher into the body and using linkages to transmit their motion to the legs.</p>
-<img width="900" alt="V3 bare mechanical frame — bus servos and linkages" src="../images/mini-echo/v3-bare-frame.jpeg" /><p>This meant that the motors did not have to move as much mass as part of the leg itself. Reducing the distal mass of the legs improved the robot&#39;s mechanical efficiency and made faster movement possible without requiring proportionally larger actuators.</p>
-<p>The entire robot remained <strong>3D printed</strong>, allowing me to rapidly iterate the geometry and test different mechanical configurations without requiring complex manufacturing.</p>
-<p>This version became the foundation for what I eventually called <strong>Mini Echo</strong>.</p>
-<hr>
+          <h2>Mini Echo: the integrated robot</h2>
+          <div class="prose"><p>Everything came together in one robot:</p>
+<ul>
+<li>Light 3D-printed structure and high-mounted actuators.</li>
+<li>Lithium-ion power with voltage monitoring and a power button.</li>
+<li>A display, and wireless controller driving.</li>
+<li>Inverse-kinematics leg control and tuned gaits.</li>
+</ul>
+<figure class="fig"><img src="../images/mini-echo/mini-echo-alt.jpeg" alt="Mini Echo from another angle." loading="lazy" /><figcaption>Mini Echo from another angle.</figcaption></figure>
 </div>
-          <div class="video-grid"><figure><video controls preload="none" poster="../images/mini-echo/v3-manual-move-poster.jpg"><source src="../images/mini-echo/v3-manual-move.mp4" type="video/mp4" /></video><figcaption>V3 legs moved manually</figcaption></figure><figure class="portrait"><video controls preload="none" poster="../images/mini-echo/v3-walking-poster.jpg"><source src="../images/mini-echo/v3-walking.mp4" type="video/mp4" /></video><figcaption>V3 walking</figcaption></figure></div>
+          
         </div>
       </section>
       <section class="step" id="step-5">
         <div class="step-num" aria-hidden="true">05</div>
         <div class="step-body">
-          <h2>Mini Echo — Integrated System</h2>
-          <div class="prose"><p>Mini Echo was the result of the lessons from the previous prototypes.</p>
-<img width="900" alt="Mini Echo — final integrated quadruped" src="../images/mini-echo/mini-echo-hero.jpeg" /><p>Rather than focusing on a single subsystem, I integrated the mechanical, electrical, and software improvements into one complete robot.</p>
-<p>The final design incorporated:</p>
-<ul>
-<li>Lightweight 3D-printed mechanical structures</li>
-<li>Higher-mounted actuators with mechanical linkages</li>
-<li>Lithium-ion power</li>
-<li>Bus-connected servos</li>
-<li>Voltage and power monitoring</li>
-<li>An integrated power button</li>
-<li>A display for system information</li>
-<li>Wireless/controller-based operation</li>
-<li>Inverse-kinematics-based leg control</li>
-<li>Tuned walking gaits</li>
-</ul>
-<img width="900" alt="Mini Echo, alternate angle" src="../images/mini-echo/mini-echo-alt.jpeg" /><p>The controller allowed me to operate the robot while the inverse kinematics system handled the underlying joint calculations.</p>
-<p>As I continued tuning the gait, I was able to improve the coordination and consistency of the robot&#39;s walking motion significantly. The final system was capable of being controlled as a complete quadruped rather than as a collection of independently controlled servos.</p>
-<hr>
-</div>
-          
-        </div>
-      </section>
-      <section class="step" id="step-6">
-        <div class="step-num" aria-hidden="true">06</div>
-        <div class="step-body">
-          <h2>What I Learned</h2>
-          <div class="prose"><p>This project taught me how strongly mechanical design, electronics, and software interact in robotics.</p>
-<p>The first version showed me that insufficient power and inefficient mechanics can make otherwise functional hardware unusable. The second taught me how mathematical modelling and inverse kinematics can transform individual actuators into a coordinated robotic system. The third pushed me to think more critically about <strong>mass distribution, mechanical advantage, power-to-weight ratio, and system integration</strong>.</p>
-<p>Most importantly, I learned to approach robotics through iteration.</p>
-<p>Each prototype had limitations, but those limitations became engineering requirements for the next version. Rather than trying to make the first design perfect, I used each failure to identify what needed to change.</p>
-<p>The result was not just a robot dog, but a progression from basic servo experimentation to a more complete understanding of <strong>robot kinematics, gait generation, power systems, actuator selection, mechanical optimisation, and iterative engineering design</strong>.</p>
+          <h2>What I learned</h2>
+          <div class="prose"><p>Mechanics, electronics and software all affect each other. The first version showed weak power ruins good hardware. The second showed that maths can replace trial and error. The third showed that moving mass out of the legs matters most. Every limit became a requirement for the next prototype.</p>
 </div>
           
         </div>
@@ -140,8 +115,24 @@
 </main>
 <footer class="site-footer">
   <span>Brandon Lai · Sydney</span>
+  <a href="mailto:brandon.lai053@gmail.com">Email</a>
   <a href="https://github.com/BeEl487">GitHub</a>
   <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
 </footer>
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  var h = document.querySelector(".site-header");
+  function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
+  s(); window.addEventListener("scroll", s, { passive: true });
+  var p = document.querySelector(".intro-photo");
+  if (p && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", function () { p.style.transform = "translateY(" + Math.min(window.scrollY * 0.08, 40) + "px)"; }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>

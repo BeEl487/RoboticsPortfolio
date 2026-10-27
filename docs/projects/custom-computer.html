@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
-<link rel="stylesheet" href="../style.css?v=5b1327b6" />
+<link rel="stylesheet" href="../style.css?v=7f1cc5db" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  <a class="back-top" href="../index.html#work">All work</a>
   <a class="brand" href="../index.html">Brandon Lai</a>
   <nav aria-label="Main">
     <a href="../index.html#work">Work</a>
@@ -31,29 +32,23 @@
       
     </header>
     <figure class="case-hero"><img src="../images/custom-computer/assembled-powered.jpg" alt="Breadboard computer" /></figure>
-    <div class="case-intro prose"><img src="../images/custom-computer/3d-sage-inspiration.jpg" alt="3D Sage YouTube videos that inspired this project" class="img-small" /><p>Inspired by 3D Sage&#39;s breadboard computer videos, I designed and built my own minimal-instruction-set computer from scratch, rather than following an existing build guide.</p>
+    <div class="case-intro prose"><p>A minimal computer I designed in software, then built from six hand-soldered cards and later put on a custom PCB. No microcontroller. Only logic gates.</p>
+<p><strong>My role</strong></p>
+<ul>
+<li>Designed every chip in CircuitVerse.</li>
+<li>Soldered, tested and debugged the hardware.</li>
+<li>Designed the PCB version.</li>
+</ul>
+<ul class="glance"><li><b>6</b><span>perfboard cards</span></li><li><b>16-bit</b><span>RAM</span></li><li><b>3</b><span>instructions</span></li><li><b>555</b><span>timer clock</span></li></ul><figure class="fig"><img src="../images/custom-computer/assembled-powered.jpg" alt="The finished computer running, with its output LEDs lit." loading="lazy" /><figcaption>The finished computer running, with its output LEDs lit.</figcaption></figure>
 </div>
-    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Circuit Design (CircuitVerse)</a></li><li><a href="#step-2">Physical Build</a></li><li><a href="#step-3">Custom PCB (V1)</a></li></ol></nav>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">Design in software first</a></li><li><a href="#step-2">Build and test each card</a></li><li><a href="#step-3">It runs a program</a></li><li><a href="#step-4">Custom PCB</a></li></ol></nav>
     <div class="steps">
       <section class="step" id="step-1">
         <div class="step-num" aria-hidden="true">01</div>
         <div class="step-body">
-          <h2>Circuit Design (CircuitVerse)</h2>
-          <div class="prose"><p>Before touching any real hardware, I designed and simulated the whole computer logic-gate by logic-gate in CircuitVerse. The design is split into four main chips:</p>
-<ul>
-<li><strong>CPU</strong> - decodes op-codes and routes data between inputs, outputs, and the program counter.</li>
-<li><strong>Counter</strong> - the program counter, tracking which instruction is currently executing.</li>
-<li><strong>Memory</strong> - a small RAM block that stores the program.</li>
-<li><strong>System</strong> - wires the CPU, Counter, and Memory together into the full computer, plus a clock and manual override switches for debugging.</li>
-</ul>
-<img src="../images/custom-computer/circuitverse-cpu.png" alt="CircuitVerse schematic of the CPU chip" /><p>The CPU chip: input/output routing gates on the left and right, with override lines running through the middle so the whole computer can be manually driven for debugging.</p>
-<img src="../images/custom-computer/circuitverse-counter.png" alt="CircuitVerse schematic of the program counter chip" /><p>The program counter chip, which increments each clock cycle or jumps to a new instruction address when told to.</p>
-<img src="../images/custom-computer/circuitverse-system.png" alt="CircuitVerse schematic of the full system, CPU, Counter, and Memory wired together" /><p>The full system: CPU, Counter, and 16-bit RAM wired together, driven by a shared clock. The instruction set is deliberately minimal:</p>
-<ol>
-<li><strong>Output</strong> - push the current value to the output LEDs.</li>
-<li><strong>Set Counter</strong> - jump to a given instruction address.</li>
-<li><strong>Halt</strong> - stop the clock.</li>
-</ol>
+          <h2>Design in software first</h2>
+          <div class="prose"><p>I built the whole computer gate by gate before touching hardware. It has four chips: CPU, program counter, memory and a system that joins them.</p>
+<div class="fig-grid tall"><figure><img src="../images/custom-computer/circuitverse-cpu.png" alt="The CPU chip" loading="lazy" /><figcaption>The CPU chip</figcaption></figure><figure><img src="../images/custom-computer/circuitverse-counter.png" alt="The program counter" loading="lazy" /><figcaption>The program counter</figcaption></figure><figure><img src="../images/custom-computer/circuitverse-system.png" alt="All four chips wired together" loading="lazy" /><figcaption>All four chips wired together</figcaption></figure></div><p>The instruction set is tiny on purpose: <strong>Output</strong>, <strong>Set Counter</strong> (jump), <strong>Halt</strong>.</p>
 </div>
           
         </div>
@@ -61,19 +56,8 @@
       <section class="step" id="step-2">
         <div class="step-num" aria-hidden="true">02</div>
         <div class="step-body">
-          <h2>Physical Build</h2>
-          <div class="prose"><img src="../images/custom-computer/hand-soldered-cards.jpg" alt="Six hand-soldered perfboard cards for the computer" /><p>Once the CircuitVerse design was working, I moved to real hardware: six hand-soldered perfboard cards (one per chip, plus supporting logic), designed to slot together rather than being wired as one big tangle.</p>
-<video controls preload="none" poster="../images/custom-computer/clock-test-poster.jpg">
-  <source src="../images/custom-computer/clock-test.mp4" type="video/mp4" />
-</video><p>Testing the clock circuit: a 555 timer in astable mode generates the square wave that drives the whole computer&#39;s clock signal.</p>
-<video controls preload="none" poster="../images/custom-computer/counter-test-poster.jpg">
-  <source src="../images/custom-computer/counter-test.mp4" type="video/mp4" />
-</video><p>Testing the 4-bit counter card on its own breadboard before integrating it with the rest of the system.</p>
-<img src="../images/custom-computer/assembled-unpowered.jpg" alt="The fully assembled computer cards, unpowered" /><p>All six cards slotted together into the finished breadboard computer.</p>
-<img src="../images/custom-computer/assembled-powered.jpg" alt="The fully assembled computer cards, powered on with LEDs lit" class="img-feature" /><p>Powered on: the output LEDs lighting up as the computer runs.</p>
-<video controls preload="none" poster="../images/custom-computer/instruction-demo-poster.jpg">
-  <source src="../images/custom-computer/instruction-demo.mp4" type="video/mp4" />
-</video><p>The finished computer executing a program: stepping through instructions and outputting values, driven entirely by hand-built logic gates rather than a microcontroller.</p>
+          <h2>Build and test each card</h2>
+          <div class="prose"><div class="fig-grid "><figure><video controls preload="none" poster="../images/custom-computer/clock-test-poster.jpg"><source src="../images/custom-computer/clock-test.mp4" type="video/mp4" /></video><figcaption>The 555 timer clock on its own</figcaption></figure><figure><video controls preload="none" poster="../images/custom-computer/counter-test-poster.jpg"><source src="../images/custom-computer/counter-test.mp4" type="video/mp4" /></video><figcaption>The 4-bit counter before joining the rest</figcaption></figure></div><div class="fig-grid "><figure><img src="../images/custom-computer/hand-soldered-cards.jpg" alt="Six hand-soldered cards" loading="lazy" /><figcaption>Six hand-soldered cards</figcaption></figure><figure><img src="../images/custom-computer/assembled-unpowered.jpg" alt="Cards slotted together" loading="lazy" /><figcaption>Cards slotted together</figcaption></figure></div>
 </div>
           
         </div>
@@ -81,10 +65,18 @@
       <section class="step" id="step-3">
         <div class="step-num" aria-hidden="true">03</div>
         <div class="step-body">
-          <h2>Custom PCB (V1)</h2>
-          <div class="prose"><p>Having proven the design on breadboards, I moved the whole computer onto a custom PCB - Mini Computer V1 - to improve reliability over the hand-soldered perfboard-and-breadboard build.</p>
-<img src="../images/custom-computer/pcb-front.jpg" alt="Mini Computer V1 PCB, front" />
-<img src="../images/custom-computer/pcb-back.jpg" alt="Mini Computer V1 PCB, back" /><p>The board keeps the same logical structure as the breadboard version - memory, program counter, clock, inverter, and override switches for manual debugging - now laid out as a single populated board instead of six separate cards.</p>
+          <h2>It runs a program</h2>
+          <div class="prose"><div class="fig-grid "><figure><video controls preload="none" poster="../images/custom-computer/instruction-demo-poster.jpg"><source src="../images/custom-computer/instruction-demo.mp4" type="video/mp4" /></video><figcaption>Stepping through instructions and outputting values, all by hand-built logic</figcaption></figure></div>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-4">
+        <div class="step-num" aria-hidden="true">04</div>
+        <div class="step-body">
+          <h2>Custom PCB</h2>
+          <div class="prose"><p>Same logic, one board. This removes loose wires, the main cause of failures.</p>
+<div class="fig-grid "><figure><img src="../images/custom-computer/pcb-front.jpg" alt="Mini Computer V1, front" loading="lazy" /><figcaption>Mini Computer V1, front</figcaption></figure><figure><img src="../images/custom-computer/pcb-back.jpg" alt="Mini Computer V1, back" loading="lazy" /><figcaption>Mini Computer V1, back</figcaption></figure></div>
 </div>
           
         </div>
@@ -98,8 +90,24 @@
 </main>
 <footer class="site-footer">
   <span>Brandon Lai · Sydney</span>
+  <a href="mailto:brandon.lai053@gmail.com">Email</a>
   <a href="https://github.com/BeEl487">GitHub</a>
   <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
 </footer>
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  var h = document.querySelector(".site-header");
+  function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
+  s(); window.addEventListener("scroll", s, { passive: true });
+  var p = document.querySelector(".intro-photo");
+  if (p && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", function () { p.style.transform = "translateY(" + Math.min(window.scrollY * 0.08, 40) + "px)"; }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>

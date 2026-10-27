@@ -1,71 +1,37 @@
-# Breadboard Computer
+# Breadboard computer
 
-<img src="images/custom-computer/3d-sage-inspiration.jpg" alt="3D Sage YouTube videos that inspired this project" class="img-small" />
+A minimal computer I designed in software, then built from six hand-soldered cards and later put on a custom PCB. No microcontroller. Only logic gates.
 
-Inspired by 3D Sage's breadboard computer videos, I designed and built my own minimal-instruction-set computer from scratch, rather than following an existing build guide.
+**My role**
 
-## Circuit Design (CircuitVerse)
+* Designed every chip in CircuitVerse.
+* Soldered, tested and debugged the hardware.
+* Designed the PCB version.
 
-Before touching any real hardware, I designed and simulated the whole computer logic-gate by logic-gate in CircuitVerse. The design is split into four main chips:
+<ul class="glance"><li><b>6</b><span>perfboard cards</span></li><li><b>16-bit</b><span>RAM</span></li><li><b>3</b><span>instructions</span></li><li><b>555</b><span>timer clock</span></li></ul>
 
-- **CPU** - decodes op-codes and routes data between inputs, outputs, and the program counter.
-- **Counter** - the program counter, tracking which instruction is currently executing.
-- **Memory** - a small RAM block that stores the program.
-- **System** - wires the CPU, Counter, and Memory together into the full computer, plus a clock and manual override switches for debugging.
+<figure class="fig"><img src="images/custom-computer/assembled-powered.jpg" alt="The finished computer running, with its output LEDs lit." loading="lazy" /><figcaption>The finished computer running, with its output LEDs lit.</figcaption></figure>
 
-<img src="images/custom-computer/circuitverse-cpu.png" alt="CircuitVerse schematic of the CPU chip" />
+## Design in software first
 
-The CPU chip: input/output routing gates on the left and right, with override lines running through the middle so the whole computer can be manually driven for debugging.
+I built the whole computer gate by gate before touching hardware. It has four chips: CPU, program counter, memory and a system that joins them.
 
-<img src="images/custom-computer/circuitverse-counter.png" alt="CircuitVerse schematic of the program counter chip" />
+<div class="fig-grid tall"><figure><img src="images/custom-computer/circuitverse-cpu.png" alt="The CPU chip" loading="lazy" /><figcaption>The CPU chip</figcaption></figure><figure><img src="images/custom-computer/circuitverse-counter.png" alt="The program counter" loading="lazy" /><figcaption>The program counter</figcaption></figure><figure><img src="images/custom-computer/circuitverse-system.png" alt="All four chips wired together" loading="lazy" /><figcaption>All four chips wired together</figcaption></figure></div>
 
-The program counter chip, which increments each clock cycle or jumps to a new instruction address when told to.
+The instruction set is tiny on purpose: **Output**, **Set Counter** (jump), **Halt**.
 
-<img src="images/custom-computer/circuitverse-system.png" alt="CircuitVerse schematic of the full system, CPU, Counter, and Memory wired together" />
+## Build and test each card
 
-The full system: CPU, Counter, and 16-bit RAM wired together, driven by a shared clock. The instruction set is deliberately minimal:
+<div class="fig-grid "><figure><video controls preload="none" poster="images/custom-computer/clock-test-poster.jpg"><source src="images/custom-computer/clock-test.mp4" type="video/mp4" /></video><figcaption>The 555 timer clock on its own</figcaption></figure><figure><video controls preload="none" poster="images/custom-computer/counter-test-poster.jpg"><source src="images/custom-computer/counter-test.mp4" type="video/mp4" /></video><figcaption>The 4-bit counter before joining the rest</figcaption></figure></div>
 
-1. **Output** - push the current value to the output LEDs.
-2. **Set Counter** - jump to a given instruction address.
-3. **Halt** - stop the clock.
+<div class="fig-grid "><figure><img src="images/custom-computer/hand-soldered-cards.jpg" alt="Six hand-soldered cards" loading="lazy" /><figcaption>Six hand-soldered cards</figcaption></figure><figure><img src="images/custom-computer/assembled-unpowered.jpg" alt="Cards slotted together" loading="lazy" /><figcaption>Cards slotted together</figcaption></figure></div>
 
-## Physical Build
+## It runs a program
 
-<img src="images/custom-computer/hand-soldered-cards.jpg" alt="Six hand-soldered perfboard cards for the computer" />
+<div class="fig-grid "><figure><video controls preload="none" poster="images/custom-computer/instruction-demo-poster.jpg"><source src="images/custom-computer/instruction-demo.mp4" type="video/mp4" /></video><figcaption>Stepping through instructions and outputting values, all by hand-built logic</figcaption></figure></div>
 
-Once the CircuitVerse design was working, I moved to real hardware: six hand-soldered perfboard cards (one per chip, plus supporting logic), designed to slot together rather than being wired as one big tangle.
+## Custom PCB
 
-<video controls preload="none" poster="images/custom-computer/clock-test-poster.jpg">
-  <source src="images/custom-computer/clock-test.mp4" type="video/mp4" />
-</video>
+Same logic, one board. This removes loose wires, the main cause of failures.
 
-Testing the clock circuit: a 555 timer in astable mode generates the square wave that drives the whole computer's clock signal.
-
-<video controls preload="none" poster="images/custom-computer/counter-test-poster.jpg">
-  <source src="images/custom-computer/counter-test.mp4" type="video/mp4" />
-</video>
-
-Testing the 4-bit counter card on its own breadboard before integrating it with the rest of the system.
-
-<img src="images/custom-computer/assembled-unpowered.jpg" alt="The fully assembled computer cards, unpowered" />
-
-All six cards slotted together into the finished breadboard computer.
-
-<img src="images/custom-computer/assembled-powered.jpg" alt="The fully assembled computer cards, powered on with LEDs lit" class="img-feature" />
-
-Powered on: the output LEDs lighting up as the computer runs.
-
-<video controls preload="none" poster="images/custom-computer/instruction-demo-poster.jpg">
-  <source src="images/custom-computer/instruction-demo.mp4" type="video/mp4" />
-</video>
-
-The finished computer executing a program: stepping through instructions and outputting values, driven entirely by hand-built logic gates rather than a microcontroller.
-
-## Custom PCB (V1)
-
-Having proven the design on breadboards, I moved the whole computer onto a custom PCB - Mini Computer V1 - to improve reliability over the hand-soldered perfboard-and-breadboard build.
-
-<img src="images/custom-computer/pcb-front.jpg" alt="Mini Computer V1 PCB, front" />
-<img src="images/custom-computer/pcb-back.jpg" alt="Mini Computer V1 PCB, back" />
-
-The board keeps the same logical structure as the breadboard version - memory, program counter, clock, inverter, and override switches for manual debugging - now laid out as a single populated board instead of six separate cards.
+<div class="fig-grid "><figure><img src="images/custom-computer/pcb-front.jpg" alt="Mini Computer V1, front" loading="lazy" /><figcaption>Mini Computer V1, front</figcaption></figure><figure><img src="images/custom-computer/pcb-back.jpg" alt="Mini Computer V1, back" loading="lazy" /><figcaption>Mini Computer V1, back</figcaption></figure></div>

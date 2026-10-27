@@ -8,11 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400&display=swap" />
-<link rel="stylesheet" href="../style.css?v=5b1327b6" />
+<link rel="stylesheet" href="../style.css?v=7f1cc5db" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  <a class="back-top" href="../index.html#work">All work</a>
   <a class="brand" href="../index.html">Brandon Lai</a>
   <nav aria-label="Main">
     <a href="../index.html#work">Work</a>
@@ -31,43 +32,30 @@
       <nav class="related" aria-label="Paired pages"><span>Goes with</span><a href="vex.html">VEX V5</a><a href="vex-iq.html">VEX IQ</a></nav>
     </header>
     <figure class="case-hero"><img src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Redbacks localization" /></figure>
-    <div class="case-intro prose"><p>VEX robots have no GPS. In a 15-second autonomous period you still need to know where you are on a 144&quot; × 144&quot; field. Dead-reckoning from wheel encoders drifts, especially through turns and wheel slip, and one early error ruins every later move.</p>
-<p><strong>lillet</strong> is the custom C++ library I wrote for team 4613B&#39;s Override robot (PROS on the V5 Brain) to fix that. It is a full probabilistic localization stack plus a closed-loop motion controller.</p>
+    <div class="case-intro prose"><p>VEX robots have no GPS, and wheel encoders drift. <strong>lillet</strong> is the C++ library I wrote so our robot always knows where it is.</p>
+<p><strong>My role</strong></p>
 <ul>
-<li><a href="https://beel487.github.io/lillet/docs.html">lillet library docs</a>: the localizer, motion controller, tuning guide and API.</li>
-<li><a href="https://beel487.github.io/lillet/Sim.html">AMCL localisation simulator</a>: drive the robot in the browser, watch the particle filter track it, plan autonomous paths and export them as LemLib code.</li>
+<li>Wrote the whole library: odometry, particle filter, motion controller.</li>
+<li>Built the browser simulator and the docs site.</li>
+<li>Wired it into the robot&#39;s code.</li>
+</ul>
+<ul class="glance"><li><b>200</b><span>pose guesses tracked</span></li><li><b>20</b><span>simulator tests passing</span></li><li><b>0.22 in</b><span>mean error in simulation</span></li><li><b>40 ms</b><span>localisation loop</span></li></ul><ul>
+<li><a href="https://beel487.github.io/lillet/docs.html">lillet library docs</a></li>
+<li><a href="https://beel487.github.io/lillet/Sim.html">AMCL localisation simulator</a></li>
 </ul>
 </div>
-    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">The stack</a></li><li><a href="#step-2">Key ideas</a></li><li><a href="#step-3">Tooling around it</a></li></ol></nav>
+    <nav class="steps-nav" aria-label="On this page"><ol><li><a href="#step-1">How it works</a></li><li><a href="#step-2">Watch it work</a></li><li><a href="#step-3">Driving with it</a></li><li><a href="#step-4">The code</a></li></ol></nav>
     <div class="steps">
       <section class="step" id="step-1">
         <div class="step-num" aria-hidden="true">01</div>
         <div class="step-body">
-          <h2>The stack</h2>
-          <div class="prose"><table>
-<thead>
-<tr>
-<th>Layer</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Odometry</strong></td>
-<td>Tracking wheel plus IMU for heading. Fast and continuous, but drifts.</td>
-</tr>
-<tr>
-<td><strong>Distance sensors</strong></td>
-<td>Four sensors (front, back, left, right) give absolute readings off the field walls. Noisy, so used as corrections.</td>
-</tr>
-<tr>
-<td><strong>AMCL particle filter</strong></td>
-<td>Keeps 200 pose hypotheses at once and fuses odometry with the sensors, converging on the true position even from an uncertain start.</td>
-</tr>
-<tr>
-<td><strong>Motion controller</strong></td>
-<td>Boomerang-style carrot path following and a locked-sign turn profile, reading the fused pose every 10 ms.</td>
-</tr>
-</tbody></table>
+          <h2>How it works</h2>
+          <div class="prose"><p>Three layers, each fixing the last one&#39;s weakness.</p>
+<ul>
+<li><strong>Odometry:</strong> a tracking wheel and IMU. Fast, but it drifts.</li>
+<li><strong>Distance sensors:</strong> four sensors read the field walls. Accurate, but noisy.</li>
+<li><strong>Particle filter:</strong> keeps 200 guesses of the robot&#39;s pose. Guesses that match the sensors survive. The rest die out.</li>
+</ul>
 </div>
           
         </div>
@@ -75,15 +63,9 @@
       <section class="step" id="step-2">
         <div class="step-num" aria-hidden="true">02</div>
         <div class="step-body">
-          <h2>Key ideas</h2>
-          <div class="prose"><ul>
-<li><strong>Honest uncertainty.</strong> A Thrun motion model spreads the particle cloud to match real odometry noise, instead of pretending the wheels are perfect.</li>
-<li><strong>Robust sensing.</strong> A hybrid Gaussian + uniform likelihood, plus an occlusion gate, stops another robot driving past a sensor from destroying the filter.</li>
-<li><strong>Ray casting.</strong> Each particle computes the distance each sensor <em>should</em> read from its pose using a slab-method ray cast against the field model.</li>
-<li><strong>Gated corrections.</strong> Sensor updates only fire after more than 8&quot; of travel or when the effective sample size drops below 30%, which saves CPU for the 40 ms localization loop.</li>
-<li><strong>Drift-free timing.</strong> <code>Task::delay_until</code> keeps a true 40 ms period so odometry integration stays accurate under load.</li>
-</ul>
-<img class="img-feature" src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Sensor likelihood code" /><img class="img-feature" src="../images/redbacks-code/code-10-mcl-resample-and-estimate.png" alt="Resampling and pose estimate code" />
+          <h2>Watch it work</h2>
+          <div class="prose"><p>The simulator lets me test the filter before the robot moves.</p>
+<div class="fig-grid tall"><figure><img src="../images/redbacks-code/sim-converged.jpg" alt="The green cloud of guesses has collapsed onto the robot" loading="lazy" /><figcaption>The green cloud of guesses has collapsed onto the robot</figcaption></figure><figure><img src="../images/redbacks-code/sim-kidnap.jpg" alt="I pick the robot up and move it: the guesses scatter" loading="lazy" /><figcaption>I pick the robot up and move it: the guesses scatter</figcaption></figure><figure><img src="../images/redbacks-code/sim-recovered.jpg" alt="Within a few updates the cloud finds it again" loading="lazy" /><figcaption>Within a few updates the cloud finds it again</figcaption></figure></div>
 </div>
           
         </div>
@@ -91,15 +73,21 @@
       <section class="step" id="step-3">
         <div class="step-num" aria-hidden="true">03</div>
         <div class="step-body">
-          <h2>Tooling around it</h2>
+          <h2>Driving with it</h2>
           <div class="prose"><ul>
-<li><strong>Browser simulator.</strong> Design, tune and validate paths and the filter in a web page before touching the robot.</li>
-<li><strong>Async motion.</strong> Autonomous can run an intake or lift while the chassis is still driving, and starting a new motion safely cancels the old one.</li>
-<li><strong>Autonomous selector.</strong> LEFT/RIGHT on the Brain&#39;s LCD picks the routine, each with its own start pose, so no reflash between matches.</li>
-<li><strong>Live telemetry.</strong> A separate low-priority task streams pose and confidence over the controller&#39;s USB link to a local live view.</li>
-<li><strong>CI.</strong> Every push runs the simulator tests and a full firmware build.</li>
+<li><strong>Motion controller:</strong> the robot chases a point just ahead of itself, so paths curve smoothly. A locked-sign turn profile stops it spinning back and forth near 180 degrees.</li>
+<li><strong>Autonomous planner:</strong> click waypoints in the simulator, then copy them out as robot code.</li>
 </ul>
-<p><strong>Source:</strong> <a href="https://github.com/BeEl487/Redbacks-optimal-vex-code">github.com/BeEl487/Redbacks-optimal-vex-code</a></p>
+<figure class="fig"><img src="../images/redbacks-code/sim-auton-path.jpg" alt="A planned autonomous path running in the simulator." loading="lazy" /><figcaption>A planned autonomous path running in the simulator.</figcaption></figure>
+</div>
+          
+        </div>
+      </section>
+      <section class="step" id="step-4">
+        <div class="step-num" aria-hidden="true">04</div>
+        <div class="step-body">
+          <h2>The code</h2>
+          <div class="prose"><div class="fig-grid tall"><figure><img src="../images/redbacks-code/code-09-mcl-update-sensor-likelihood.png" alt="Scoring each guess against the sensor readings" loading="lazy" /><figcaption>Scoring each guess against the sensor readings</figcaption></figure><figure><img src="../images/redbacks-code/code-10-mcl-resample-and-estimate.png" alt="Resampling and the final pose estimate" loading="lazy" /><figcaption>Resampling and the final pose estimate</figcaption></figure></div><p><strong>Source:</strong> <a href="https://github.com/BeEl487/Redbacks-optimal-vex-code">github.com/BeEl487/Redbacks-optimal-vex-code</a></p>
 </div>
           
         </div>
@@ -113,8 +101,24 @@
 </main>
 <footer class="site-footer">
   <span>Brandon Lai · Sydney</span>
+  <a href="mailto:brandon.lai053@gmail.com">Email</a>
   <a href="https://github.com/BeEl487">GitHub</a>
   <a href="https://www.youtube.com/channel/UCtvEuVHtahAkyb2Jg0Qb9iA">YouTube</a>
 </footer>
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { io.observe(e); });
+  var h = document.querySelector(".site-header");
+  function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
+  s(); window.addEventListener("scroll", s, { passive: true });
+  var p = document.querySelector(".intro-photo");
+  if (p && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("scroll", function () { p.style.transform = "translateY(" + Math.min(window.scrollY * 0.08, 40) + "px)"; }, { passive: true });
+  }
+})();
+</script>
 </body>
 </html>

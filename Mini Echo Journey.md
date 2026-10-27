@@ -1,104 +1,49 @@
-# Mini Echo: Iterative Quadruped Robot Development
+A small quadruped robot that walks around my house. It had to be compact, light and cheap. I built three prototypes, and each failure became the next version's requirements.
 
-## Overview
+**My role**
 
-I wanted to build a small quadruped robot that could move around my house at a useful walking speed while remaining compact, lightweight, and inexpensive to build. Rather than designing the final robot immediately, I treated the project as an iterative engineering process. Each version was used to identify limitations in the previous design and inform the next.
+* Designed all of it: CAD, electronics and code.
+* Taught myself inverse kinematics to make it walk.
 
-The project progressed through three major prototypes, taking me from basic servo control and electronics to inverse kinematics, gait generation, mechanical optimisation, and integrated robot control.
+<ul class="glance"><li><b>3</b><span>prototypes</span></li><li><b>3D printed</b><span>every version</span></li><li><b>Li-ion</b><span>final power</span></li><li><b>IK</b><span>walking gait</span></li></ul>
 
----
+<figure class="fig"><img src="images/mini-echo/mini-echo-hero.jpeg" alt="Mini Echo, the final integrated version." loading="lazy" /><figcaption>Mini Echo, the final integrated version.</figcaption></figure>
 
 # Version 1 — Prototyping the Concept
 
-My first quadruped used inexpensive micro servos and AA batteries. The goal was not to build a high-performance robot immediately, but to establish whether I could create a functional walking mechanism.
+Micro servos and an AA battery pack. The goal was to find out if it could walk at all.
 
-<img width="900" alt="V1 prototype — micro servos and AA battery pack" src="images/mini-echo/v1-hero.jpeg" />
+* The servos were too weak.
+* The batteries could not supply enough current.
+* **Lesson:** a robot is only as good as its weakest part.
 
-The first prototype quickly exposed several problems.
-
-The micro servos were lightweight and inexpensive, but they had limited torque. The AA battery pack also could not deliver enough power to operate the servos effectively, particularly when multiple joints were moving simultaneously. I also found that the mechanical design was relatively inefficient, with unnecessary mass and poor mechanical advantage.
-
-This version taught me an important lesson: **the performance of a robot is not determined by any single component. The motors, power system, mechanical structure, and control system all have to be designed as one system.**
-
-The failures of the first prototype gave me the requirements for the next version.
-
----
+<figure class="fig"><img src="images/mini-echo/v1-hero.jpeg" alt="Version 1 with micro servos and the AA pack." loading="lazy" /><figcaption>Version 1 with micro servos and the AA pack.</figcaption></figure>
 
 # Version 2 — Servos, Inverse Kinematics and Walking
 
-For the second prototype, I moved to more powerful **bus servos**. Unlike the previous servos, these could be connected through a daisy-chain communication system, significantly simplifying the electronics and allowing me to control a larger number of joints.
+Stronger bus servos, daisy-chained to simplify the wiring.
 
-I redesigned the body and legs around the new actuators and built another fully 3D-printed quadruped.
-
-This was also where the software side of the project became substantially more challenging.
-
-To make the robot walk rather than simply move individual servos, I taught myself **inverse kinematics** and the trigonometry required to calculate joint angles from the desired position of each foot.
-
-Instead of directly commanding each joint, I could specify where I wanted a foot to be and mathematically determine the corresponding joint configuration.
-
-I then used these calculations to develop walking gaits, coordinating the movement of multiple legs to produce stable forward motion.
-
-This prototype was a major step forward because I was no longer just assembling a robot. I was beginning to design the mathematical and control systems that allowed the robot to behave as a coordinated machine.
-
-However, the mechanical design still had significant limitations. The robot worked, but it carried too much unnecessary weight in the legs and did not make efficient use of the available actuator torque.
-
----
+* I taught myself the trigonometry of **inverse kinematics**: choose where a foot goes, and the maths finds the joint angles.
+* I used that to build walking gaits.
+* It worked, but the legs were too heavy.
 
 # Version 3 — Mechanical Optimisation
 
-The third version focused heavily on **mechanical efficiency**.
+I moved the actuators up into the body and used linkages to drive the legs. Light legs mean faster, more efficient movement. A lithium-ion battery replaced the AAs.
 
-I redesigned the robot around a proper lithium-ion battery, reducing the limitations of the previous AA battery system while improving the overall power-to-weight ratio.
+<figure class="fig"><img src="images/mini-echo/v3-bare-frame.jpeg" alt="The bare Version 3 frame, with servos high in the body and linkages to the legs." loading="lazy" /><figcaption>The bare Version 3 frame, with servos high in the body and linkages to the legs.</figcaption></figure>
 
-One of the largest mechanical changes was moving the actuators higher into the body and using linkages to transmit their motion to the legs.
+# Mini Echo: the integrated robot
 
-<img width="900" alt="V3 bare mechanical frame — bus servos and linkages" src="images/mini-echo/v3-bare-frame.jpeg" />
+Everything came together in one robot:
 
-This meant that the motors did not have to move as much mass as part of the leg itself. Reducing the distal mass of the legs improved the robot's mechanical efficiency and made faster movement possible without requiring proportionally larger actuators.
+* Light 3D-printed structure and high-mounted actuators.
+* Lithium-ion power with voltage monitoring and a power button.
+* A display, and wireless controller driving.
+* Inverse-kinematics leg control and tuned gaits.
 
-The entire robot remained **3D printed**, allowing me to rapidly iterate the geometry and test different mechanical configurations without requiring complex manufacturing.
+<figure class="fig"><img src="images/mini-echo/mini-echo-alt.jpeg" alt="Mini Echo from another angle." loading="lazy" /><figcaption>Mini Echo from another angle.</figcaption></figure>
 
-This version became the foundation for what I eventually called **Mini Echo**.
+# What I learned
 
----
-
-# Mini Echo — Integrated System
-
-Mini Echo was the result of the lessons from the previous prototypes.
-
-<img width="900" alt="Mini Echo — final integrated quadruped" src="images/mini-echo/mini-echo-hero.jpeg" />
-
-Rather than focusing on a single subsystem, I integrated the mechanical, electrical, and software improvements into one complete robot.
-
-The final design incorporated:
-
-* Lightweight 3D-printed mechanical structures
-* Higher-mounted actuators with mechanical linkages
-* Lithium-ion power
-* Bus-connected servos
-* Voltage and power monitoring
-* An integrated power button
-* A display for system information
-* Wireless/controller-based operation
-* Inverse-kinematics-based leg control
-* Tuned walking gaits
-
-<img width="900" alt="Mini Echo, alternate angle" src="images/mini-echo/mini-echo-alt.jpeg" />
-
-The controller allowed me to operate the robot while the inverse kinematics system handled the underlying joint calculations.
-
-As I continued tuning the gait, I was able to improve the coordination and consistency of the robot's walking motion significantly. The final system was capable of being controlled as a complete quadruped rather than as a collection of independently controlled servos.
-
----
-
-# What I Learned
-
-This project taught me how strongly mechanical design, electronics, and software interact in robotics.
-
-The first version showed me that insufficient power and inefficient mechanics can make otherwise functional hardware unusable. The second taught me how mathematical modelling and inverse kinematics can transform individual actuators into a coordinated robotic system. The third pushed me to think more critically about **mass distribution, mechanical advantage, power-to-weight ratio, and system integration**.
-
-Most importantly, I learned to approach robotics through iteration.
-
-Each prototype had limitations, but those limitations became engineering requirements for the next version. Rather than trying to make the first design perfect, I used each failure to identify what needed to change.
-
-The result was not just a robot dog, but a progression from basic servo experimentation to a more complete understanding of **robot kinematics, gait generation, power systems, actuator selection, mechanical optimisation, and iterative engineering design**.
+Mechanics, electronics and software all affect each other. The first version showed weak power ruins good hardware. The second showed that maths can replace trial and error. The third showed that moving mass out of the legs matters most. Every limit became a requirement for the next prototype.

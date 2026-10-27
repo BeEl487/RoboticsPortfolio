@@ -33,7 +33,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(60rem 40rem at 90% -5%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+    radial-gradient(50rem 36rem at -10% 45%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%);
+  background-size: auto;
+  background-attachment: fixed;
   color: var(--ink-2);
   font: 400 1.0625rem/1.65 var(--serif);
   overflow-wrap: break-word;
@@ -285,3 +290,74 @@ main { display: block; }
   .step { grid-template-columns: 1fr; padding-top: 2.5rem; }
   .step-num { position: static; font-size: 2.2rem; margin-bottom: 0.5rem; }
 }
+
+/* ---- Hero grid: masked so it fades out, like a drafting sheet under the intro ---- */
+.intro { position: relative; isolation: isolate; }
+.intro::before {
+  content: "";
+  position: absolute; inset: -2rem -100vw; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(90% 90% at 65% 45%, #000 25%, transparent 85%);
+  mask-image: radial-gradient(90% 90% at 65% 45%, #000 25%, transparent 85%);
+}
+
+/* ---- Motion ---- */
+.site-header { position: sticky; top: 0; z-index: 20; max-width: none; padding-left: max(1.25rem, calc((100vw - var(--max)) / 2 + 1.25rem)); padding-right: max(1.25rem, calc((100vw - var(--max)) / 2 + 1.25rem)); transition: background .2s, border-color .2s; border-bottom: 1px solid transparent; }
+.site-header.scrolled { background: color-mix(in srgb, var(--paper) 82%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom-color: var(--rule); }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.intro-photo { transition: transform .1s linear; will-change: transform; }
+.work a img { transition: transform .35s cubic-bezier(.2,.75,.2,1); }
+.work a:hover img { transform: scale(1.03); }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+noscript ~ .reveal, .no-js .reveal { opacity: 1; transform: none; }
+
+/* ---- Get in touch ---- */
+.contact { display: block; max-width: none; margin: 4rem 0 0; padding: 0; border: 0; background: #141a22; color: #e7ecf2; }
+.contact-inner { max-width: var(--max); margin: 0 auto; padding: 4.5rem 1.25rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 3rem; }
+.contact .eyebrow { margin: 0 0 .75rem; font: 600 .75rem var(--sans); letter-spacing: .1em; text-transform: uppercase; color: #93a9ff; }
+.contact h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: #fff; margin: 0 0 1rem; }
+.contact-head p { grid-column: auto; margin: 0; color: #b4bdca; max-width: 28rem; }
+.contact .contact-links { display: block; font: 500 clamp(1.05rem, 1.8vw, 1.35rem) var(--sans); }
+.contact-links a { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.15rem 0; color: #e7ecf2; text-decoration: none; border-bottom: 1px solid #2a3442; transition: color .16s, padding .16s; }
+.contact-links a:first-child { border-top: 1px solid #2a3442; }
+.contact-links a:hover { color: #93a9ff; padding-left: .6rem; }
+@media (max-width: 700px) { .contact-inner { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1rem; } }
+
+/* Back button pinned top-left in the sticky header on project pages */
+.back-top { order: -1; margin-right: auto; font: 600 0.95rem var(--sans); text-decoration: none; color: var(--ink); padding: 0.35rem 0.8rem 0.35rem 0.6rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); }
+.back-top::before { content: "\2190\00a0"; }
+.back-top:hover { color: var(--accent); border-color: var(--accent); }
+.back-top + .brand { display: none; }
+
+/* Dark mode: the contact band is dark in light mode; in dark mode lift it off the page so it still reads as a band */
+@media (prefers-color-scheme: dark) {
+  .contact { background: var(--surface); border-top: 1px solid var(--rule); }
+  .back-top { background: var(--surface); }
+}
+
+/* Captioned figures, picture grids and the "at a glance" strip used inside project text */
+.prose figure.fig { margin: 1.75em 0; max-width: none; }
+.prose figure.fig img { margin: 0; width: 100%; }
+.prose figcaption { margin-top: 0.5rem; font: 400 0.88rem/1.4 var(--sans); color: var(--muted); }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: 0.9rem; margin: 1.75em 0; }
+.fig-grid figure { margin: 0; min-width: 0; }
+.fig-grid img, .fig-grid video { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; margin: 0; border-radius: 3px; background: var(--rule); }
+.fig-grid.tall img { aspect-ratio: auto; height: auto; object-fit: contain; background: var(--surface); }
+.fig-grid figcaption { margin-top: 0.45rem; font: 400 0.85rem/1.4 var(--sans); color: var(--muted); }
+.prose .fig-grid { max-width: none; }
+.glance { list-style: none; padding: 0; margin: 1.5em 0 2em; display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 0.75rem; max-width: none; }
+.prose .glance li { margin: 0; padding: 0.8rem 0.9rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; line-height: 1.25; }
+.glance b { display: block; font: 650 1.35rem/1.1 var(--sans); color: var(--ink); }
+.glance span { display: block; margin-top: 0.3rem; font: 400 0.82rem/1.3 var(--sans); color: var(--muted); }
+@media (max-width: 640px) {
+  .fig-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+  .fig-grid.tall { grid-template-columns: 1fr; }
+  .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.profile-body .how { margin: 0; padding-left: 1.2em; }
+.profile-body .how li { margin: 0 0 0.7em; }
+.profile-body .how li::marker { color: var(--accent); }
