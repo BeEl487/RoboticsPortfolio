@@ -186,6 +186,7 @@ function layout({ title, description, content, depth, current }) {
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
+  ${depth ? `<a class="back-arrow" href="${base}index.html#work" aria-label="Back to all work"><span aria-hidden="true">&larr;</span> Back</a>` : ""}
   <a class="brand" href="${base}index.html">${NAME}</a>
   <nav aria-label="Main">
     <a href="${base}index.html#work"${current === "work" ? ' aria-current="page"' : ""}>Work</a>
@@ -206,7 +207,7 @@ ${content}
 (function () {
   var els = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("in"); }); return; }
-  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0, rootMargin: "0px 0px 150% 0px" });
   els.forEach(function (e) { io.observe(e); });
   var h = document.querySelector(".site-header");
   function s() { h.classList.toggle("scrolled", window.scrollY > 8); }
