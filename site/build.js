@@ -204,10 +204,6 @@ const timelines = [
         "vex/switch-detail/detail-4.jpeg",
       ],
       "V5RC - Middle School Worlds": ["vex-v5/pit-1.jpg", "vex-v5/pit-2.jpg", "vex-v5/pit-3.jpg", "vex-v5/pit-4.jpg", "vex-v5/nationals-team.jpg"],
-      "Override Notebook - The Season in Brief": ["override/build-1.jpg", "override/robot-assembled.jpg"],
-      "Override Notebook - Achievements": ["override/pin.jpg"],
-      "Override Notebook - Problems We Faced": ["override/drivebase.jpg", "override/elevator-close.jpg", "override/rigging.jpg", "override/gears.jpg", "override/claw-piece.jpg"],
-      "Override Notebook - The Robot": ["override/robot-side.jpg", "override/robot-top.jpg", "override/robot-lift.jpg", "override/claw-hold.jpg"],
     },
     videos: {
       "V5RC - Middle School": [{ src: "vex-v5/auto-nats.mp4", poster: "vex-v5/auto-nats-poster.jpg", label: "Autonomous run at Nationals" }],

@@ -165,7 +165,6 @@
 <li><strong>Rapid Field Traversal:</strong> Clocked a sub-2.3 second full-field traversal time, maximizing point output during critical scoring windows and driver-control endgames.</li>
 </ul>
 <hr>
-<p>If you want an in-depth overview of the robot and why you can look through our engineering notebook</p>
 </div>
           <div class="photo-grid">
              <img src="../images/vex/switch-detail/pto-1.jpeg" alt="VEX Robotics Personal Portfolio: Team 4613O (Barker College)" loading="lazy" />
@@ -182,65 +181,8 @@
       <div class="tl-item">
         <div class="tl-marker" style="background:#4dabc9"></div>
         <div class="tl-content">
-          <h2>Override Notebook - The Season in Brief</h2>
-          <div class="markdown-body"><p>Team 4613R (Barker Redbacks) played V5RC <em>Override</em> with a simple goal: a reliable robot that scores consistently, then improve it at every event. The full engineering notebook runs to 190 pages following the design cycle; this is the short version.</p>
-<p>The big design call was the lift. Four concepts (continuous elevator, cascade, double reverse four-bar, two-bar arm) were scored against eight weighted requirements, and the <strong>continuous elevator won with 90/100</strong>. The notebook is careful to say that score only chose a direction for CAD; it was not proof the mechanism would work.</p>
-</div>
-          <div class="photo-grid">
-             <img src="../images/override/build-1.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
-<img src="../images/override/robot-assembled.jpg" alt="Override Notebook - The Season in Brief" loading="lazy" />
-           </div>
-          
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-marker" style="background:#4dabc9"></div>
-        <div class="tl-content">
-          <h2>Override Notebook - Achievements</h2>
-          <div class="markdown-body"><ul>
-<li><strong>Shore Regional:</strong> 5th in qualification, through to the elimination rounds, and the <strong>Innovate Award</strong> for the design and development of the robot.</li>
-<li><strong>UNSW:</strong> finished 8th in qualification.</li>
-<li><strong>Knox:</strong> qualification record of <strong>5 wins and 3 losses</strong>, an average of 70.6 points per match and a best score of <strong>110</strong>.</li>
-<li><strong>Driving:</strong> the driver improved at every event, especially approaching game pieces, which cut down on pieces being knocked away.</li>
-<li><strong>Teamwork:</strong> the team covered driving, strategy, scouting and technical support, and adapted between offence and guarding toggles mid-match.</li>
-</ul>
-</div>
-          <div class="photo-grid">
-             <img src="../images/override/pin.jpg" alt="Override Notebook - Achievements" loading="lazy" />
-           </div>
-          
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-marker" style="background:#4dabc9"></div>
-        <div class="tl-content">
-          <h2>Override Notebook - Problems We Faced</h2>
-          <div class="markdown-body"><ul>
-<li><strong>Toggle unreliable when the field moved (Shore).</strong> Robots bumping the field shifted it, which misaligned the toggle and the autonomous routines. Skills came out 10th, with a best driver run of 28 and an autonomous run of 8.</li>
-<li><strong>Elevator friction.</strong> The first three-stage elevator was clamped against its guides by over-tightened standoffs. Then the twin retraction strings failed under load because rope tension also pulled on the hardware that set the guide clearance. Both led to a simpler two-stage rebuild with one continuous retraction rope.</li>
-<li><strong>End effector torque (UNSW).</strong> The gearing could not flip it over the robot. Surgical tubing helped but was not VEX-legal, so rubber bands replaced it and pulled the end effector too far down.</li>
-<li><strong>Not enough programming time (UNSW).</strong> Skills finished 17th with no autonomous run, because driver and autonomous code were not finished or tested.</li>
-<li><strong>Chain bar and claw (Knox).</strong> The chain bar sometimes lacked the torque to flip pieces, and the claw did not always hold the cup and pin in place. The driver slowed the flips and set pieces carefully first. The planned autonomous broke the day before, so the team chose a reliable parking routine over a risky run.</li>
-</ul>
-</div>
-          <div class="photo-grid">
-             <img src="../images/override/drivebase.jpg" alt="Override Notebook - Problems We Faced" loading="lazy" />
-<img src="../images/override/elevator-close.jpg" alt="Override Notebook - Problems We Faced" loading="lazy" />
-<img src="../images/override/rigging.jpg" alt="Override Notebook - Problems We Faced" loading="lazy" />
-<img src="../images/override/gears.jpg" alt="Override Notebook - Problems We Faced" loading="lazy" />
-<img src="../images/override/claw-piece.jpg" alt="Override Notebook - Problems We Faced" loading="lazy" />
-           </div>
-          
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-marker" style="background:#4dabc9"></div>
-        <div class="tl-content">
-          <h2>Override Notebook - The Robot</h2>
-          <div class="markdown-body"><p>The robot as built and as described by its code: a tank-drive robot that drives, lifts and scores under driver control, runs a selectable autonomous, and has its own localization library.</p>
+          <h2>VEX V5RC Override: The Robot (Team 4613B)</h2>
+          <div class="markdown-body"><p>The robot as described by its code: a tank-drive robot that drives, lifts and scores under driver control, runs a selectable autonomous, and has its own localization library.</p>
 <ul>
 <li><strong>Drivetrain:</strong> six motors (three per side) on a 12 in track width with 2.75 in wheels, geared to 450 rpm for about 65 in/s.</li>
 <li><strong>Lift:</strong> a double reverse four-bar (DR4B) raised by the <strong>intake motors through a one-way ratchet</strong>. That means the arm can only be driven up and falls by letting the motors spin forward. A normal PID loop would drop the arm, so the controller uses a smooth, slew-limited ramp with a hold state and four preset heights on the controller buttons.</li>
@@ -249,14 +191,8 @@
 <li><strong>Sensing:</strong> forward and sideways tracking wheels, an IMU for heading and four distance sensors for field position.</li>
 <li><strong>Software:</strong> LemLib handles PID driving and turning, an LCD selector picks the autonomous routine, and a background task keeps the lift and claw running while the robot drives. The Monte Carlo localization library built for it is on the <a href="../projects/redbacks-localization.html">Redbacks Localization</a> page.</li>
 </ul>
-<p>If you want an in-depth overview of the robot and why we built it this way, you can look through our <a href="../images/override/4613R-Engineering-Notebook.pdf">engineering notebook (PDF)</a>.</p>
 </div>
-          <div class="photo-grid">
-             <img src="../images/override/robot-side.jpg" alt="Override Notebook - The Robot" loading="lazy" />
-<img src="../images/override/robot-top.jpg" alt="Override Notebook - The Robot" loading="lazy" />
-<img src="../images/override/robot-lift.jpg" alt="Override Notebook - The Robot" loading="lazy" />
-<img src="../images/override/claw-hold.jpg" alt="Override Notebook - The Robot" loading="lazy" />
-           </div>
+          
           
         </div>
       </div>

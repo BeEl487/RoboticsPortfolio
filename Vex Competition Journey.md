@@ -113,33 +113,10 @@ The 2025–2026 VEX OVERRIDE season brought strict power limits and restrictive 
 
 ---
 
-If you want an in-depth overview of the robot and why you can look through our engineering notebook
 
-# Override Notebook - The Season in Brief
+# VEX V5RC Override: The Robot (Team 4613B)
 
-Team 4613R (Barker Redbacks) played V5RC *Override* with a simple goal: a reliable robot that scores consistently, then improve it at every event. The full engineering notebook runs to 190 pages following the design cycle; this is the short version.
-
-The big design call was the lift. Four concepts (continuous elevator, cascade, double reverse four-bar, two-bar arm) were scored against eight weighted requirements, and the **continuous elevator won with 90/100**. The notebook is careful to say that score only chose a direction for CAD; it was not proof the mechanism would work.
-
-# Override Notebook - Achievements
-
-- **Shore Regional:** 5th in qualification, through to the elimination rounds, and the **Innovate Award** for the design and development of the robot.
-- **UNSW:** finished 8th in qualification.
-- **Knox:** qualification record of **5 wins and 3 losses**, an average of 70.6 points per match and a best score of **110**.
-- **Driving:** the driver improved at every event, especially approaching game pieces, which cut down on pieces being knocked away.
-- **Teamwork:** the team covered driving, strategy, scouting and technical support, and adapted between offence and guarding toggles mid-match.
-
-# Override Notebook - Problems We Faced
-
-- **Toggle unreliable when the field moved (Shore).** Robots bumping the field shifted it, which misaligned the toggle and the autonomous routines. Skills came out 10th, with a best driver run of 28 and an autonomous run of 8.
-- **Elevator friction.** The first three-stage elevator was clamped against its guides by over-tightened standoffs. Then the twin retraction strings failed under load because rope tension also pulled on the hardware that set the guide clearance. Both led to a simpler two-stage rebuild with one continuous retraction rope.
-- **End effector torque (UNSW).** The gearing could not flip it over the robot. Surgical tubing helped but was not VEX-legal, so rubber bands replaced it and pulled the end effector too far down.
-- **Not enough programming time (UNSW).** Skills finished 17th with no autonomous run, because driver and autonomous code were not finished or tested.
-- **Chain bar and claw (Knox).** The chain bar sometimes lacked the torque to flip pieces, and the claw did not always hold the cup and pin in place. The driver slowed the flips and set pieces carefully first. The planned autonomous broke the day before, so the team chose a reliable parking routine over a risky run.
-
-# Override Notebook - The Robot
-
-The robot as built and as described by its code: a tank-drive robot that drives, lifts and scores under driver control, runs a selectable autonomous, and has its own localization library.
+The robot as described by its code: a tank-drive robot that drives, lifts and scores under driver control, runs a selectable autonomous, and has its own localization library.
 
 - **Drivetrain:** six motors (three per side) on a 12 in track width with 2.75 in wheels, geared to 450 rpm for about 65 in/s.
 - **Lift:** a double reverse four-bar (DR4B) raised by the **intake motors through a one-way ratchet**. That means the arm can only be driven up and falls by letting the motors spin forward. A normal PID loop would drop the arm, so the controller uses a smooth, slew-limited ramp with a hold state and four preset heights on the controller buttons.
@@ -147,5 +124,3 @@ The robot as built and as described by its code: a tank-drive robot that drives,
 - **Side pistons:** two independent pneumatic pistons on the D-pad.
 - **Sensing:** forward and sideways tracking wheels, an IMU for heading and four distance sensors for field position.
 - **Software:** LemLib handles PID driving and turning, an LCD selector picks the autonomous routine, and a background task keeps the lift and claw running while the robot drives. The Monte Carlo localization library built for it is on the [Redbacks Localization](../projects/redbacks-localization.html) page.
-
-If you want an in-depth overview of the robot and why we built it this way, you can look through our [engineering notebook (PDF)](images/override/4613R-Engineering-Notebook.pdf).
