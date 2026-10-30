@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { NAME, GITHUB, YOUTUBE } from "../data/pages.mjs";
 import "../styles/global.css";
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title: string;
@@ -44,5 +45,6 @@ const { title, description, current } = Astro.props;
       <a href={GITHUB}>GitHub</a>
       <a href={YOUTUBE}>YouTube</a>
     </footer>
+    <SpeedInsights />
   </body>
 </html>
