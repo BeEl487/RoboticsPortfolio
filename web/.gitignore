@@ -4,3 +4,4 @@ public/images/
 dist/
 .astro/
 node_modules/
+.vercel/
